@@ -12,17 +12,28 @@ const config = {
   entry: "./src/index.ts",
   output: {
     path: path.resolve(__dirname, "dist"),
+    filename: '[name].[contenthash].js',
+    assetModuleFilename: './assets/images/[name][ext]',
+    clean: true,
   },
   devServer: {
     open: true,
     host: "localhost",
+    hot: false,
+    client: {
+      overlay: {
+        errors: true,
+        warnings: false,
+      },
+    }
   },
+  devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
       template: "index.html",
     }),
 
-    new MiniCssExtractPlugin(),
+    // new MiniCssExtractPlugin(),
 
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
@@ -59,6 +70,10 @@ const config = {
 module.exports = () => {
   if (isProduction) {
     config.mode = "production";
+
+    config.plugins.push(new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }));
   } else {
     config.mode = "development";
   }
