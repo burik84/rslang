@@ -1,36 +1,41 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const isProduction = process.env.NODE_ENV == "production";
+const isProduction = process.env.NODE_ENV == 'production';
 
-const stylesHandler = MiniCssExtractPlugin.loader;
+// const stylesHandler = MiniCssExtractPlugin.loader;
+const stylesHandler = isProduction
+  ? MiniCssExtractPlugin.loader
+  : 'style-loader';
 
 const config = {
-  entry: "./src/index.ts",
+  entry: './src/index.ts',
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].[contenthash].js',
     assetModuleFilename: './assets/images/[name][ext]',
     clean: true,
   },
   devServer: {
     open: true,
-    host: "localhost",
+    host: 'localhost',
     hot: false,
     client: {
       overlay: {
         errors: true,
         warnings: false,
       },
-    }
+    },
   },
   devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
-      template: "index.html",
+      template: './src/index.html',
+      filename: 'index.html',
+      favicon: './src/assets/favicon.ico',
     }),
 
     // new MiniCssExtractPlugin(),
@@ -42,20 +47,20 @@ const config = {
     rules: [
       {
         test: /\.(ts|tsx)$/i,
-        loader: "ts-loader",
-        exclude: ["/node_modules/"],
+        loader: 'ts-loader',
+        exclude: ['/node_modules/'],
       },
       {
         test: /\.css$/i,
-        use: [stylesHandler, "css-loader"],
+        use: [stylesHandler, 'css-loader'],
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [stylesHandler, "css-loader", "sass-loader"],
+        use: [stylesHandler, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-        type: "asset",
+        type: 'asset',
       },
 
       // Add your rules for custom modules here
@@ -63,19 +68,21 @@ const config = {
     ],
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: ['.tsx', '.ts', '.js'],
   },
 };
 
 module.exports = () => {
   if (isProduction) {
-    config.mode = "production";
+    config.mode = 'production';
 
-    config.plugins.push(new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
-    }));
+    config.plugins.push(
+      new MiniCssExtractPlugin({
+        filename: '[name].[contenthash].css',
+      })
+    );
   } else {
-    config.mode = "development";
+    config.mode = 'development';
   }
   return config;
 };

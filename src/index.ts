@@ -1,1 +1,7 @@
-console.log("Hello World!");
+import './styles/style.scss';
+import { app } from './scripts/app';
+
+document.addEventListener('DOMContentLoaded', () => {
+	console.log("Start script!");
+  app.init()
+});
