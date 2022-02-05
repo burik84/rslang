@@ -5,3 +5,4 @@ document.addEventListener('DOMContentLoaded', () => {
 	console.log("Start script!");
   app.init()
 });
+
