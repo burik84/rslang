@@ -46,3 +46,8 @@ Local web server will be available at `http://localhost:8080/`
 - run linter `npm run lint`
 - run watcher `npm run watch`
 - run server `npm run serve`
+
+## BackEnd
+
+[https://rs-lang-team17-be.herokuapp.com/](https://rs-lang-team17-be.herokuapp.com/)
+[swagger](https://rs-lang-team17-be.herokuapp.com/doc/)
