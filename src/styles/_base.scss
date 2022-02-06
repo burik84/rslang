@@ -8,4 +8,133 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-style: normal;
   font-size: 18px;
+  font-weight: 400;
+}
+
+:root{
+  --bg-dark-color: #41445c;
+  --bg-light-color: #e5e5e5;
+  --div-bg-color: #1F9DA5;
+}
+
+.font-size24{
+  font-size: 24px;
+}
+.font-size48{
+  font-size: 48px;
+}
+.line-height29{
+  line-height: 29.17px;
+}
+.line-height35{
+  line-height: 35px;
+}
+.line-height50{
+  line-height: 50px;
+}
+.white-text{
+  color: #FFFFFF;
+}
+.app-description{
+  background-color: var(--bg-light-color);
+  padding: 158px 745px 25px 147px;
+}
+.app-description__header{
+  padding-bottom: 74px;
+}
+.app-description__text{
+  padding-bottom: 33px;
+  width: 61.11vw;
+}
+
+.about-video{
+  margin-left: 40%;
+  width: 675px;
+  height: 270px;
+  border-radius: 30px;
+  background-color: var(--div-bg-color);
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-column-gap: 27px;
+  justify-content: center;
+  align-content: center;
+}
+.about-video__text{
+  color: var(--bg-light-color);
+}
+.video-icon{
+  width: 105px;
+  background: no-repeat center url("../assets/icons/video.svg");
+}
+.app-advantagies{
+  background-color: var(--bg-dark-color);
+  padding: 43px 0 140px;
+  display: grid;
+  grid-template-rows: 108px 375px;
+  grid-template-columns: repeat(3, 413px);
+  grid-column-gap: 56px;
+  grid-row-gap: 75px;
+  justify-content: center;
+}
+.app-advantagies__h2{
+  display: grid;
+  grid-template-rows: repeat(2, 54px);
+  justify-content: center;
+  grid-column: 1/4;
+}
+.app-advantagies__header-items{
+  justify-self: center;
+}
+.app-advantagies__div{
+  border-radius: 10px;
+  background-color: var(--div-bg-color);
+  display: grid;
+  grid-template-rows: 24px auto;
+  grid-row-gap: 57px;
+  padding: 44px 13px 38px;
+}
+.app-advantagies__p{
+  text-align: justify;
+  color: var(--bg-light-color);
+}
+.app-advantagies__h3,
+.app-advantagies__p{
+  justify-self: center;
+}
+.dev-section{
+  background-color: var(--bg-light-color);
+  padding: 37px 0 147px;
+}
+.dev-section-header{
+  padding: 0 0 83px;
+  color: var(--bg-dark-color);
+  text-align: center;
+}
+.about-developers-blocks{
+  display: grid;
+  grid-template-rows: repeat(2, 225px);
+  grid-row-gap: 55px;
+  justify-content: center;
+}
+.about-developers{
+  background-color: var(--div-bg-color);
+  width: 853px;
+  border-radius: 10px;
+  padding: 45px 25px 0;
+}
+.name-logo{
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: space-between;
+  align-items: center;
+}
+.git-link{
+  width: 60px;
+  height: 60px;
+  background: no-repeat center url("../assets/icons/bi_github.svg");
+}
+.about-developers__p{
+  padding-top: 27px;
+  text-align: center;
+  color: var(--bg-light-color);
 }
