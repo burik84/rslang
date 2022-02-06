@@ -2,7 +2,7 @@ import './styles/style.scss';
 import { app } from './scripts/app';
 
 document.addEventListener('DOMContentLoaded', () => {
-	console.log("Start script!");
-  app.init()
+  console.log('Start script!');
+  app.init();
+  app.testSevice();
 });
-
