@@ -14,7 +14,7 @@
           <li>Аудиовызов</li>
           <li>Статистика</li>
           <li>
-            <button type="button">Вход</button>
+            <button type="button" class="menu-sign" >Вход</button>
           </li>
         </ul>
       </nav>
@@ -33,6 +33,38 @@
           <span></span><span></span><span></span>
         </button>
       </div>
+      <section class="user-handler open">
+        <h3 class="user-header">Авторизация пользователя</h3>
+        <div id="user-error-msg-holder" class="show">
+          <p id="user-error-msg">Не правильное имя пользователя <span id="error-msg-second-line">и/или пароль</span></p>
+        </div>
+        <div id="user-sign-msg-holder">
+          <p id="user-sign-msg">Если вы не регистрировались</p>
+          <button class="button button-link" id="user-sign-button">зарегистрироваться</button>
+        </div>
+        <form id="login-form" class="">
+          <div class="login-input-container">
+            <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username">
+          </div>
+          <div class="login-input-container">
+            <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
+          </div>
+          <input type="submit" value="Авторизация" id="login-form-submit">
+        </form>
+        <form id="signin-form" class="open">
+          <div class="login-input-container">
+            <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username">
+          </div>
+          <div class="login-input-container">
+            <input type="email" name="email" id="email-field" class="login-form-field" placeholder="Email">
+          </div>
+          <div class="login-input-container">
+            <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
+          </div>
+          <input type="submit" value="Регистрация" id="login-form-submit">
+        </form>
+        <button type="reset">Закрыть</button>
+      </section>
     </header>
     <main>
       <div class="start-page">

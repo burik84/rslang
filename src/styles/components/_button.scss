@@ -10,8 +10,13 @@ button {
 .button-link {
   background-color: inherit;
   border: none;
+  border-radius: 0;
   outline: none;
   line-height: inherit;
+  opacity: 1;
+  &:hover{
+    cursor: pointer;
+  }
 }
 
 .menu__button {
