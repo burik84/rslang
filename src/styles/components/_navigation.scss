@@ -1,0 +1,43 @@
+.menu-adaptive {
+  display: none;
+  padding: 46px 100px;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: hidden;
+  .header__ul {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 582px;
+    position: absolute;
+    right: -100%;
+    z-index: 10;
+    transform: translateY(-46px);
+    transition: all 0.5s ease-in;
+    background-color: #fff;
+    li {
+      margin-left: 16px;
+    }
+  }
+}
+
+.menu-adaptive.open {
+  .header__ul {
+    right: 0;
+  }
+}
+.menu-sign {
+  order: -1;
+}
+
+@media screen and (max-width: 960px) {
+  header nav {
+    display: none;
+  }
+  .menu-adaptive {
+    display: flex;
+    nav {
+      display: flex;
+    }
+  }
+}

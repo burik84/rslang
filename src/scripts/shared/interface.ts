@@ -14,5 +14,24 @@ interface IWordAPI {
   textMeaningTranslate: string;
   wordTranslate: string;
 }
+type TUser = {
+  email: string;
+  password: string;
+};
 
-export { IWordAPI };
+type TUserCreate = TUser & {
+  name: string;
+};
+interface IUserAuth {
+  message: string;
+  token: string;
+  refreshToken: string;
+  userId: string;
+  name: string;
+}
+interface IUserCreated {
+  id: string;
+  name: string;
+  email: string;
+}
+export { IWordAPI, TUser, TUserCreate, IUserAuth, IUserCreated };
