@@ -1,10 +1,12 @@
-@import './base';
+@import "./base";
 
-@import './pages/main';
+@import "./pages/main";
 
-@import './layouts/header';
-@import './layouts/main';
-@import './layouts/footer';
+@import "./layouts/header";
+@import "./layouts/main";
+@import "./layouts/footer";
 
-@import './components/button';
-@import './components/navigation';
+@import "./components/button";
+@import "./components/navigation";
+
+@import "./pages/audio-game";
