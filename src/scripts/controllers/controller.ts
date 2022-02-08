@@ -4,7 +4,8 @@ import {model} from '../model/model';
 const controllers={
   init: () => {
     console.log('Init view');
-    view.openMenu()
+    view.init()
+    view.openElement()
     model.start()
   },
 }
