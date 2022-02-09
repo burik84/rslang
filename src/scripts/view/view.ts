@@ -1,6 +1,8 @@
 import { userTitle, errorMessage } from './components/elements';
+import { validateInput } from './validate';
 
-const inputForms: string[] = ['text', 'email', 'password'];
+// const inputForms: string[] = ['text', 'email', 'password'];
+const inputForms: string[] = ['password', 'email', 'text'];
 
 const isShowElement = (tag: string) => {
   const element: HTMLDivElement = document.querySelector(tag);
@@ -14,6 +16,11 @@ const isShowElement = (tag: string) => {
 const addInput = (type = 'text') => {
   const container: HTMLDivElement = document.createElement('div');
   const input: HTMLInputElement = document.createElement('input');
+  const hint: HTMLParagraphElement = document.createElement('p');
+
+  container.className = 'login-input-container';
+  hint.className = 'login-input-hint';
+
   switch (type) {
     case 'text':
       input.type = type;
@@ -21,17 +28,46 @@ const addInput = (type = 'text') => {
       input.id = 'username-field';
       input.className = 'login-form-field';
       input.placeholder = 'username';
+      hint.textContent =
+        'Имя может содержать только цифробуквенные символы и не менее 3 символов';
       break;
-    default:
+    case 'email':
       input.type = type;
       input.name = type;
       input.id = `${type}-field`;
       input.className = 'login-form-field';
       input.placeholder = `${type}`;
+      hint.textContent = 'Почта может содержать только цифробуквенные символы';
+      break;
+    case 'password':
+      input.type = type;
+      input.name = type;
+      input.id = `${type}-field`;
+      input.className = 'login-form-field';
+      input.placeholder = `${type}`;
+      hint.textContent =
+        'Пароль может содержать только цифробуквенные символы и не менее 8 символов';
+      break;
+    default:
       break;
   }
-  container.className = 'login-input-container';
+
+  input.addEventListener('input', (e) => {
+    const isValidate = validateInput(type, input.value);
+    if (isValidate) {
+      if (!container.classList.contains('validate'))
+        container.classList.add('validate');
+      if (container.classList.contains('invalidate'))
+        container.classList.remove('invalidate');
+    } else {
+      if (container.classList.contains('validate'))
+        container.classList.remove('validate');
+      if (!container.classList.contains('invalidate'))
+        container.classList.add('invalidate');
+    }
+  });
   container.append(input);
+  container.insertAdjacentElement('afterbegin', hint);
   return container;
 };
 const renderUserForm = (signin = true) => {
@@ -57,7 +93,7 @@ const renderUserForm = (signin = true) => {
   });
   inputForms.forEach((element, index) => {
     if (signin) {
-      if (index > 0)
+      if (index < 2)
         form.insertAdjacentElement('afterbegin', addInput(element));
     } else {
       form.insertAdjacentElement('afterbegin', addInput(element));
@@ -124,7 +160,7 @@ const openElementsHandleClick = () => {
 
 const view = {
   openElement: () => {
-    openElementsHandleClick()
+    openElementsHandleClick();
   },
   signin: false,
   init: () => {
