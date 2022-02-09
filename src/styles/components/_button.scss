@@ -5,6 +5,9 @@ button {
   font-size: 18px;
   line-height: 21.88px;
   border-radius: 10px;
+  &:hover{
+    cursor: pointer;
+  }
 }
 
 .button-link {

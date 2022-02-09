@@ -58,6 +58,10 @@ form {
     }
     &[type='submit'] {
       @extend %filter-button;
+      z-index: 20;
+      &:hover{
+        cursor: pointer;
+      }
     }
   }
 }
