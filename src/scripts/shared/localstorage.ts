@@ -1,5 +1,5 @@
-
-const setValue = (value, key='user') => {
+import {IUserAuth} from './interface'
+const setValue = (value:IUserAuth, key='user') => {
     const name=`rsteam17-${key}`;
     const valueJSON=JSON.stringify(value);
 
