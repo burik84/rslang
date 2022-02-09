@@ -12,4 +12,13 @@ const errorMessage = (
 <p id="user-error-msg">${text}</p>
 </div>`;
 
-export { userTitle, errorMessage };
+const isShowElement = (tag: string) => {
+  const element: HTMLDivElement = document.querySelector(tag);
+
+  if (element.classList.contains('open')) {
+    element.classList.remove('open');
+  } else {
+    element.classList.add('open');
+  }
+};
+export { userTitle, errorMessage, isShowElement };

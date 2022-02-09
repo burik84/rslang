@@ -1,13 +1,12 @@
-import {view} from '../view/view';
-import {model} from '../model/model';
+import { view } from '../view/view';
+import { model } from '../model/model';
 
-const controllers={
+const controllers = {
   init: () => {
     console.log('Init view');
-    view.init()
-    view.openElement()
-    model.start()
+    view.init();
+    model.start();
   },
-}
+};
 
-export {controllers}
+export { controllers };
