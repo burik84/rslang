@@ -117,6 +117,16 @@ const addUserForm = () => {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+
+    let isValidate = 0;
+    const containersInput = document.querySelectorAll('.login-input-container');
+
+    containersInput.forEach((element: HTMLInputElement) => {
+      if (!element.classList.contains('validate')) isValidate += 1;
+    });
+
+    if (isValidate ===0) view.submit()
+
   });
   messageButtonSwtchAuth.addEventListener('click', () => {
     currentSignin = !currentSignin;

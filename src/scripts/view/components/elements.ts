@@ -21,4 +21,11 @@ const isShowElement = (tag: string) => {
     element.classList.add('open');
   }
 };
-export { userTitle, errorMessage, isShowElement };
+
+const removeElement = (tag: string) => {
+  setTimeout(() => {
+    const element = document.querySelector(tag);
+    element.remove();
+  }, 3000);
+};
+export { userTitle, errorMessage, isShowElement, removeElement };
