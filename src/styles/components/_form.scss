@@ -39,7 +39,7 @@
 }
 
 form {
-  display: none;
+  display: flex;
   width: 204px;
   margin-bottom: 24px;
   flex-direction: column;
@@ -60,9 +60,9 @@ form {
       @extend %filter-button;
     }
   }
-  &.open {
-    display: flex;
-  }
+  // &.open {
+  //   display: flex;
+  // }
 }
 .login-input-container {
   margin-bottom: 24px;

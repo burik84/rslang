@@ -1,4 +1,6 @@
-import {userTitle, errorMessage} from './components/elements';
+import { userTitle, errorMessage } from './components/elements';
+
+const inputForms: string[] = ['text', 'email', 'password'];
 
 const isShowElement = (tag: string) => {
   const element: HTMLDivElement = document.querySelector(tag);
@@ -9,43 +11,125 @@ const isShowElement = (tag: string) => {
     element.classList.add('open');
   }
 };
-const addUserForm = () => {
-  const fragment:DocumentFragment=document.createDocumentFragment()
-  const messageHolder:HTMLDivElement=document.createElement('div')
-  const messageButtonSwtchAuth:HTMLButtonElement=document.createElement('button')
-
-  messageHolder.className='user-sign-msg-holder';
-  messageButtonSwtchAuth.className='button button-link'
-  messageButtonSwtchAuth.id='user-sign-button'
-
-  messageHolder.innerHTML='<p id="user-sign-msg">Если вы не регистрировались</p>'
-  messageButtonSwtchAuth.textContent='зарегистрироваться'
-  messageHolder.append(messageButtonSwtchAuth)
-
-  fragment.append(userTitle(), messageHolder)
-  return fragment
+const addInput = (type = 'text') => {
+  const container: HTMLDivElement = document.createElement('div');
+  const input: HTMLInputElement = document.createElement('input');
+  switch (type) {
+    case 'text':
+      input.type = type;
+      input.name = 'username';
+      input.id = 'username-field';
+      input.className = 'login-form-field';
+      input.placeholder = 'username';
+      break;
+    default:
+      input.type = type;
+      input.name = type;
+      input.id = `${type}-field`;
+      input.className = 'login-form-field';
+      input.placeholder = `${type}`;
+      break;
+  }
+  container.className = 'login-input-container';
+  container.append(input);
+  return container;
 };
+const renderUserForm = (signin = true) => {
+  const textMessageHolder = signin
+    ? 'Если вы не регистрировались'
+    : 'Если у вас уже есть аккаунт ';
+  const messageHolder: HTMLParagraphElement =
+    document.querySelector('#user-sign-msg');
+  const messageButtonSwtchAuth: HTMLButtonElement =
+    document.querySelector('#user-sign-button');
+  const buttonSubmit: HTMLInputElement =
+    document.querySelector('#login-form-submit');
+
+  const form: HTMLFormElement = document.querySelector('form');
+  const blocksInputForm = form.querySelectorAll('div');
+
+  messageHolder.textContent = textMessageHolder;
+  messageButtonSwtchAuth.textContent = signin ? 'регистрация' : 'авторизация';
+
+  buttonSubmit.value = signin ? 'Авторизация' : 'Регистрация';
+  blocksInputForm.forEach((element: HTMLDivElement) => {
+    element.parentNode.removeChild(element);
+  });
+  inputForms.forEach((element, index) => {
+    if (signin) {
+      if (index > 0)
+        form.insertAdjacentElement('afterbegin', addInput(element));
+    } else {
+      form.insertAdjacentElement('afterbegin', addInput(element));
+    }
+  });
+};
+const addUserForm = () => {
+  let currentSignin = view.signin;
+  const fragment: DocumentFragment = document.createDocumentFragment();
+  const messageHolder: HTMLDivElement = document.createElement('div');
+  const messageButtonSwtchAuth: HTMLButtonElement =
+    document.createElement('button');
+  const form: HTMLFormElement = document.createElement('form');
+  const buttonReset: HTMLButtonElement = document.createElement('button');
+  const buttonSubmit: HTMLInputElement = document.createElement('input');
+
+  messageHolder.id = 'user-sign-msg-holder';
+  messageButtonSwtchAuth.className = 'button button-link';
+  messageButtonSwtchAuth.id = 'user-sign-button';
+
+  messageHolder.innerHTML = `<p id="user-sign-msg"></p>`;
+  messageHolder.append(messageButtonSwtchAuth);
+
+  form.id = 'signin-form';
+
+  buttonReset.type = 'reset';
+  buttonReset.textContent = 'Закрыть';
+  buttonSubmit.type = 'submit';
+  buttonSubmit.id = 'login-form-submit';
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+  });
+  messageButtonSwtchAuth.addEventListener('click', () => {
+    currentSignin = !currentSignin;
+    view.signin = currentSignin;
+    renderUserForm(currentSignin);
+  });
+  buttonReset.addEventListener('click', () => {
+    isShowElement('.user-handler');
+  });
+  form.append(buttonSubmit);
+
+  fragment.append(userTitle(), messageHolder, form, buttonReset);
+  return fragment;
+};
+const openElementsHandleClick = () => {
+  const buttonMenu: HTMLButtonElement = document.querySelector('.menu__button');
+  const buttonsSign = document.querySelectorAll('.menu-sign');
+
+  buttonMenu.addEventListener('click', () => {
+    ['.menu__button', '.menu-adaptive'].forEach((element) => {
+      isShowElement(element);
+    });
+  });
+
+  buttonsSign.forEach((button: HTMLButtonElement) => {
+    button.addEventListener('click', () => {
+      isShowElement('.user-handler');
+      renderUserForm(view.signin);
+    });
+  });
+};
+
 const view = {
   openElement: () => {
-    const buttonMenu: HTMLButtonElement =
-      document.querySelector('.menu__button');
-    const buttonsSign = document.querySelectorAll('.menu-sign');
-
-    buttonMenu.addEventListener('click', () => {
-      ['.menu__button', '.menu-adaptive'].forEach((element) => {
-        isShowElement(element);
-      });
-    });
-
-    buttonsSign.forEach((button: HTMLButtonElement) => {
-      button.addEventListener('click', () => {
-        isShowElement('.user-handler');
-      });
-    });
+    openElementsHandleClick()
   },
+  signin: false,
   init: () => {
-    const section=document.querySelector('.user-handler')
-    section.append(addUserForm())
+    const section = document.querySelector('.user-handler');
+    section.append(addUserForm());
   },
 };
 export { view };
