@@ -5,13 +5,21 @@ button {
   font-size: 18px;
   line-height: 21.88px;
   border-radius: 10px;
+  &:hover{
+    cursor: pointer;
+  }
 }
 
 .button-link {
   background-color: inherit;
   border: none;
+  border-radius: 0;
   outline: none;
   line-height: inherit;
+  opacity: 1;
+  &:hover{
+    cursor: pointer;
+  }
 }
 
 .menu__button {
