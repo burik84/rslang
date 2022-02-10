@@ -1,6 +1,5 @@
 import { isShowElement, userTitle } from './elements';
 import { validateInput } from './validate';
-import { view } from '../view';
 import { controllers } from '../../controllers/controller';
 import {resetValue} from '../../shared/localstorage';
 

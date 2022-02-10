@@ -5,12 +5,14 @@ const userTitle = (text = 'Авторизация') => {
   return title;
 };
 
-const exampleError = 'Не правильное имя пользователя и/или пароль';
-const errorMessage = (
-  text: string = exampleError
-) => `<div id="user-error-msg-holder" class="show">
-<p id="user-error-msg">${text}</p>
-</div>`;
+const errorLogin = 'Не правильное имя пользователя и/или пароль';
+const errorSignin = 'Пользователь с указанным email уже существует';
+const errorMessage = (type?: string) => {
+  const text = type ? errorSignin : errorLogin;
+  return `<div id="user-error-msg-holder" class="show">
+  <p id="user-error-msg">${text}</p>
+  </div>`;
+};
 
 const isShowElement = (tag: string) => {
   const element: HTMLDivElement = document.querySelector(tag);

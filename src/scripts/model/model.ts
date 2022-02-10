@@ -1,5 +1,5 @@
 import { servicesApi } from '../shared/services';
-import { TUser, IUserAuth } from '../shared/interface';
+import { TUser, TUserCreate, IUserAuth } from '../shared/interface';
 import { setValue, getValue } from '../shared/localstorage';
 import {controllers} from '../controllers/controller';
 
@@ -10,13 +10,12 @@ const model = {
   },
   login: async (user: TUser) => {
     try {
-      const response = await servicesApi.signin(user);
+      const response = await servicesApi.login(user);
       const login = {
         name: response.name,
         token: response.token,
         userId: response.userId,
       };
-      controllers.user = login;
       setValue(login);
       return response;
     } catch (error) {
@@ -24,10 +23,17 @@ const model = {
       return false;
     }
   },
+  signin: async (user: TUserCreate) => {
+    try {
+      const response = await servicesApi.signin(user);
+      return response;
+    } catch (error) {
+      return false;
+    }
+  },
   isLogin:()=>{
     const user:IUserAuth=getValue()
     controllers.user=user
-    // return user
   }
 };
 

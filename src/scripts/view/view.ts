@@ -32,10 +32,10 @@ const renderFormUser = () => {
     showModalUser(button);
   });
 };
-const addErrorLogin = () => {
+const addErrorLogin = (type?:string) => {
   const message = document.querySelector('#user-sign-msg-holder');
 
-  message.insertAdjacentHTML('afterend', errorMessage());
+  message.insertAdjacentHTML('afterend', errorMessage(type));
   removeElement('#user-error-msg-holder');
 };
 
@@ -46,16 +46,20 @@ const view = {
     showAdaptiveMenu();
     renderFormUser();
   },
-  renderUserMessage: () => {
-    addErrorLogin();
+  renderUserMessage: (type?:string) => {
+    addErrorLogin(type);
   },
   closeModalUserSign: () => {
     isShowElement('.user-handler');
   },
-  renderUserLogin: (isLogin: boolean) => {
+  renderUserLogin: (isLogin: boolean, name?:string) => {
     const header = document.querySelector('header');
+    const buttonsUser = document.querySelectorAll('.menu-user-name');
     if (isLogin) {
       if (!header.classList.contains('login')) header.classList.add('login');
+      buttonsUser.forEach((button) => {
+        button.textContent = name;
+      });
     } else {
       if (header.classList.contains('login')) header.classList.remove('login');
     }

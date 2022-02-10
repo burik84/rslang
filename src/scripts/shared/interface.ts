@@ -34,4 +34,15 @@ interface IUserCreated {
   name: string;
   email: string;
 }
-export { IWordAPI, TUser, TUserCreate, IUserAuth, IUserCreated };
+
+interface IControllers {
+  signin: boolean;
+  isUserLogin: boolean;
+  isUserSignin: boolean;
+  isSpinner: boolean;
+  user: IUserAuth | any;
+  init: () => void;
+  userSign: () => void;
+  updateUser: () => void;
+}
+export { IWordAPI, TUser, TUserCreate, IUserAuth, IUserCreated, IControllers };
