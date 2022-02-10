@@ -25,7 +25,7 @@ type TUserCreate = TUser & {
 interface IUserAuth {
   message?: string;
   token: string;
-  refreshToken: string;
+  refreshToken?: string;
   userId: string;
   name: string;
 }

@@ -13,7 +13,6 @@ const model = {
       const response = await servicesApi.signin(user);
       const login = {
         name: response.name,
-        refreshToken: response.refreshToken,
         token: response.token,
         userId: response.userId,
       };
