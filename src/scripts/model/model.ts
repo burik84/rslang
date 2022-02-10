@@ -1,7 +1,7 @@
 import { servicesApi } from '../shared/services';
 import { TUser, TUserCreate, IUserAuth } from '../shared/interface';
 import { setValue, getValue } from '../shared/localstorage';
-import {controllers} from '../controllers/controller';
+import { controllers } from '../controllers/controller';
 
 const model = {
   start: () => {
@@ -16,10 +16,10 @@ const model = {
         token: response.token,
         userId: response.userId,
       };
+      controllers.refreshToken = response.refreshToken;
       setValue(login);
       return response;
     } catch (error) {
-      console.error('rejected login:', error.message);
       return false;
     }
   },
@@ -31,10 +31,10 @@ const model = {
       return false;
     }
   },
-  isLogin:()=>{
-    const user:IUserAuth=getValue()
-    controllers.user=user
-  }
+  isLogin: () => {
+    const user: IUserAuth = getValue();
+    controllers.user = user;
+  },
 };
 
 export { model };

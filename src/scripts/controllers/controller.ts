@@ -40,6 +40,7 @@ const controllers: IControllers = {
   isUserSignin: false,
   isSpinner: false,
   user: {},
+  refreshToken: '',
   init: () => {
     console.log('Init view');
     view.init();
@@ -62,7 +63,7 @@ const controllers: IControllers = {
     if (controllers.user) {
       controllers.isUserLogin = true;
       view.renderUserLogin(controllers.isUserLogin, controllers.user.name);
-    }else{
+    } else {
       controllers.isUserLogin = false;
       view.renderUserLogin(controllers.isUserLogin);
     }

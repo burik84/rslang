@@ -41,6 +41,7 @@ interface IControllers {
   isUserSignin: boolean;
   isSpinner: boolean;
   user: IUserAuth | any;
+  refreshToken: string;
   init: () => void;
   userSign: () => void;
   updateUser: () => void;
