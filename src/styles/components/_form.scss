@@ -1,34 +1,42 @@
-@import '../constants';
-@import '../extends';
+@import "../constants";
+@import "../extends";
 
 .user-handler {
   // display: none;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   width: 420px;
-  height: 582px;
+  height: 100%;
+  padding: 60px 20px;
   position: absolute;
   right: -100%;
-  z-index: 10;
-  transform: translateY(-20px);
+  z-index: 40;
+  transform: translateY(-230px);
   transition: all 0.5s ease-in;
   background-color: #fff;
+  background-image: url("../assets/icons/account-lock-open-outline.svg");
+  background-repeat: no-repeat;
+  background-position: center 75%;
 
   &.open {
     right: 0;
   }
+
   .button-link {
     text-decoration: underline;
     color: $color-primary-background;
   }
-  button[type='reset'], .button-user-logout {
+
+  button[type="reset"],
+  .button-user-logout {
     width: 280px;
     align-self: center;
     @extend %filter-button;
   }
-  .button-user-logout{
+
+  .button-user-logout {
     margin-bottom: 24px;
   }
 }
@@ -36,6 +44,7 @@
 #user-error-msg-holder {
   opacity: 0;
   color: $color-error;
+
   &.show {
     opacity: 1;
   }
@@ -48,6 +57,7 @@ form {
   flex-direction: column;
   justify-content: center;
   align-self: center;
+
   input {
     width: 100%;
     height: 38px;
@@ -55,29 +65,34 @@ form {
     border: none;
     border-radius: 0;
     outline: none;
+
     &:active {
       outline-offset: inherit;
       outline: none;
     }
-    &[type='submit'] {
+
+    &[type="submit"] {
       @extend %filter-button;
       z-index: 20;
-      &:hover{
+
+      &:hover {
         cursor: pointer;
       }
     }
   }
 }
-.login-input-hint{
+
+.login-input-hint {
   opacity: 0;
   font-size: 14px;
   line-height: 16px;
-  color:$color-primary-background;
+  color: $color-primary-background;
   position: absolute;
   top: 44px;
   left: 0;
   transition: all 0.3s ease-in;
 }
+
 .login-input-container {
   // width: 204px;
   position: relative;
@@ -85,30 +100,36 @@ form {
   padding: 0 12px;
   @extend %filter-button;
 
-  &.invalidate{
+  &.invalidate {
     border-color: $color-error;
     margin-bottom: 64px;
-    .login-input-hint{
+
+    .login-input-hint {
       opacity: 1;
       color: $color-error;
     }
   }
-  &.validate{
+
+  &.validate {
     border-color: $color-is-validate;
-    .login-input-hint{
+
+    .login-input-hint {
       opacity: 0;
     }
   }
+
   // &:last-of-type{
   //   order: -2;
   // }
 }
+
 .login-checkbox-show {
   display: flex;
   flex-direction: row;
   align-items: baseline;
   justify-content: flex-start;
   margin-bottom: 24px;
+
   input {
     display: none;
     height: initial;
@@ -118,11 +139,13 @@ form {
     padding: 0;
     cursor: pointer;
   }
+
   label {
     position: relative;
     cursor: pointer;
+
     &:before {
-      content:'';
+      content: "";
       margin-right: 5px;
       padding: 10px;
       display: inline-block;
@@ -134,11 +157,10 @@ form {
       vertical-align: middle;
       cursor: pointer;
     }
-
-
   }
+
   input:checked + label:after {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     top: 5px;
@@ -148,5 +170,11 @@ form {
     border: solid $color-primary-background;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .user-handler {
+    transform: translateY(-130px);
   }
 }
