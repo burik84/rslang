@@ -1,5 +1,6 @@
 header {
   background-color: var(--bg-light-color);
+
   .menu-user-name,
   .button-user-logout,
   .user-header:last-of-type {
@@ -7,9 +8,15 @@ header {
   }
 
   .menu-sign,
-  #user-sign-msg-holder,
   .user-header:first-of-type {
     display: block;
+  }
+
+  #user-sign-msg-holder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
   }
 
   &.login {
@@ -46,4 +53,8 @@ header {
       border-radius: 10px;
     }
   }
+}
+
+.user-header {
+  margin-bottom: 24px;
 }
