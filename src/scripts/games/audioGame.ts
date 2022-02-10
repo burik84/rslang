@@ -1,5 +1,6 @@
 import { urlAPI } from '../shared/api';
 import { getExampleWords } from '../shared/exampleWords';
+import { IWordAPI } from '../shared/interface';
 
 const audioGame = () => {
 
@@ -9,6 +10,11 @@ const audioGame = () => {
     const answerButton3 = document.querySelector('#audio-answer-button-3');
     const answerButton4 = document.querySelector('#audio-answer-button-4');
     const nextQuestionButton = document.querySelector('#audio-next-question-button');
+
+    const currentQuestionHTMLCounter = document.querySelector('#audio-current-question-number');
+    const totalQuestionHTMLCounter = document.querySelector('#audio-total-question-number');
+
+    const wordsForAGarr: Array<IWordAPI> = [];
 
     /*функции для получения аудио с сервера и последующего воспроизведения по клику*/
 
@@ -32,6 +38,35 @@ const audioGame = () => {
         playSound.connect(ctx.destination);
         playSound.start(ctx.currentTime);
     }
+
+    /*забирает нужные слова с сервера, закидывает их в массив*/
+
+    function getWordsFromAPI(page: number, group: number) {
+        const resp = fetch(`${urlAPI}/words?page=${page}&group=${group}`)
+            .then(response => response.json())
+            .then(((data) => {
+                // return data
+                wordsForAGarr.push(...data);
+                totalQuestionHTMLCounter.innerHTML = String(wordsForAGarr.length / 4);
+            }))
+            // .then(((data) => console.log(data)))
+    }
+
+    /*создает массив из 80 (или меньше) слов в зависимости от страницы*/
+
+    
+    function getWordsForAG(page: number, group: number) {
+        const pageNumsArr: Array<number> = [];
+        for (let i = 0; i < 4; i++) {
+            if (page - i >= 0) {
+                pageNumsArr.push(page - i);
+            } 
+        }
+        pageNumsArr.forEach(value => getWordsFromAPI(value, 1));
+        // console.log(wordsForAGarr)
+    }
+
+    getWordsForAG(2, 1)
 
     /*создания массива с номерами вопросов, пока что заглушка, потом будет генерироваться исходя из условий*/
 
