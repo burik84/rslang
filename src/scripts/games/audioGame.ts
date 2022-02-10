@@ -42,7 +42,7 @@ const audioGame = () => {
     /*забирает нужные слова с сервера, закидывает их в массив*/
 
     function getWordsFromAPI(page: number, group: number) {
-        const resp = fetch(`${urlAPI}/words?page=${page}&group=${group}`)
+        fetch(`${urlAPI}/words?page=${page}&group=${group}`)
             .then(response => response.json())
             .then(((data) => {
                 // return data
@@ -62,11 +62,11 @@ const audioGame = () => {
                 pageNumsArr.push(page - i);
             } 
         }
-        pageNumsArr.forEach(value => getWordsFromAPI(value, 1));
-        // console.log(wordsForAGarr)
+        pageNumsArr.forEach(value => getWordsFromAPI(value, group));
+        console.log(wordsForAGarr)
     }
 
-    getWordsForAG(2, 1)
+    getWordsForAG(2, 3)
 
     /*создания массива с номерами вопросов, пока что заглушка, потом будет генерироваться исходя из условий*/
 
