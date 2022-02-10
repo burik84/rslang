@@ -15,6 +15,7 @@ const audioGame = () => {
     const totalQuestionHTMLCounter = document.querySelector('#audio-total-question-number');
 
     const wordsForAGarr: Array<IWordAPI> = [];
+    let currentQuestionNumber;
 
     /*функции для получения аудио с сервера и последующего воспроизведения по клику*/
 
@@ -45,11 +46,15 @@ const audioGame = () => {
         fetch(`${urlAPI}/words?page=${page}&group=${group}`)
             .then(response => response.json())
             .then(((data) => {
-                // return data
                 wordsForAGarr.push(...data);
                 totalQuestionHTMLCounter.innerHTML = String(wordsForAGarr.length / 4);
+                // return wordsForAGarr;
             }))
-            // .then(((data) => console.log(data)))
+            .then((() => {
+                // console.log(wordsForAGarr)
+                // console.log(wordsForAGarr.length)
+                setFirstQuestionAG()
+            }))
     }
 
     /*создает массив из 80 (или меньше) слов в зависимости от страницы*/
@@ -63,26 +68,20 @@ const audioGame = () => {
             } 
         }
         pageNumsArr.forEach(value => getWordsFromAPI(value, group));
-        console.log(wordsForAGarr)
     }
 
-    getWordsForAG(2, 3)
+    getWordsForAG(3, 3) /*Это нужно будет выполнить когда пользователь выберет сложность для запуска*/
 
-    /*создания массива с номерами вопросов, пока что заглушка, потом будет генерироваться исходя из условий*/
-
-    const arrStartNumbers: Array<number> = Array(20).fill(0).map((x, idx) => idx);
-    // let setNumbersWords: any = new Set(arrStartNumbers);
-
-    let currentQuestionNumber;
-
-    function setQuestionAG(arrStartNumbers: Array<number>, currentQuestionNumber: number) {
-        answerButton1.innerHTML = getExampleWords[arrStartNumbers[currentQuestionNumber * 4 - 4 + 0]].word;
-        answerButton2.innerHTML = getExampleWords[arrStartNumbers[currentQuestionNumber * 4 - 4 + 1]].word;
-        answerButton3.innerHTML = getExampleWords[arrStartNumbers[currentQuestionNumber * 4 - 4 + 2]].word;
-        answerButton4.innerHTML = getExampleWords[arrStartNumbers[currentQuestionNumber * 4 - 4 + 3]].word; 
+    function setFirstQuestionAG() {
+        setQuestionAG(1);
     }
 
-    setQuestionAG(arrStartNumbers, 1)
+    function setQuestionAG(currentQuestionNumber: number) {
+            answerButton1.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 0].word;
+            answerButton2.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 1].word;
+            answerButton3.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 2].word;
+            answerButton4.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 3].word; 
+    }
 
     /* 1я меняет цвета кнопок после ответа и блокирует их / 2я возращает как было */
     
@@ -97,8 +96,6 @@ const audioGame = () => {
         [answerButton1, answerButton2, answerButton3, answerButton4].forEach(value => value.classList.remove('audio-answer-button-true'));
         [answerButton1, answerButton2, answerButton3, answerButton4].forEach(value => value.removeAttribute('disabled'));
     }
-
-    // fillButtonsInColor(2)
 
     /*обработчики для кнопок*/
 
