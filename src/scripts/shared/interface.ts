@@ -25,7 +25,7 @@ type TUserCreate = TUser & {
 interface IUserAuth {
   message?: string;
   token: string;
-  refreshToken: string;
+  refreshToken?: string;
   userId: string;
   name: string;
 }
@@ -34,4 +34,16 @@ interface IUserCreated {
   name: string;
   email: string;
 }
-export { IWordAPI, TUser, TUserCreate, IUserAuth, IUserCreated };
+
+interface IControllers {
+  signin: boolean;
+  isUserLogin: boolean;
+  isUserSignin: boolean;
+  isSpinner: boolean;
+  user: IUserAuth | any;
+  refreshToken: string;
+  init: () => void;
+  userSign: () => void;
+  updateUser: () => void;
+}
+export { IWordAPI, TUser, TUserCreate, IUserAuth, IUserCreated, IControllers };

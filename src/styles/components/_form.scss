@@ -23,10 +23,13 @@
     text-decoration: underline;
     color: $color-primary-background;
   }
-  button[type='reset'] {
+  button[type='reset'], .button-user-logout {
     width: 280px;
     align-self: center;
     @extend %filter-button;
+  }
+  .button-user-logout{
+    margin-bottom: 24px;
   }
 }
 

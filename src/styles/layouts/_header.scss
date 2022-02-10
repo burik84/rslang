@@ -1,15 +1,44 @@
-header{
+header {
   background-color: var(--bg-light-color);
+  .menu-user-name,
+  .button-user-logout,
+  .user-header:last-of-type {
+    display: none;
+  }
+
+  .menu-sign,
+  #user-sign-msg-holder,
+  .user-header:first-of-type {
+    display: block;
+  }
+
+  &.login {
+    .menu-user-name,
+    .button-user-logout,
+    .user-header:last-of-type {
+      display: block;
+    }
+
+    .menu-sign,
+    #signin-form,
+    #user-sign-msg-holder,
+    .user-header:first-of-type {
+      display: none;
+    }
+  }
 }
-.header__ul{
+
+.header__ul {
   padding: 46px 101px 126px 0;
   display: grid;
   grid-template-columns: repeat(6, auto);
   justify-content: space-evenly;
   align-items: baseline;
-  li{
+
+  li {
     list-style: none;
-    button{
+
+    button {
       width: 150px;
       height: 38px;
       font-size: 18px;

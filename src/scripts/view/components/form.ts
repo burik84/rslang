@@ -1,6 +1,7 @@
 import { isShowElement, userTitle } from './elements';
 import { validateInput } from './validate';
-import { view } from '../view';
+import { controllers } from '../../controllers/controller';
+import {resetValue} from '../../shared/localstorage';
 
 const inputForms: string[] = ['password', 'email', 'text'];
 
@@ -61,7 +62,8 @@ const addInput = (type = 'text') => {
   container.insertAdjacentElement('afterbegin', hint);
   return container;
 };
-const renderUserForm = (signin = true) => {
+const renderUserForm = () => {
+  const signin = controllers.signin;
   const textMessageHolder = signin
     ? 'Если вы не регистрировались'
     : 'Если у вас уже есть аккаунт ';
@@ -92,13 +94,14 @@ const renderUserForm = (signin = true) => {
   });
 };
 const addUserForm = () => {
-  let currentSignin = view.signin;
+  let currentSignin = controllers.signin;
   const fragment: DocumentFragment = document.createDocumentFragment();
   const messageHolder: HTMLDivElement = document.createElement('div');
   const messageButtonSwtchAuth: HTMLButtonElement =
     document.createElement('button');
   const form: HTMLFormElement = document.createElement('form');
   const buttonReset: HTMLButtonElement = document.createElement('button');
+  const buttonUserLogout: HTMLButtonElement = document.createElement('button');
   const buttonSubmit: HTMLInputElement = document.createElement('input');
 
   messageHolder.id = 'user-sign-msg-holder';
@@ -114,6 +117,9 @@ const addUserForm = () => {
   buttonReset.textContent = 'Закрыть';
   buttonSubmit.type = 'submit';
   buttonSubmit.id = 'login-form-submit';
+  buttonUserLogout.type = 'button';
+  buttonUserLogout.textContent = 'Выход';
+  buttonUserLogout.className='button button-user-logout'
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -125,20 +131,24 @@ const addUserForm = () => {
       if (!element.classList.contains('validate')) isValidate += 1;
     });
 
-    if (isValidate ===0) view.submit()
-
+    if (isValidate === 0) controllers.userSign();
   });
   messageButtonSwtchAuth.addEventListener('click', () => {
     currentSignin = !currentSignin;
-    view.signin = currentSignin;
-    renderUserForm(currentSignin);
+    controllers.signin = currentSignin;
+    renderUserForm();
   });
   buttonReset.addEventListener('click', () => {
     isShowElement('.user-handler');
   });
+  buttonUserLogout.addEventListener('click', () => {
+    resetValue()
+    controllers.updateUser()
+    isShowElement('.user-handler');
+  });
   form.append(buttonSubmit);
 
-  fragment.append(userTitle(), messageHolder, form, buttonReset);
+  fragment.append(userTitle(), userTitle('Выход'), messageHolder, form, buttonUserLogout, buttonReset);
   return fragment;
 };
 

@@ -1,6 +1,9 @@
-import { isShowElement, errorMessage, removeElement } from './components/elements';
+import {
+  isShowElement,
+  errorMessage,
+  removeElement,
+} from './components/elements';
 import { addUserForm, renderUserForm } from './components/form';
-import {model} from '../model/model';
 
 const showAdaptiveMenu = () => {
   const buttonMenu: HTMLButtonElement = document.querySelector('.menu__button');
@@ -13,44 +16,53 @@ const showAdaptiveMenu = () => {
 };
 const renderFormUser = () => {
   const buttonsSign = document.querySelectorAll('.menu-sign');
+  const buttonsLogout = document.querySelectorAll('.menu-user-name');
+
+  const showModalUser = (element: HTMLButtonElement) => {
+    element.addEventListener('click', () => {
+      isShowElement('.user-handler');
+      renderUserForm();
+    });
+  };
 
   buttonsSign.forEach((button: HTMLButtonElement) => {
-    button.addEventListener('click', () => {
-      isShowElement('.user-handler');
-      renderUserForm(view.signin);
-    });
+    showModalUser(button);
   });
+  buttonsLogout.forEach((button: HTMLButtonElement) => {
+    showModalUser(button);
+  });
+};
+const addErrorLogin = (type?:string) => {
+  const message = document.querySelector('#user-sign-msg-holder');
+
+  message.insertAdjacentHTML('afterend', errorMessage(type));
+  removeElement('#user-error-msg-holder');
 };
 
 const view = {
-  signin: true,
   init: () => {
     const section = document.querySelector('.user-handler');
     section.append(addUserForm());
     showAdaptiveMenu();
     renderFormUser();
   },
-  submit: () => {
-    const result:string[]=[]
-    const inputs = document.querySelectorAll('.login-form-field');
-    const message=document.querySelector('#user-sign-msg-holder')
-
-    inputs.forEach((element: HTMLInputElement) => {
-      result.push(element.value)
-    });
-
-    if (result.length===2){
-      const successLogin=model.login({
-        'email':result[0],
-        'password':result[1]
-      }).then(data=>{
-        if (!data) {
-          message.insertAdjacentHTML('afterend',errorMessage())
-          removeElement('#user-error-msg-holder')
-        }
-      })
+  renderUserMessage: (type?:string) => {
+    addErrorLogin(type);
+  },
+  closeModalUserSign: () => {
+    isShowElement('.user-handler');
+  },
+  renderUserLogin: (isLogin: boolean, name?:string) => {
+    const header = document.querySelector('header');
+    const buttonsUser = document.querySelectorAll('.menu-user-name');
+    if (isLogin) {
+      if (!header.classList.contains('login')) header.classList.add('login');
+      buttonsUser.forEach((button) => {
+        button.textContent = name;
+      });
+    } else {
+      if (header.classList.contains('login')) header.classList.remove('login');
     }
-
   },
 };
 export { view };
