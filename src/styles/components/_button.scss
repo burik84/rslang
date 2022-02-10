@@ -1,17 +1,29 @@
-@import '../constants';
+@import "../constants";
+
 button {
   width: 150px;
   height: 38px;
   font-size: 18px;
   line-height: 21.88px;
   border-radius: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
-.button-link {
+.button-link,
+.menu-user-name {
   background-color: inherit;
   border: none;
+  border-radius: 0;
   outline: none;
   line-height: inherit;
+  opacity: 1;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .menu__button {
@@ -23,9 +35,11 @@ button {
   background-color: inherit;
   z-index: 20;
   transition: all 0.5s ease;
+
   &:hover {
     cursor: pointer;
   }
+
   span {
     display: block;
     width: 100%;
@@ -35,9 +49,11 @@ button {
     top: 16px;
     transform: rotate(0deg);
     transition: 0.5s ease-in-out;
+
     &:first-of-type {
       top: 0;
     }
+
     &:last-of-type {
       top: 34px;
     }
@@ -47,15 +63,28 @@ button {
 .menu__button.open {
   span {
     opacity: 0;
+
     &:first-of-type {
       top: 16px;
       transform: rotate(45deg);
       opacity: 1;
     }
+
     &:last-of-type {
       top: 16px;
       transform: rotate(-45deg);
       opacity: 1;
     }
+  }
+}
+
+header.login{
+  .menu-user-name {
+    height: 28px;
+    padding-left: 4px;
+    text-align: start;
+    border-radius: 0;
+    border-bottom: 1px solid $color-primary-background;
+    order: -1;
   }
 }

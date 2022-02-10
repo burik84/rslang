@@ -3,6 +3,6 @@ import { app } from './scripts/app';
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Start script!');
-  app.init();
+  app.start();
   app.testSevice();
 });

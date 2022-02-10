@@ -14,7 +14,7 @@ export const servicesApi = {
       });
     return dataAllWords;
   },
-  signin: async (user: TUser) => {
+  login: async (user: TUser) => {
     const rawResponse = await fetch(`${urlAPI}/signin`, {
       method: 'POST',
       headers: {
@@ -26,7 +26,7 @@ export const servicesApi = {
     const content: IUserAuth = await rawResponse.json();
     return content;
   },
-  createUser: async (user: TUserCreate) => {
+  signin: async (user: TUserCreate) => {
     const rawResponse = await fetch(`${urlAPI}/users`, {
       method: 'POST',
       headers: {
@@ -35,7 +35,7 @@ export const servicesApi = {
       },
       body: JSON.stringify(user),
     });
-    const content: IUserCreated = await rawResponse.json();
+    const content: IUserCreated = await rawResponse.json().catch(()=>false);
 
     return content;
   },
