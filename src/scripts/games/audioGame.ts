@@ -1,5 +1,4 @@
 import { urlAPI } from '../shared/api';
-import { getExampleWords } from '../shared/exampleWords';
 import { IWordAPI } from '../shared/interface';
 
 const audioGame = () => {
@@ -15,7 +14,10 @@ const audioGame = () => {
     const totalQuestionHTMLCounter = document.querySelector('#audio-total-question-number');
 
     const wordsForAGarr: Array<IWordAPI> = [];
-    let currentQuestionNumber;
+    let currentQuestionNumber = 1;
+    let totalNumberOfQuestions: number;
+    let correctAnswerNumber: number;
+    let totalCorrectAnswers = 0;
 
     /*функции для получения аудио с сервера и последующего воспроизведения по клику*/
 
@@ -47,12 +49,13 @@ const audioGame = () => {
             .then(response => response.json())
             .then(((data) => {
                 wordsForAGarr.push(...data);
-                totalQuestionHTMLCounter.innerHTML = String(wordsForAGarr.length / 4);
+                totalNumberOfQuestions = wordsForAGarr.length / 4;
+                totalQuestionHTMLCounter.innerHTML = String(totalNumberOfQuestions);
                 // return wordsForAGarr;
             }))
             .then((() => {
                 // console.log(wordsForAGarr)
-                // console.log(wordsForAGarr.length)
+                console.log('слов в массиве: ' + wordsForAGarr.length)
                 setFirstQuestionAG()
             }))
     }
@@ -72,22 +75,52 @@ const audioGame = () => {
 
     getWordsForAG(3, 3) /*Это нужно будет выполнить когда пользователь выберет сложность для запуска*/
 
+    /*генерируют вопросы*/
+
     function setFirstQuestionAG() {
         setQuestionAG(1);
     }
 
     function setQuestionAG(currentQuestionNumber: number) {
-            answerButton1.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 0].word;
-            answerButton2.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 1].word;
-            answerButton3.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 2].word;
-            answerButton4.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 3].word; 
+        currentQuestionHTMLCounter.innerHTML = String(currentQuestionNumber);
+        disabledNextButton();
+
+        answerButton1.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 0].word;
+        answerButton2.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 1].word;
+        answerButton3.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 2].word;
+        answerButton4.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 3].word; 
+
+        correctAnswerNumber = Math.floor(Math.random() * 4);
+        // console.log(correctAnswerNumber)
+
+        const voice = wordsForAGarr[4 * (currentQuestionNumber - 1) + correctAnswerNumber].audio;
+        console.log('ответ: ' + wordsForAGarr[4 * (currentQuestionNumber - 1) + correctAnswerNumber].word);
+        console.log('--------------------')
+        getAudioFromApi(voice);
+        // if (currentQuestionNumber > 1) {
+        //     playback()
+        // }
+    }
+
+    /*проверяет, правильный ли ответ и переходит к следующему*/
+
+    function checkAnswerAG(userSelect: number) {
+        if (userSelect == correctAnswerNumber) {
+            totalCorrectAnswers += 1;
+            console.log('правильно!')
+        } else {
+            console.log('неправильно!')
+        }
+        console.log('всего правильных ответов: ' + totalCorrectAnswers)
+
+        currentQuestionNumber += 1;
     }
 
     /* 1я меняет цвета кнопок после ответа и блокирует их / 2я возращает как было */
     
     function fillButtonsInColor (correctAnswernumber: number) {
         [answerButton1, answerButton2, answerButton3, answerButton4].forEach(value => value.classList.add('audio-answer-button-false'));
-        [answerButton1, answerButton2, answerButton3, answerButton4][correctAnswernumber - 1].classList.add('audio-answer-button-true');
+        [answerButton1, answerButton2, answerButton3, answerButton4][correctAnswernumber].classList.add('audio-answer-button-true');
         [answerButton1, answerButton2, answerButton3, answerButton4].forEach(value => value.setAttribute('disabled', 'disabled'));
     }
 
@@ -99,34 +132,58 @@ const audioGame = () => {
 
     /*обработчики для кнопок*/
 
+    function enableNextButton() {
+        nextQuestionButton.classList.add('audio-button-enable');
+    }
+
+    function disabledNextButton() {
+        nextQuestionButton.classList.remove('audio-button-enable');
+    }
+
+    function setSelectedButtonBorder(selectedAnswerNumber: number) {
+        [answerButton1, answerButton2, answerButton3, answerButton4][selectedAnswerNumber].classList.add('audio-answer-button-selected');
+    }
+
+    function clearSelectedButtonBorder() {
+        [answerButton1, answerButton2, answerButton3, answerButton4].forEach(value => value.classList.remove('audio-answer-button-selected'));
+    }
+
+    function answerButtonHandler(buttonNumber: number) {
+        fillButtonsInColor(correctAnswerNumber)
+        checkAnswerAG(buttonNumber);
+        enableNextButton();
+        setSelectedButtonBorder(buttonNumber);
+    }
+
     repeatVoiceButton.addEventListener('click', () => {
         console.log('voice click');
         playback();
     })
 
     answerButton1.addEventListener('click', () => {
-        console.log('answerButton1 click')
-        fillButtonsInColor(1)
+        answerButtonHandler(0);
     })
 
     answerButton2.addEventListener('click', () => {
-        console.log('answerButton2 click')
-        fillButtonsInColor(2)
+        answerButtonHandler(1);
     })
 
     answerButton3.addEventListener('click', () => {
-        console.log('answerButton3 click')
-        fillButtonsInColor(3)
+        answerButtonHandler(2);
     })
 
     answerButton4.addEventListener('click', () => {
-        console.log('answerButton4 click')
-        fillButtonsInColor(4)
+        answerButtonHandler(3);
     })
 
     nextQuestionButton.addEventListener('click', () => {
-        console.log('nextQuestionButton click')
-        clearButtonsColor()
+        if (currentQuestionNumber < totalNumberOfQuestions + 1) {
+            clearButtonsColor();
+            clearSelectedButtonBorder();
+            setQuestionAG(currentQuestionNumber);
+        } else {
+            console.log('Игра закончена! Ваш результат: ' + totalCorrectAnswers)
+        }
     })
 
 
