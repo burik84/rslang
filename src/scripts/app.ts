@@ -1,7 +1,12 @@
-const app={
-  init:()=>{
-    console.log('Start App');
-  }
-}
+import { servicesApi } from './shared/services';
 
-export {app}
+const app = {
+  init: () => {
+    console.log('Start App');
+  },
+  testSevice: () => {
+    servicesApi.getAllWords();
+  },
+};
+
+export { app };
