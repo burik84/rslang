@@ -20,8 +20,7 @@ const addInput = (type = 'text') => {
       input.id = 'username-field';
       input.className = 'login-form-field';
       input.placeholder = 'username';
-      hint.textContent =
-        'Имя может содержать только цифробуквенные символы и не менее 3 символов';
+      hint.textContent = 'Имя может содержать только цифробуквенные символы и не менее 3 символов';
       break;
     case 'email':
       input.type = type;
@@ -47,15 +46,11 @@ const addInput = (type = 'text') => {
   input.addEventListener('input', (e) => {
     const isValidate = validateInput(type, input.value);
     if (isValidate) {
-      if (!container.classList.contains('validate'))
-        container.classList.add('validate');
-      if (container.classList.contains('invalidate'))
-        container.classList.remove('invalidate');
+      if (!container.classList.contains('validate')) container.classList.add('validate');
+      if (container.classList.contains('invalidate')) container.classList.remove('invalidate');
     } else {
-      if (container.classList.contains('validate'))
-        container.classList.remove('validate');
-      if (!container.classList.contains('invalidate'))
-        container.classList.add('invalidate');
+      if (container.classList.contains('validate')) container.classList.remove('validate');
+      if (!container.classList.contains('invalidate')) container.classList.add('invalidate');
     }
   });
   container.append(input);
@@ -64,15 +59,10 @@ const addInput = (type = 'text') => {
 };
 const renderUserForm = () => {
   const signin = controllers.signin;
-  const textMessageHolder = signin
-    ? 'Если вы не регистрировались'
-    : 'Если у вас уже есть аккаунт ';
-  const messageHolder: HTMLParagraphElement =
-    document.querySelector('#user-sign-msg');
-  const messageButtonSwtchAuth: HTMLButtonElement =
-    document.querySelector('#user-sign-button');
-  const buttonSubmit: HTMLInputElement =
-    document.querySelector('#login-form-submit');
+  const textMessageHolder = signin ? 'Если вы не регистрировались' : 'Если у вас уже есть аккаунт ';
+  const messageHolder: HTMLParagraphElement = document.querySelector('#user-sign-msg');
+  const messageButtonSwtchAuth: HTMLButtonElement = document.querySelector('#user-sign-button');
+  const buttonSubmit: HTMLInputElement = document.querySelector('#login-form-submit');
 
   const form: HTMLFormElement = document.querySelector('form');
   const blocksInputForm = form.querySelectorAll('div');
@@ -86,8 +76,7 @@ const renderUserForm = () => {
   });
   inputForms.forEach((element, index) => {
     if (signin) {
-      if (index < 2)
-        form.insertAdjacentElement('afterbegin', addInput(element));
+      if (index < 2) form.insertAdjacentElement('afterbegin', addInput(element));
     } else {
       form.insertAdjacentElement('afterbegin', addInput(element));
     }
@@ -97,8 +86,7 @@ const addUserForm = () => {
   let currentSignin = controllers.signin;
   const fragment: DocumentFragment = document.createDocumentFragment();
   const messageHolder: HTMLDivElement = document.createElement('div');
-  const messageButtonSwtchAuth: HTMLButtonElement =
-    document.createElement('button');
+  const messageButtonSwtchAuth: HTMLButtonElement = document.createElement('button');
   const form: HTMLFormElement = document.createElement('form');
   const buttonReset: HTMLButtonElement = document.createElement('button');
   const buttonUserLogout: HTMLButtonElement = document.createElement('button');

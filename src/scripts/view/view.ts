@@ -1,8 +1,4 @@
-import {
-  isShowElement,
-  errorMessage,
-  removeElement,
-} from './components/elements';
+import { isShowElement, errorMessage, removeElement } from './components/elements';
 import { addUserForm, renderUserForm } from './components/form';
 
 const showAdaptiveMenu = () => {

@@ -2,23 +2,15 @@ import { urlAPI } from '../shared/api';
 import { IWordAPI } from '../shared/interface';
 
 const audioGame = () => {
-  const repeatVoiceButton = document.querySelector(
-    '#audio-repeat-voice-button'
-  );
+  const repeatVoiceButton = document.querySelector('#audio-repeat-voice-button');
   const answerButton1 = document.querySelector('#audio-answer-button-1');
   const answerButton2 = document.querySelector('#audio-answer-button-2');
   const answerButton3 = document.querySelector('#audio-answer-button-3');
   const answerButton4 = document.querySelector('#audio-answer-button-4');
-  const nextQuestionButton = document.querySelector(
-    '#audio-next-question-button'
-  );
+  const nextQuestionButton = document.querySelector('#audio-next-question-button');
 
-  const currentQuestionHTMLCounter = document.querySelector(
-    '#audio-current-question-number'
-  );
-  const totalQuestionHTMLCounter = document.querySelector(
-    '#audio-total-question-number'
-  );
+  const currentQuestionHTMLCounter = document.querySelector('#audio-current-question-number');
+  const totalQuestionHTMLCounter = document.querySelector('#audio-total-question-number');
 
   const wordsForAGarr: Array<IWordAPI> = [];
   let currentQuestionNumber = 1;
@@ -94,25 +86,17 @@ const audioGame = () => {
     currentQuestionHTMLCounter.innerHTML = String(currentQuestionNumber);
     disabledNextButton();
 
-    answerButton1.innerHTML =
-      wordsForAGarr[4 * (currentQuestionNumber - 1) + 0].word;
-    answerButton2.innerHTML =
-      wordsForAGarr[4 * (currentQuestionNumber - 1) + 1].word;
-    answerButton3.innerHTML =
-      wordsForAGarr[4 * (currentQuestionNumber - 1) + 2].word;
-    answerButton4.innerHTML =
-      wordsForAGarr[4 * (currentQuestionNumber - 1) + 3].word;
+    answerButton1.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 0].word;
+    answerButton2.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 1].word;
+    answerButton3.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 2].word;
+    answerButton4.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 3].word;
 
     correctAnswerNumber = Math.floor(Math.random() * 4);
     // console.log(correctAnswerNumber)
 
-    const voice =
-      wordsForAGarr[4 * (currentQuestionNumber - 1) + correctAnswerNumber]
-        .audio;
+    const voice = wordsForAGarr[4 * (currentQuestionNumber - 1) + correctAnswerNumber].audio;
     console.log(
-      'ответ: ' +
-        wordsForAGarr[4 * (currentQuestionNumber - 1) + correctAnswerNumber]
-          .word
+      'ответ: ' + wordsForAGarr[4 * (currentQuestionNumber - 1) + correctAnswerNumber].word
     );
     console.log('--------------------');
     getAudioFromApi(voice);
@@ -138,26 +122,26 @@ const audioGame = () => {
   /* 1я меняет цвета кнопок после ответа и блокирует их / 2я возращает как было */
 
   function fillButtonsInColor(correctAnswernumber: number) {
-    [answerButton1, answerButton2, answerButton3, answerButton4].forEach(
-      (value) => value.classList.add('audio-answer-button-false')
+    [answerButton1, answerButton2, answerButton3, answerButton4].forEach((value) =>
+      value.classList.add('audio-answer-button-false')
     );
-    [answerButton1, answerButton2, answerButton3, answerButton4][
-      correctAnswernumber
-    ].classList.add('audio-answer-button-true');
-    [answerButton1, answerButton2, answerButton3, answerButton4].forEach(
-      (value) => value.setAttribute('disabled', 'disabled')
+    [answerButton1, answerButton2, answerButton3, answerButton4][correctAnswernumber].classList.add(
+      'audio-answer-button-true'
+    );
+    [answerButton1, answerButton2, answerButton3, answerButton4].forEach((value) =>
+      value.setAttribute('disabled', 'disabled')
     );
   }
 
   function clearButtonsColor() {
-    [answerButton1, answerButton2, answerButton3, answerButton4].forEach(
-      (value) => value.classList.remove('audio-answer-button-false')
+    [answerButton1, answerButton2, answerButton3, answerButton4].forEach((value) =>
+      value.classList.remove('audio-answer-button-false')
     );
-    [answerButton1, answerButton2, answerButton3, answerButton4].forEach(
-      (value) => value.classList.remove('audio-answer-button-true')
+    [answerButton1, answerButton2, answerButton3, answerButton4].forEach((value) =>
+      value.classList.remove('audio-answer-button-true')
     );
-    [answerButton1, answerButton2, answerButton3, answerButton4].forEach(
-      (value) => value.removeAttribute('disabled')
+    [answerButton1, answerButton2, answerButton3, answerButton4].forEach((value) =>
+      value.removeAttribute('disabled')
     );
   }
 
@@ -178,8 +162,8 @@ const audioGame = () => {
   }
 
   function clearSelectedButtonBorder() {
-    [answerButton1, answerButton2, answerButton3, answerButton4].forEach(
-      (value) => value.classList.remove('audio-answer-button-selected')
+    [answerButton1, answerButton2, answerButton3, answerButton4].forEach((value) =>
+      value.classList.remove('audio-answer-button-selected')
     );
   }
 
