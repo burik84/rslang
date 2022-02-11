@@ -6,13 +6,13 @@ const validateInput = (type: string, text: string) => {
   switch (type) {
     case 'text':
       result = regexName.test(text);
-      break
+      break;
     case 'email':
       result = regexMail.test(text);
-      break
+      break;
     case 'password':
       result = regexPassword.test(text);
-      break
+      break;
     default:
       break;
   }

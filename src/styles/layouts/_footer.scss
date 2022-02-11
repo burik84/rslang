@@ -2,44 +2,44 @@ footer {
   background-color: var(--bg-dark-color);
 }
 
-.footer-text{
+.footer-text {
   font-size: 18px;
   line-height: 21.88px;
 }
-.footer{
+.footer {
   padding: 35px 0 24px;
   display: grid;
   grid-template-columns: repeat(2, auto);
   justify-content: space-evenly;
 }
-.footer-heading{
+.footer-heading {
   padding-bottom: 22px;
   text-align: center;
 }
-.navigation-list{
+.navigation-list {
   display: grid;
   grid-template-columns: repeat(2, auto);
   justify-content: center;
   grid-column-gap: 45px;
 }
-.navigation-list{
-  li{
+.navigation-list {
+  li {
     padding-bottom: 5px;
   }
 }
-.developers-list{
+.developers-list {
   display: grid;
   grid-template-columns: repeat(3, auto);
   grid-gap: 72px;
   justify-content: center;
 }
-.footer-link{
+.footer-link {
   height: 23px;
   background: left/ contain no-repeat url("../assets/icons/bi_github.svg");
   padding-left: 30px;
   text-decoration: none;
 }
-.footer__p{
+.footer__p {
   display: block;
   height: 46px;
   border-top: 1px solid #c4c4c4;

@@ -35,7 +35,7 @@ export const servicesApi = {
       },
       body: JSON.stringify(user),
     });
-    const content: IUserCreated = await rawResponse.json().catch(()=>false);
+    const content: IUserCreated = await rawResponse.json().catch(() => false);
 
     return content;
   },

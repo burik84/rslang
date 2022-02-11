@@ -32,7 +32,7 @@ const renderFormUser = () => {
     showModalUser(button);
   });
 };
-const addErrorLogin = (type?:string) => {
+const addErrorLogin = (type?: string) => {
   const message = document.querySelector('#user-sign-msg-holder');
 
   message.insertAdjacentHTML('afterend', errorMessage(type));
@@ -46,13 +46,13 @@ const view = {
     showAdaptiveMenu();
     renderFormUser();
   },
-  renderUserMessage: (type?:string) => {
+  renderUserMessage: (type?: string) => {
     addErrorLogin(type);
   },
   closeModalUserSign: () => {
     isShowElement('.user-handler');
   },
-  renderUserLogin: (isLogin: boolean, name?:string) => {
+  renderUserLogin: (isLogin: boolean, name?: string) => {
     const header = document.querySelector('header');
     const buttonsUser = document.querySelectorAll('.menu-user-name');
     if (isLogin) {

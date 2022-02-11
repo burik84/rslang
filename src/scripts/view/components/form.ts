@@ -1,7 +1,7 @@
 import { isShowElement, userTitle } from './elements';
 import { validateInput } from './validate';
 import { controllers } from '../../controllers/controller';
-import {resetValue} from '../../shared/localstorage';
+import { resetValue } from '../../shared/localstorage';
 
 const inputForms: string[] = ['password', 'email', 'text'];
 
@@ -119,7 +119,7 @@ const addUserForm = () => {
   buttonSubmit.id = 'login-form-submit';
   buttonUserLogout.type = 'button';
   buttonUserLogout.textContent = 'Выход';
-  buttonUserLogout.className='button button-user-logout'
+  buttonUserLogout.className = 'button button-user-logout';
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -142,13 +142,20 @@ const addUserForm = () => {
     isShowElement('.user-handler');
   });
   buttonUserLogout.addEventListener('click', () => {
-    resetValue()
-    controllers.updateUser()
+    resetValue();
+    controllers.updateUser();
     isShowElement('.user-handler');
   });
   form.append(buttonSubmit);
 
-  fragment.append(userTitle(), userTitle('Выход'), messageHolder, form, buttonUserLogout, buttonReset);
+  fragment.append(
+    userTitle(),
+    userTitle('Выход'),
+    messageHolder,
+    form,
+    buttonUserLogout,
+    buttonReset
+  );
   return fragment;
 };
 
