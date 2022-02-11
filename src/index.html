@@ -16,13 +16,32 @@
           <li>Аудиовызов</li>
           <li>Статистика</li>
           <li>
-            <button type="button">Вход</button>
+            <button type="button" class="menu-sign" >Вход</button>
+            <button type="button" class="menu-user-name" >Имя</button>
           </li>
         </ul>
       </nav>
+      <div class="menu-adaptive">
+        <nav>
+          <button type="button" class="button-link font-size48 line-height50">RSLang</button>
+          <ul class="header__ul font-size24 line-height29">
+            <li>Учебник</li>
+            <li>Спринт</li>
+            <li>Аудиовызов</li>
+            <li>Статистика</li>
+          </ul>
+          <button class="menu-sign" type="button">Вход</button>
+          <button type="button" class="menu-user-name" >Имя</button>
+        </nav>
+        <button type="button" class="menu__button">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <section class="user-handler">
+      </section>
     </header>
     <main>
-      <div class="start-page">
+      <div class="start-page visually-hidden">
         <section class="app-description">
             <h1 class="big-font app-description__header wide-lines">RS Lang поможет изучить английский</h1>
             <p class="small-font app-description__text wide-lines">RS lang– приложение для изучения иностранных слов, включающее электронный учебник с базой слов для изучения, мини-игры для их повторения, страницу статистики для отслеживания индивидуального прогресса.</p>
@@ -80,6 +99,34 @@
             </div>
           </section>
       </div>
+      <div class="audio-game">
+        <div class="audio-game-container">
+          <div class="audio-title-and-counter">
+            <h2 class="h2-audio">Аудиовызов</h2>
+            <div class="audio-counter-container">
+              <span id="audio-current-question-number">1</span>
+              <span>/</span>
+              <span id="audio-total-question-number">20</span>
+            </div>
+          </div>
+          <div class="audio-repeat-voice-button-cont">
+            <div class="audio-repeat-voice-button" id="audio-repeat-voice-button">
+              <svg width="52" height="37" viewBox="0 0 52 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 24.9998V14.9998C1 14.3368 1.26339 13.7009 1.73223 13.232C2.20107 12.7632 2.83696 12.4998 3.5 12.4998H10.2425C10.7363 12.4999 11.2191 12.3538 11.63 12.0798L22.1125 5.08981C22.4894 4.83838 22.9274 4.69407 23.38 4.67232C23.8325 4.65056 24.2824 4.75218 24.6816 4.9663C25.0809 5.18043 25.4144 5.49901 25.6466 5.88801C25.8788 6.277 26.001 6.72178 26 7.17481V32.8248C26.0001 33.2774 25.8773 33.7216 25.6447 34.1098C25.4121 34.4981 25.0785 34.816 24.6794 35.0295C24.2803 35.243 23.8308 35.3442 23.3787 35.3222C22.9266 35.3003 22.489 35.156 22.1125 34.9048L11.63 27.9173C11.2189 27.6442 10.7361 27.499 10.2425 27.4998H3.5C2.83696 27.4998 2.20107 27.2364 1.73223 26.7676C1.26339 26.2987 1 25.6629 1 24.9998V24.9998Z" stroke="#41445C" stroke-width="1.5"/>
+                <path d="M37.25 8.75C37.25 8.75 41 12.5 41 18.75C41 25 37.25 28.75 37.25 28.75" stroke="#41445C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M44.75 1.25C44.75 1.25 51 7.5 51 18.75C51 30 44.75 36.25 44.75 36.25" stroke="#41445C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+          </div>
+          <div class="audio-answer-options-container">
+            <button class="audio-answer-button" id="audio-answer-button-1">Вариант 1</button>
+            <button class="audio-answer-button" id="audio-answer-button-2">Вариант 2</button>
+            <button class="audio-answer-button" id="audio-answer-button-3">Вариант 3</button>
+            <button class="audio-answer-button" id="audio-answer-button-4">Вариант 4</button>
+          </div>
+          <button class="audio-next-question-button " id="audio-next-question-button">&#129046;</button>
+        </div>
+      </div>
     </main>
     <footer class="white-text">
       <div class="footer">
@@ -104,7 +151,5 @@
       </div>
       <p class="footer__p">2022 RS LANG Project for RS School Course JS / FRONT-END</p>
     </footer>
-
-    <script type="module" src="index.ts"></script>
   </body>
 </html>
