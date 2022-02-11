@@ -32,8 +32,6 @@ const audioGame = () => {
       });
   }
 
-  getAudioFromApi('files/02_0621.mp3');
-
   function playback() {
     const playSound = ctx.createBufferSource();
     playSound.buffer = audio;
@@ -71,10 +69,8 @@ const audioGame = () => {
     pageNumsArr.forEach((value) => getWordsFromAPI(value, group));
   }
 
-  getWordsForAG(
-    3,
-    3
-  ); /*Это нужно будет выполнить когда пользователь выберет сложность для запуска*/
+  getWordsForAG(3,3); 
+  /*Это нужно будет выполнить когда пользователь выберет сложность для запуска*/
 
   /*генерируют вопросы*/
 
