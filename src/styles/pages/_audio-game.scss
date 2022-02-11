@@ -1,7 +1,11 @@
 .audio-game {
+  position: relative;
   height: calc(100vh - 474px);
+  // width: 100%;
   //   background-color: #348498;
 }
+
+/*styles for game start*/
 
 .audio-game-container {
   position: relative;
@@ -45,7 +49,6 @@
   width: 100px;
   height: 100px;
   border-radius: 50px;
-  //   border: 2px solid red;
   background: linear-gradient(aliceblue, aliceblue) padding-box,
     linear-gradient(to right, #348498, #004d61) border-box;
   border-radius: 50em;
@@ -119,6 +122,81 @@
   opacity: 1;
   transition: visibility 0.5s, opacity 0.5s;
 }
+
+/*styles for game end*/
+
+/*styles for result start*/
+
+.audio-game-result-container {
+  position: absolute;
+  padding-bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  width: 400px;
+  // height: 100%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+}
+
+.audio-result-statistics {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 27px;
+}
+
+.audio-result-right-number {
+  width: 35px;
+  color: rgba(96, 197, 186, 1);
+}
+
+.audio-result-wrong-number {
+  width: 35px;
+  color: rgba(239, 82, 133, 1);
+}
+
+.audio-result-percentages-counter {
+  position: absolute;
+}
+
+.audio-result-wrong-container,
+.audio-result-right-container {
+  padding-left: 10px;
+  font-size: 20px;
+}
+
+.audio-result-wrong-title,
+.audio-result-right-title {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.audio-result-word-item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  gap: 14px;
+}
+
+.voice-small-svg:hover {
+  opacity: 0.7;
+}
+
+.audio-result-word-text {
+  color: #348498;
+}
+
+.audio-result-word-transcription {
+  color: darkgray;
+}
+
+.audio-result-word-translation {
+  color: #004d61;
+}
+
+/*styles for result end*/
 
 @media screen and (max-width: 960px) {
   .audio-game {

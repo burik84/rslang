@@ -1,5 +1,6 @@
 import { urlAPI } from '../shared/api';
 import { IWordAPI } from '../shared/interface';
+// import { getExampleWords } from '../shared/exampleWords';
 
 const audioGame = () => {
   const repeatVoiceButton = document.querySelector('#audio-repeat-voice-button');
@@ -12,11 +13,22 @@ const audioGame = () => {
   const currentQuestionHTMLCounter = document.querySelector('#audio-current-question-number');
   const totalQuestionHTMLCounter = document.querySelector('#audio-total-question-number');
 
+  const audioResultWrongCounter = document.querySelector('#audio-result-wrong-number');
+  const audioResultRightCounter = document.querySelector('#audio-result-right-number');
+  const audioResultPercentagesCounter = document.querySelector('#audio-result-percentages-counter');
+  const audioResultDonutSegment = document.querySelector('#audio-result-donut-segment');
+  const audioResultWrongWordsCont = document.querySelector('#audio-result-wrong-words');
+  const audioResultRightWordsCont = document.querySelector('#audio-result-right-words');
+  const audioResultModal = document.querySelector('#audio-game-result-container');
+  
   const wordsForAGarr: Array<IWordAPI> = [];
   let currentQuestionNumber = 1;
   let totalNumberOfQuestions: number;
   let correctAnswerNumber: number;
   let totalCorrectAnswers = 0;
+  const rightWordsArr: Array<IWordAPI> = [];
+  const wrongWordsArr: Array<IWordAPI> = [];
+  let bufferWordBeforePush: IWordAPI;
 
   /*функции для получения аудио с сервера и последующего воспроизведения по клику*/
 
@@ -52,7 +64,7 @@ const audioGame = () => {
       })
       .then(() => {
         // console.log(wordsForAGarr)
-        console.log('слов в массиве: ' + wordsForAGarr.length);
+        // console.log('слов в массиве: ' + wordsForAGarr.length);
         setFirstQuestionAG();
       });
   }
@@ -69,7 +81,7 @@ const audioGame = () => {
     pageNumsArr.forEach((value) => getWordsFromAPI(value, group));
   }
 
-  getWordsForAG(3,3); 
+  getWordsForAG(0,4); 
   /*Это нужно будет выполнить когда пользователь выберет сложность для запуска*/
 
   /*генерируют вопросы*/
@@ -91,14 +103,16 @@ const audioGame = () => {
     // console.log(correctAnswerNumber)
 
     const voice = wordsForAGarr[4 * (currentQuestionNumber - 1) + correctAnswerNumber].audio;
-    console.log(
-      'ответ: ' + wordsForAGarr[4 * (currentQuestionNumber - 1) + correctAnswerNumber].word
-    );
-    console.log('--------------------');
+    // console.log(
+    //   'ответ: ' + wordsForAGarr[4 * (currentQuestionNumber - 1) + correctAnswerNumber].word
+    // );
+    // console.log('--------------------');
     getAudioFromApi(voice);
     // if (currentQuestionNumber > 1) {
     //     playback()
     // }
+    bufferWordBeforePush = wordsForAGarr[4 * (currentQuestionNumber - 1) + correctAnswerNumber];
+    // console.log(bufferWordBeforePush);
   }
 
   /*проверяет, правильный ли ответ и переходит к следующему*/
@@ -107,8 +121,10 @@ const audioGame = () => {
     if (userSelect == correctAnswerNumber) {
       totalCorrectAnswers += 1;
       console.log('правильно!');
+      rightWordsArr.push(bufferWordBeforePush);
     } else {
       console.log('неправильно!');
+      wrongWordsArr.push(bufferWordBeforePush);
     }
     console.log('всего правильных ответов: ' + totalCorrectAnswers);
 
@@ -171,7 +187,7 @@ const audioGame = () => {
   }
 
   repeatVoiceButton.addEventListener('click', () => {
-    console.log('voice click');
+    // console.log('voice click');
     playback();
   });
 
@@ -197,9 +213,64 @@ const audioGame = () => {
       clearSelectedButtonBorder();
       setQuestionAG(currentQuestionNumber);
     } else {
-      console.log('Игра закончена! Ваш результат: ' + totalCorrectAnswers);
+      // console.log('Игра закончена! Ваш результат: ' + totalCorrectAnswers);
+      audioResultModal.classList.remove('visually-hidden');
+      setAGResultWordsCont(rightWordsArr, wrongWordsArr);
+      setAGResultStatistics(totalCorrectAnswers, totalNumberOfQuestions);
+      disabledNextButton();
     }
   });
+
+  /*заполняет счетчики правильных и неправильных ответов и соответствующую диаграмму*/
+  
+  function setAGResultStatistics(totalCorrectAnswers: number, totalNumberOfQuestions: number) {
+    audioResultRightCounter.innerHTML = String(totalCorrectAnswers);
+    audioResultWrongCounter.innerHTML = String(totalNumberOfQuestions - totalCorrectAnswers);
+    const pers = Math.round(totalCorrectAnswers / totalNumberOfQuestions * 100);
+    audioResultPercentagesCounter.innerHTML = `${String(pers)}%`;
+    const donutValue = `${pers} ${100 - pers}`;
+    audioResultDonutSegment.setAttribute('stroke-dasharray', donutValue)
+  }
+
+  /*заполняет блоки правильно и неправильно отвеченных слов*/
+
+  function setAGResultWordsCont(arrayRight: Array<IWordAPI>, arrayWrong: Array<IWordAPI>) {
+    arrayRight.forEach(value => setAGResultWordsItem(value, 1));
+    arrayWrong.forEach(value => setAGResultWordsItem(value, 0));
+  }
+
+  /*заполняет строку для одного слова, навешивает обработчик*/
+
+  function setAGResultWordsItem(object: IWordAPI, arrNum: number) {
+    const div = document.createElement('div');
+    const html = `<div class="audio-result-word-item" data-audio="${object.audio}">
+      <svg class="voice-small-svg" width="22" height="17" viewBox="0 0 22 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1 10.9998V6.99983C1 6.73461 1.10536 6.48026 1.29289 6.29272C1.48043 6.10518 1.73478 5.99983 2 5.99983H4.697C4.89453 5.99987 5.08765 5.94141 5.252 5.83183L9.445 3.03583C9.59574 2.93525 9.77098 2.87753 9.95198 2.86883C10.133 2.86013 10.313 2.90077 10.4726 2.98642C10.6323 3.07207 10.7658 3.19951 10.8586 3.3551C10.9515 3.5107 11.0004 3.68861 11 3.86983V14.1298C11 14.3109 10.9509 14.4885 10.8579 14.6438C10.7648 14.7991 10.6314 14.9263 10.4718 15.0117C10.3121 15.0971 10.1323 15.1376 9.95148 15.1288C9.77065 15.12 9.5956 15.0623 9.445 14.9618L5.252 12.1668C5.08754 12.0576 4.89443 11.9995 4.697 11.9998H2C1.73478 11.9998 1.48043 11.8945 1.29289 11.7069C1.10536 11.5194 1 11.265 1 10.9998V10.9998Z" stroke="#41445C" stroke-width="1.5"/>
+      <path d="M15.5 4.5C15.5 4.5 17 6 17 8.5C17 11 15.5 12.5 15.5 12.5" stroke="#41445C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M18.5 1.5C18.5 1.5 21 4 21 8.5C21 13 18.5 15.5 18.5 15.5" stroke="#41445C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <p class="audio-result-word-text">${object.word}</p>
+      <p class="audio-result-word-transcription">${object.transcription}</p>
+      <p class="audio-result-word-translation">${object.wordTranslate}</p>
+    </div>`;
+
+    div.innerHTML = html;
+    if (arrNum == 1) {
+      audioResultRightWordsCont.appendChild(div);
+    } else {
+      audioResultWrongWordsCont.appendChild(div);
+    }
+    div.addEventListener('click', () => {
+      getAudioFromApi(object.audio);
+      setTimeout(playback, 100);
+    })
+  }
+
+
+
+
+
 };
+
 
 export { audioGame };
