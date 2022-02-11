@@ -1,0 +1,115 @@
+@media only screen and (max-width: 1400px) {
+  .app-description {
+    padding: 0 70px 25px 70px;
+  }
+  .wide-lines {
+    line-height: 32px;
+  }
+  .big-font {
+   font-size: 30px;
+  }
+  .small-font {
+    font-size: 20px;
+  }
+  .about-video {
+    margin-left: 25%;
+  }
+  .app-description__header {
+    padding-bottom: 50px;
+    width: 50%;
+  }
+  .app-advantagies {
+    padding: 43px 46px 100px;
+    grid-row-gap: 50px;
+    grid-column-gap: 35px;
+  }
+  .app-advantagies__div {
+    grid-gap: 50px;
+  }
+  .dev-section {
+    padding: 37px 0 90px;
+  }
+  .about-developers-blocks {
+    grid-row-gap: 45px;
+    padding: 0 52px;
+  }
+  .dev-section-header {
+    padding: 0 0 60px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .app-description {
+    padding: 0 56px 41px;
+  }
+  .wide-lines {
+    line-height: 50px;
+  }
+  .big-font {
+    font-size: 24px;
+  }
+  .small-font {
+    font-size: 18px;
+  }
+  .narrow-lines {
+    line-height: 21.88px;
+  }
+  .middle-lines {
+    line-height: 24px;
+  }
+  .app-description__header {
+    padding-bottom: 31px;
+  }
+  .app-description__text {
+    padding-bottom: 35px;
+    width: 100%;
+  }
+  .about-video {
+    margin-left: 0;
+    width: 100%;
+  }
+  .video-icon {
+    width: 80px;
+  }
+  .app-advantagies {
+    padding: 35px 46px 29px;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, auto);
+    grid-row-gap: 25px;
+    justify-content: center;
+    align-items: center;
+  }
+  .app-advantagies__h2 {
+    grid-column: 1/2;
+    padding-bottom: 37px;
+  }
+  .app-advantagies__div {
+    padding: 26px 13px 23px;
+    grid-template-rows: auto auto;
+    grid-gap: 30px;
+  }
+  .dev-section  {
+    padding: 52px 0 19px;
+  }
+  .dev-section-header {
+    padding: 0 0 26px;
+  }
+  .about-developers-blocks {
+    padding: 0 26px;
+    grid-gap: 21px;
+  }
+  .about-developers {
+    padding: 29px 25px 12px;
+  }
+  .footer {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    justify-content: center;
+    grid-gap: 34px;
+    padding: 21px 0 16px;
+  }
+  .developers-list {
+    grid-template-columns: 45%;
+    grid-template-rows: auto auto auto;
+    grid-row-gap: 11px;
+  }
+}
