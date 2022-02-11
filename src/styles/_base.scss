@@ -5,23 +5,23 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-style: normal;
   font-size: 18px;
   font-weight: 400;
   overflow-x: hidden;
 }
 
-:root{
+:root {
   --bg-dark-color: #41445c;
   --bg-light-color: #e5e5e5;
-  --div-bg-color: #1F9DA5;
+  --div-bg-color: #1f9da5;
 }
 
-.small-font{
+.small-font {
   font-size: 24px;
 }
-.big-font{
+.big-font {
   font-size: 48px;
 }
 .narrow-lines {
@@ -30,26 +30,26 @@ body {
 .middle-lines {
   line-height: 35px;
 }
-.wide-lines{
+.wide-lines {
   line-height: 50px;
 }
-.white-text{
-  color: #FFFFFF;
+.white-text {
+  color: #ffffff;
 }
-.app-description{
+.app-description {
   background-color: var(--bg-light-color);
   padding: 0 147px 25px 147px;
 }
-.app-description__header{
+.app-description__header {
   padding-bottom: 74px;
   width: 36%;
 }
-.app-description__text{
+.app-description__text {
   padding-bottom: 33px;
   width: 61.11vw;
 }
 
-.about-video{
+.about-video {
   margin-left: 25%;
   width: 48%;
   min-height: 210px;
@@ -61,15 +61,15 @@ body {
   justify-content: center;
   align-content: center;
 }
-.about-video__text{
+.about-video__text {
   color: var(--bg-light-color);
 }
-.video-icon{
+.video-icon {
   width: 105px;
   background: no-repeat center url("../assets/icons/video.svg");
   background-size: contain;
 }
-.app-advantagies{
+.app-advantagies {
   background-color: var(--bg-dark-color);
   padding: 43px 47px 140px;
   display: grid;
@@ -79,16 +79,16 @@ body {
   grid-row-gap: 85px;
   justify-content: center;
 }
-.app-advantagies__h2{
+.app-advantagies__h2 {
   display: grid;
   grid-template-rows: repeat(2, 54px);
   justify-content: center;
   grid-column: 1/4;
 }
-.app-advantagies__header-items{
+.app-advantagies__header-items {
   justify-self: center;
 }
-.app-advantagies__div{
+.app-advantagies__div {
   border-radius: 10px;
   background-color: var(--div-bg-color);
   display: grid;
@@ -96,48 +96,48 @@ body {
   grid-row-gap: 60px;
   padding: 42px 21px 38px;
 }
-.app-advantagies__p{
+.app-advantagies__p {
   text-align: justify;
   color: var(--bg-light-color);
 }
 .app-advantagies__h3,
-.app-advantagies__p{
+.app-advantagies__p {
   justify-self: center;
 }
-.dev-section{
+.dev-section {
   background-color: var(--bg-light-color);
   padding: 37px 0 147px;
 }
-.dev-section-header{
+.dev-section-header {
   padding: 0 0 83px;
   color: var(--bg-dark-color);
   text-align: center;
 }
-.about-developers-blocks{
+.about-developers-blocks {
   display: grid;
   grid-template-rows: repeat(3, auto);
   grid-row-gap: 55px;
   justify-content: center;
   padding: 0 273px;
 }
-.about-developers{
+.about-developers {
   background-color: var(--div-bg-color);
   width: 100%;
   border-radius: 10px;
   padding: 45px 25px 27px;
 }
-.name-logo{
+.name-logo {
   display: grid;
   grid-template-columns: repeat(3, auto);
   justify-content: space-between;
   align-items: center;
 }
-.git-link{
+.git-link {
   width: 60px;
   height: 60px;
   background: no-repeat center url("../assets/icons/bi_github.svg");
 }
-.about-developers__p{
+.about-developers__p {
   padding-top: 27px;
   text-align: center;
   color: var(--bg-light-color);
