@@ -11,11 +11,11 @@
     <header>
       <nav>
         <ul class="header__ul small-font narrow-lines">
-          <li class="big-font wide-lines">RSLang</li>
-          <li>Учебник</li>
-          <li>Спринт</li>
-          <li>Аудиовызов</li>
-          <li>Статистика</li>
+          <li class="nav-item nav-item-active big-font wide-lines" id="nav-main-page">RSLang</li>
+          <li class="nav-item" id="nav-dictionary">Учебник</li>
+          <li class="nav-item" id="nav-sprint-game">Спринт</li>
+          <li class="nav-item" id="nav-audio-game">Аудиовызов</li>
+          <li class="nav-item" id="nav-statistics">Статистика</li>
           <li>
             <button type="button" class="menu-sign">Вход</button>
             <button type="button" class="menu-user-name">Имя</button>
@@ -43,7 +43,7 @@
       <section class="user-handler"></section>
     </header>
     <main>
-      <div class="start-page visually-hidden">
+      <div class="start-page" id="start-page">
         <section class="app-description">
           <h1 class="big-font app-description__header wide-lines">
             RS Lang поможет изучить английский
@@ -124,7 +124,13 @@
           </div>
         </section>
       </div>
-      <div class="audio-game">
+      <div class="dictionary visually-hidden" id="dictionary-page">
+        <p>dictionary in progress</p>
+      </div>
+      <div class="sprint-game visually-hidden" id="sprint-game-page">
+        <p>sprint game in progress</p>
+      </div>
+      <div class="audio-game visually-hidden" id="audio-game-page">
         <div class="audio-game-container">
           <div class="audio-title-and-counter">
             <h2 class="h2-audio">Аудиовызов</h2>
@@ -196,8 +202,11 @@
           </div>
         </div>
       </div>
+      <div class="statistics visually-hidden" id="statistics-page">
+        <p>statistics in progress</p>
+      </div>
     </main>
-    <footer class="white-text">
+    <footer class="white-text" id="footer">
       <div class="footer">
         <nav>
           <h2 class="footer-heading small-font narrow-lines">Меню</h2>

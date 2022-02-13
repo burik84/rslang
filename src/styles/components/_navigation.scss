@@ -33,6 +33,22 @@
   order: -1;
 }
 
+.nav-item {
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  color: #1f9da5;
+}
+
+.nav-item:active {
+  opacity: 0.7;
+}
+
+.nav-item-active {
+  color: #1f9da5;
+}
+
 @media screen and (max-width: 960px) {
   header nav {
     display: none;
