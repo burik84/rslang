@@ -46,6 +46,7 @@ interface IControllers {
   userSign: () => void;
   updateUser: () => void;
 }
+
 type TDataPagination = {
   size: number;
   page: number;
@@ -71,4 +72,15 @@ interface IPagination {
   create: (element: HTMLElement) => void;
   init: (element: HTMLElement, data: TDataPagination) => void;
 }
-export { IWordAPI, TUser, TUserCreate, IUserAuth, IUserCreated, IControllers, IPagination };
+
+interface IAudio {
+  length: number;
+  duration: number;
+  sampleRate: number;
+  numberOfChannels: number;
+  getChannelData(channel: number): Float32Array;
+  copyFromChannel(destination: Float32Array, channelNumber: number, bufferOffset?: number): void;
+  copyToChannel(source: Float32Array, channelNumber: number, bufferOffset?: number): void;
+}
+
+export { IWordAPI, TUser, TUserCreate, IUserAuth, IUserCreated, IControllers, IPagination, IAudio };

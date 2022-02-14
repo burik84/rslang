@@ -1,8 +1,13 @@
 import { urlAPI } from '../shared/api';
 import { IWordAPI } from '../shared/interface';
-// import { getExampleWords } from '../shared/exampleWords';
+import { IAudio } from '../shared/interface';
 
 const audioGame = () => {
+  const audioChoiceLevelModal = document.querySelector('#audio-choice-level-modal');
+  const audioChoiceLevelItems = document.querySelectorAll('.audio-choice-level-item');
+  const audioStartGameBtn = document.querySelector('#audio-start-game-button');
+  const audioRestartGgameBtn = document.querySelector('#audio-restart-game-button');
+
   const repeatVoiceButton = document.querySelector('#audio-repeat-voice-button');
   const answerButton1 = document.querySelector('#audio-answer-button-1');
   const answerButton2 = document.querySelector('#audio-answer-button-2');
@@ -20,7 +25,10 @@ const audioGame = () => {
   const audioResultWrongWordsCont = document.querySelector('#audio-result-wrong-words');
   const audioResultRightWordsCont = document.querySelector('#audio-result-right-words');
   const audioResultModal = document.querySelector('#audio-game-result-container');
-  
+
+  let userSelectedLevel: number;
+  // let userSelectedPage = 0;
+  const userSelectedPage = 0;
   const wordsForAGarr: Array<IWordAPI> = [];
   let currentQuestionNumber = 1;
   let totalNumberOfQuestions: number;
@@ -33,7 +41,7 @@ const audioGame = () => {
   /*функции для получения аудио с сервера и последующего воспроизведения по клику*/
 
   const ctx = new AudioContext();
-  let audio: any;
+  let audio: IAudio;
 
   function getAudioFromApi(urlSound: string) {
     fetch(`${urlAPI}/${urlSound}`)
@@ -63,8 +71,6 @@ const audioGame = () => {
         // return wordsForAGarr;
       })
       .then(() => {
-        // console.log(wordsForAGarr)
-        // console.log('слов в массиве: ' + wordsForAGarr.length);
         setFirstQuestionAG();
       });
   }
@@ -81,7 +87,7 @@ const audioGame = () => {
     pageNumsArr.forEach((value) => getWordsFromAPI(value, group));
   }
 
-  getWordsForAG(0,4); 
+  // getWordsForAG(0,4); 
   /*Это нужно будет выполнить когда пользователь выберет сложность для запуска*/
 
   /*генерируют вопросы*/
@@ -94,25 +100,20 @@ const audioGame = () => {
     currentQuestionHTMLCounter.innerHTML = String(currentQuestionNumber);
     disabledNextButton();
 
-    answerButton1.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 0].word;
-    answerButton2.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 1].word;
-    answerButton3.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 2].word;
-    answerButton4.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 3].word;
+    answerButton1.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 0].wordTranslate;
+    answerButton2.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 1].wordTranslate;
+    answerButton3.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 2].wordTranslate;
+    answerButton4.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 3].wordTranslate;
 
     correctAnswerNumber = Math.floor(Math.random() * 4);
-    // console.log(correctAnswerNumber)
 
     const voice = wordsForAGarr[4 * (currentQuestionNumber - 1) + correctAnswerNumber].audio;
-    // console.log(
-    //   'ответ: ' + wordsForAGarr[4 * (currentQuestionNumber - 1) + correctAnswerNumber].word
-    // );
-    // console.log('--------------------');
     getAudioFromApi(voice);
-    // if (currentQuestionNumber > 1) {
-    //     playback()
-    // }
+    if (currentQuestionNumber > 1) {
+      setTimeout(playback, 200);
+      // playback();
+    }
     bufferWordBeforePush = wordsForAGarr[4 * (currentQuestionNumber - 1) + correctAnswerNumber];
-    // console.log(bufferWordBeforePush);
   }
 
   /*проверяет, правильный ли ответ и переходит к следующему*/
@@ -120,13 +121,10 @@ const audioGame = () => {
   function checkAnswerAG(userSelect: number) {
     if (userSelect == correctAnswerNumber) {
       totalCorrectAnswers += 1;
-      console.log('правильно!');
       rightWordsArr.push(bufferWordBeforePush);
     } else {
-      console.log('неправильно!');
       wrongWordsArr.push(bufferWordBeforePush);
     }
-    console.log('всего правильных ответов: ' + totalCorrectAnswers);
 
     currentQuestionNumber += 1;
   }
@@ -159,6 +157,19 @@ const audioGame = () => {
 
   /*обработчики для кнопок*/
 
+  audioChoiceLevelItems.forEach(value => value.addEventListener('click', ()=> {
+    audioChoiceLevelItems.forEach(item => item.classList.remove('audio-choice-level-item-active'));
+    value.classList.add('audio-choice-level-item-active');
+    const num  = Number(value.innerHTML);
+    userSelectedLevel = num - 1;
+    audioStartGameBtn.removeAttribute('disabled');
+  }))
+
+  audioStartGameBtn.addEventListener('click', () => {
+    audioChoiceLevelModal.classList.add('visually-hidden');
+    getWordsForAG(userSelectedPage, userSelectedLevel);
+  });
+
   function enableNextButton() {
     nextQuestionButton.classList.add('audio-button-enable');
   }
@@ -187,7 +198,6 @@ const audioGame = () => {
   }
 
   repeatVoiceButton.addEventListener('click', () => {
-    // console.log('voice click');
     playback();
   });
 
@@ -213,7 +223,6 @@ const audioGame = () => {
       clearSelectedButtonBorder();
       setQuestionAG(currentQuestionNumber);
     } else {
-      // console.log('Игра закончена! Ваш результат: ' + totalCorrectAnswers);
       audioResultModal.classList.remove('visually-hidden');
       setAGResultWordsCont(rightWordsArr, wrongWordsArr);
       setAGResultStatistics(totalCorrectAnswers, totalNumberOfQuestions);
@@ -266,8 +275,30 @@ const audioGame = () => {
     })
   }
 
+/*для перезапуска игры*/
 
+audioRestartGgameBtn.addEventListener('click', () => {
+  clearAllBeforeRestart();
+})
 
+function clearAllBeforeRestart() {
+  wordsForAGarr.length = 0;
+  currentQuestionNumber = 1;
+  totalCorrectAnswers = 0;
+  rightWordsArr.length = 0;
+  wrongWordsArr.length = 0;
+
+  audioResultRightWordsCont.innerHTML = '';
+  audioResultWrongWordsCont.innerHTML = '';
+  audioResultModal.classList.add('visually-hidden');
+
+  clearButtonsColor();
+  clearSelectedButtonBorder();
+
+  audioChoiceLevelModal.classList.remove('visually-hidden');
+  audioChoiceLevelItems.forEach(item => item.classList.remove('audio-choice-level-item-active'));
+  audioStartGameBtn.setAttribute('disabled', 'disabled');
+}
 
 
 };
