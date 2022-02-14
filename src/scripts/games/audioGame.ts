@@ -6,6 +6,7 @@ const audioGame = () => {
   const audioChoiceLevelModal = document.querySelector('#audio-choice-level-modal');
   const audioChoiceLevelItems = document.querySelectorAll('.audio-choice-level-item');
   const audioStartGameBtn = document.querySelector('#audio-start-game-button');
+  const audioRestartGgameBtn = document.querySelector('#audio-restart-game-button');
 
   const repeatVoiceButton = document.querySelector('#audio-repeat-voice-button');
   const answerButton1 = document.querySelector('#audio-answer-button-1');
@@ -160,6 +161,7 @@ const audioGame = () => {
     value.classList.add('audio-choice-level-item-active');
     const num  = Number(value.innerHTML);
     userSelectedLevel = num - 1;
+    audioStartGameBtn.removeAttribute('disabled');
   }))
 
   audioStartGameBtn.addEventListener('click', () => {
@@ -272,8 +274,30 @@ const audioGame = () => {
     })
   }
 
+/*для перезапуска игры*/
 
+audioRestartGgameBtn.addEventListener('click', () => {
+  clearAllBeforeRestart();
+})
 
+function clearAllBeforeRestart() {
+  wordsForAGarr.length = 0;
+  currentQuestionNumber = 1;
+  totalCorrectAnswers = 0;
+  rightWordsArr.length = 0;
+  wrongWordsArr.length = 0;
+
+  audioResultRightWordsCont.innerHTML = '';
+  audioResultWrongWordsCont.innerHTML = '';
+  audioResultModal.classList.add('visually-hidden');
+
+  clearButtonsColor();
+  clearSelectedButtonBorder();
+
+  audioChoiceLevelModal.classList.remove('visually-hidden');
+  audioChoiceLevelItems.forEach(item => item.classList.remove('audio-choice-level-item-active'));
+  audioStartGameBtn.setAttribute('disabled', 'disabled');
+}
 
 
 };

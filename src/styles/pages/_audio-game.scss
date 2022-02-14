@@ -136,7 +136,7 @@
 
 .audio-game-result-container {
   position: absolute;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   top: 10px;
@@ -201,6 +201,34 @@
 
 .audio-result-word-translation {
   color: #004d61;
+}
+
+.audio-restart-game-cont {
+  display: flex;
+  justify-content: center;
+}
+
+.audio-restart-game-button {
+  margin-top: 10px;
+  width: 170px;
+  height: 30px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  // color: #047c94;
+  font-size: 16px;
+  border: 2px solid rgba(65, 182, 230, 1);
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.audio-restart-game-button:hover {
+  background-color: rgba(65, 182, 230, 0.5);
+}
+
+.audio-restart-game-button:active {
+  opacity: 0.8;
 }
 
 /*styles for result end*/
