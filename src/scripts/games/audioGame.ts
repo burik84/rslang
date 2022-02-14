@@ -27,7 +27,8 @@ const audioGame = () => {
   const audioResultModal = document.querySelector('#audio-game-result-container');
 
   let userSelectedLevel: number;
-  let userSelectedPage = 0;
+  // let userSelectedPage = 0;
+  const userSelectedPage = 0;
   const wordsForAGarr: Array<IWordAPI> = [];
   let currentQuestionNumber = 1;
   let totalNumberOfQuestions: number;
