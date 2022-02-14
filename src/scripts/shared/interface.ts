@@ -46,4 +46,15 @@ interface IControllers {
   userSign: () => void;
   updateUser: () => void;
 }
-export { IWordAPI, TUser, TUserCreate, IUserAuth, IUserCreated, IControllers };
+
+interface IAudio {
+  length: number;
+  duration: number;
+  sampleRate: number;
+  numberOfChannels: number;
+  getChannelData(channel: number): Float32Array;
+  copyFromChannel(destination: Float32Array, channelNumber: number, bufferOffset?: number): void;
+  copyToChannel(source: Float32Array, channelNumber: number, bufferOffset?: number): void;
+}
+
+export { IWordAPI, TUser, TUserCreate, IUserAuth, IUserCreated, IControllers, IAudio };

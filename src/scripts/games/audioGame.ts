@@ -1,5 +1,6 @@
 import { urlAPI } from '../shared/api';
 import { IWordAPI } from '../shared/interface';
+import { IAudio } from '../shared/interface';
 
 const audioGame = () => {
   const repeatVoiceButton = document.querySelector('#audio-repeat-voice-button');
@@ -31,8 +32,10 @@ const audioGame = () => {
 
   /*функции для получения аудио с сервера и последующего воспроизведения по клику*/
 
+  
+
   const ctx = new AudioContext();
-  let audio: any;
+  let audio: IAudio;
 
   function getAudioFromApi(urlSound: string) {
     fetch(`${urlAPI}/${urlSound}`)
@@ -78,7 +81,7 @@ const audioGame = () => {
     pageNumsArr.forEach((value) => getWordsFromAPI(value, group));
   }
 
-  getWordsForAG(0,3); 
+  getWordsForAG(0,4); 
   /*Это нужно будет выполнить когда пользователь выберет сложность для запуска*/
 
   /*генерируют вопросы*/
