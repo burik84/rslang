@@ -1,6 +1,5 @@
 import { urlAPI } from '../shared/api';
 import { IWordAPI } from '../shared/interface';
-// import { getExampleWords } from '../shared/exampleWords';
 
 const audioGame = () => {
   const repeatVoiceButton = document.querySelector('#audio-repeat-voice-button');
@@ -63,8 +62,6 @@ const audioGame = () => {
         // return wordsForAGarr;
       })
       .then(() => {
-        // console.log(wordsForAGarr)
-        // console.log('слов в массиве: ' + wordsForAGarr.length);
         setFirstQuestionAG();
       });
   }
@@ -81,7 +78,7 @@ const audioGame = () => {
     pageNumsArr.forEach((value) => getWordsFromAPI(value, group));
   }
 
-  getWordsForAG(0,4); 
+  getWordsForAG(0,3); 
   /*Это нужно будет выполнить когда пользователь выберет сложность для запуска*/
 
   /*генерируют вопросы*/
@@ -94,25 +91,20 @@ const audioGame = () => {
     currentQuestionHTMLCounter.innerHTML = String(currentQuestionNumber);
     disabledNextButton();
 
-    answerButton1.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 0].word;
-    answerButton2.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 1].word;
-    answerButton3.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 2].word;
-    answerButton4.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 3].word;
+    answerButton1.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 0].wordTranslate;
+    answerButton2.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 1].wordTranslate;
+    answerButton3.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 2].wordTranslate;
+    answerButton4.innerHTML = wordsForAGarr[4 * (currentQuestionNumber - 1) + 3].wordTranslate;
 
     correctAnswerNumber = Math.floor(Math.random() * 4);
-    // console.log(correctAnswerNumber)
 
     const voice = wordsForAGarr[4 * (currentQuestionNumber - 1) + correctAnswerNumber].audio;
-    // console.log(
-    //   'ответ: ' + wordsForAGarr[4 * (currentQuestionNumber - 1) + correctAnswerNumber].word
-    // );
-    // console.log('--------------------');
     getAudioFromApi(voice);
-    // if (currentQuestionNumber > 1) {
-    //     playback()
-    // }
+    if (currentQuestionNumber > 1) {
+      setTimeout(playback, 200);
+      // playback();
+    }
     bufferWordBeforePush = wordsForAGarr[4 * (currentQuestionNumber - 1) + correctAnswerNumber];
-    // console.log(bufferWordBeforePush);
   }
 
   /*проверяет, правильный ли ответ и переходит к следующему*/
@@ -120,13 +112,10 @@ const audioGame = () => {
   function checkAnswerAG(userSelect: number) {
     if (userSelect == correctAnswerNumber) {
       totalCorrectAnswers += 1;
-      console.log('правильно!');
       rightWordsArr.push(bufferWordBeforePush);
     } else {
-      console.log('неправильно!');
       wrongWordsArr.push(bufferWordBeforePush);
     }
-    console.log('всего правильных ответов: ' + totalCorrectAnswers);
 
     currentQuestionNumber += 1;
   }
@@ -187,7 +176,6 @@ const audioGame = () => {
   }
 
   repeatVoiceButton.addEventListener('click', () => {
-    // console.log('voice click');
     playback();
   });
 
@@ -213,7 +201,6 @@ const audioGame = () => {
       clearSelectedButtonBorder();
       setQuestionAG(currentQuestionNumber);
     } else {
-      // console.log('Игра закончена! Ваш результат: ' + totalCorrectAnswers);
       audioResultModal.classList.remove('visually-hidden');
       setAGResultWordsCont(rightWordsArr, wrongWordsArr);
       setAGResultStatistics(totalCorrectAnswers, totalNumberOfQuestions);
