@@ -18,6 +18,10 @@ body {
   --div-bg-color: #1f9da5;
 }
 
+.body {
+  background-color: var(--bg-light-color);
+}
+
 .small-font {
   font-size: 24px;
 }
