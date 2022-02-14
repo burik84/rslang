@@ -3,6 +3,10 @@ import { IWordAPI } from '../shared/interface';
 import { IAudio } from '../shared/interface';
 
 const audioGame = () => {
+  const audioChoiceLevelModal = document.querySelector('#audio-choice-level-modal');
+  const audioChoiceLevelItems = document.querySelectorAll('.audio-choice-level-item');
+  const audioStartGameBtn = document.querySelector('#audio-start-game-button');
+
   const repeatVoiceButton = document.querySelector('#audio-repeat-voice-button');
   const answerButton1 = document.querySelector('#audio-answer-button-1');
   const answerButton2 = document.querySelector('#audio-answer-button-2');
@@ -20,7 +24,9 @@ const audioGame = () => {
   const audioResultWrongWordsCont = document.querySelector('#audio-result-wrong-words');
   const audioResultRightWordsCont = document.querySelector('#audio-result-right-words');
   const audioResultModal = document.querySelector('#audio-game-result-container');
-  
+
+  let userSelectedLevel: number;
+  let userSelectedPage = 0;
   const wordsForAGarr: Array<IWordAPI> = [];
   let currentQuestionNumber = 1;
   let totalNumberOfQuestions: number;
@@ -31,8 +37,6 @@ const audioGame = () => {
   let bufferWordBeforePush: IWordAPI;
 
   /*функции для получения аудио с сервера и последующего воспроизведения по клику*/
-
-  
 
   const ctx = new AudioContext();
   let audio: IAudio;
@@ -81,7 +85,7 @@ const audioGame = () => {
     pageNumsArr.forEach((value) => getWordsFromAPI(value, group));
   }
 
-  getWordsForAG(0,4); 
+  // getWordsForAG(0,4); 
   /*Это нужно будет выполнить когда пользователь выберет сложность для запуска*/
 
   /*генерируют вопросы*/
@@ -150,6 +154,18 @@ const audioGame = () => {
   }
 
   /*обработчики для кнопок*/
+
+  audioChoiceLevelItems.forEach(value => value.addEventListener('click', ()=> {
+    audioChoiceLevelItems.forEach(item => item.classList.remove('audio-choice-level-item-active'));
+    value.classList.add('audio-choice-level-item-active');
+    const num  = Number(value.innerHTML);
+    userSelectedLevel = num - 1;
+  }))
+
+  audioStartGameBtn.addEventListener('click', () => {
+    audioChoiceLevelModal.classList.add('visually-hidden');
+    getWordsForAG(userSelectedPage, userSelectedLevel);
+  });
 
   function enableNextButton() {
     nextQuestionButton.classList.add('audio-button-enable');

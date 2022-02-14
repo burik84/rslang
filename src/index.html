@@ -7,7 +7,7 @@
     <title>RS Lang team 17</title>
   </head>
 
-  <body>
+  <body class="body">
     <header>
       <nav>
         <ul class="header__ul small-font narrow-lines">
@@ -43,7 +43,7 @@
       <section class="user-handler"></section>
     </header>
     <main>
-      <div class="start-page" id="start-page">
+      <div class="start-page visually-hidden" id="start-page">
         <section class="app-description">
           <h1 class="big-font app-description__header wide-lines">
             RS Lang поможет изучить английский
@@ -130,7 +130,7 @@
       <div class="sprint-game visually-hidden" id="sprint-game-page">
         <p>sprint game in progress</p>
       </div>
-      <div class="audio-game visually-hidden" id="audio-game-page">
+      <div class="audio-game " id="audio-game-page">
         <div class="audio-game-container">
           <div class="audio-title-and-counter">
             <h2 class="h2-audio">Аудиовызов</h2>
@@ -176,6 +176,19 @@
           <button class="audio-next-question-button" id="audio-next-question-button">
             &#129046;
           </button>
+          <div class="audio-choice-level-modal" id="audio-choice-level-modal">
+            <p class="audio-choice-level-text-1">Тренировка аудиовызов улучшает <br> твое восприятие речи на слух.</p>
+            <p class="audio-choice-level-text-2">Выбери уровень сложности:</p>
+            <ul class="audio-choice-level-list">
+              <li class="audio-choice-level-item">1</li>
+              <li class="audio-choice-level-item">2</li>
+              <li class="audio-choice-level-item">3</li>
+              <li class="audio-choice-level-item">4</li>
+              <li class="audio-choice-level-item">5</li>
+              <li class="audio-choice-level-item">6</li>
+            </ul>
+            <button class="audio-start-game-button" id="audio-start-game-button">Начать</button>
+          </div>
         </div>
         <div class="audio-game-result-container visually-hidden" id="audio-game-result-container">
           <div class="audio-result-statistics">
@@ -206,7 +219,7 @@
         <p>statistics in progress</p>
       </div>
     </main>
-    <footer class="white-text" id="footer">
+    <footer class="white-text visually-hidden" id="footer">
       <div class="footer">
         <nav>
           <h2 class="footer-heading small-font narrow-lines">Меню</h2>
