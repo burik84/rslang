@@ -1,5 +1,6 @@
 import { isShowElement, errorMessage, removeElement } from './components/elements';
 import { addUserForm, renderUserForm } from './components/form';
+import {pagination} from './components/pagination';
 
 const showAdaptiveMenu = () => {
   const buttonMenu: HTMLButtonElement = document.querySelector('.menu__button');
@@ -41,6 +42,11 @@ const view = {
     section.append(addUserForm());
     showAdaptiveMenu();
     renderFormUser();
+    pagination.init(document.querySelector('.dictionary__pages'), {
+      size: 30, // pages size
+      page: 1, // selected page
+      step: 3, // pages before and after current
+    });
   },
   renderUserMessage: (type?: string) => {
     addErrorLogin(type);

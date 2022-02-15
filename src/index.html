@@ -24,7 +24,12 @@
       </nav>
       <div class="menu-adaptive">
         <nav>
-          <button type="button" class="button-link font-size48 line-height50" id="nav-main-page-adaptive">RSLang</button>
+          <button
+            type="button"
+            class="button-link font-size48 line-height50"
+            id="nav-main-page-adaptive">
+            RSLang
+          </button>
           <ul class="header__ul font-size24 line-height29">
             <li class="nav-item-adaptive" id="nav-dictionary-adaptive">Учебник</li>
             <li class="nav-item-adaptive" id="nav-sprint-game-adaptive">Спринт</li>
@@ -125,7 +130,34 @@
         </section>
       </div>
       <div class="dictionary visually-hidden" id="dictionary-page">
-        <p>dictionary in progress</p>
+        <ul class="dictionary__lists">
+          <li class="dictionary__list">
+            <button class="button dictionary__button dictionary__button-active" data-group="1">Группа 1</button>
+          </li>
+          <li class="dictionary__list">
+            <button class="button dictionary__button"
+            data-group="2">Группа 2</button>
+          </li>
+          <li class="dictionary__list">
+            <button class="button dictionary__button" data-group="3">Группа 3</button>
+          </li>
+          <li class="dictionary__list">
+            <button class="button dictionary__button" data-group="4">Группа 4</button>
+          </li>
+          <li class="dictionary__list">
+            <button class="button dictionary__button" data-group="5">Группа 5</button>
+          </li>
+          <li class="dictionary__list">
+            <button class="button dictionary__button" data-group="6">Группа 6</button>
+          </li>
+          <li class="dictionary__list">
+            <button class="button dictionary__button" data-group="7">Сложные слова</button>
+          </li>
+        </ul>
+        <section class="dictionary__words"></section>
+        <div class="dictionary__pagination">
+          <ul class="dictionary__pages"></ul>
+        </div>
       </div>
       <div class="sprint-game visually-hidden" id="sprint-game-page">
         <p>sprint game in progress</p>
@@ -195,23 +227,38 @@
             <p class="audio-result-wrong-number" id="audio-result-wrong-number">99</p>
             <svg width="100" height="100" viewBox="0 0 40 40" class="donut">
               <!-- <circle class="donut-hole" cx="50%" cy="50%" r="15.91549430918954" fill="#fff"></circle> -->
-              <circle class="donut-ring" cx="50%" cy="50%" r="15.9" fill="transparent" stroke="rgba(239, 82, 133, 1)" stroke-width="4"></circle>
-              <circle class="donut-segment" id="audio-result-donut-segment" cx="50%" cy="50%" r="15.9" fill="transparent" stroke="rgba(96, 197, 186, 1)" stroke-width="4" stroke-dasharray="50 50" stroke-dashoffset="25"></circle>
+              <circle
+                class="donut-ring"
+                cx="50%"
+                cy="50%"
+                r="15.9"
+                fill="transparent"
+                stroke="rgba(239, 82, 133, 1)"
+                stroke-width="4"></circle>
+              <circle
+                class="donut-segment"
+                id="audio-result-donut-segment"
+                cx="50%"
+                cy="50%"
+                r="15.9"
+                fill="transparent"
+                stroke="rgba(96, 197, 186, 1)"
+                stroke-width="4"
+                stroke-dasharray="50 50"
+                stroke-dashoffset="25"></circle>
             </svg>
             <p class="audio-result-right-number" id="audio-result-right-number">99</p>
-            <p class="audio-result-percentages-counter" id="audio-result-percentages-counter">50%</p>
+            <p class="audio-result-percentages-counter" id="audio-result-percentages-counter">
+              50%
+            </p>
           </div>
           <div class="audio-result-wrong-container">
             <p class="audio-result-wrong-title">Ошибок</p>
-            <div class="audio-result-wrong-words" id="audio-result-wrong-words">
-              
-            </div>
+            <div class="audio-result-wrong-words" id="audio-result-wrong-words"></div>
           </div>
           <div class="audio-result-right-container">
             <p class="audio-result-right-title">Правильно</p>
-            <div class="audio-result-right-words" id="audio-result-right-words">
-              
-            </div>
+            <div class="audio-result-right-words" id="audio-result-right-words"></div>
           </div>
           <div class="audio-restart-game-cont">
             <div class="audio-restart-game-button" id="audio-restart-game-button">
@@ -243,9 +290,10 @@
           <h2 class="footer-heading small-font narrow-lines">Разработчики</h2>
           <div class="developers-list small-text">
             <a href="https://github.com/burik84" class="white-text footer-link" target="_blank">burik84</a>
-            <a href="https://github.com/Blackdoll-Loki" class="white-text footer-link" target="_blank">
-              Blackdoll-Loki
-            </a>
+            <a
+              href="https://github.com/Blackdoll-Loki"
+              class="white-text footer-link"
+              target="_blank">Blackdoll-Loki</a>
             <a href="https://github.com/lg0leg" class="white-text footer-link" target="_blank">Oleg</a>
           </div>
         </div>
