@@ -25,7 +25,6 @@ const signUp = (result: string[]) => {
       password: result[2],
     })
     .then((data) => {
-      console.log(data);
       if (!data) view.renderUserMessage('signin');
       controllers.isUserSignin = data ? true : false;
       if (controllers.isUserSignin) {
