@@ -2,9 +2,9 @@ import { IControllers } from '../shared/interface';
 import { view } from '../view/view';
 import { model } from '../model/model';
 
-const loginUser = (result: string[]) => {
-  const successLogin = model
-    .login({
+const signIn = (result: string[]) => {
+  const successSignIn = model
+    .signin({
       email: result[0],
       password: result[1],
     })
@@ -17,9 +17,9 @@ const loginUser = (result: string[]) => {
       }
     });
 };
-const signinUser = (result: string[]) => {
-  const successSignin = model
-    .signin({
+const signUp = (result: string[]) => {
+  const successSignUp = model
+    .signup({
       name: result[0],
       email: result[1],
       password: result[2],
@@ -30,7 +30,7 @@ const signinUser = (result: string[]) => {
       controllers.isUserSignin = data ? true : false;
       if (controllers.isUserSignin) {
         const user = result.slice(1);
-        loginUser(user);
+        signIn(user);
       }
     });
 };
@@ -55,11 +55,11 @@ const controllers: IControllers = {
       result.push(element.value);
     });
 
-    if (result.length === 2) loginUser(result);
-    if (result.length === 3) signinUser(result);
+    if (result.length === 2) signIn(result);
+    if (result.length === 3) signUp(result);
   },
   updateUser: () => {
-    model.isLogin();
+    model.isSignIn();
     if (controllers.user) {
       controllers.isUserLogin = true;
       view.renderUserLogin(controllers.isUserLogin, controllers.user.name);
