@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: flex-start;
   width: 420px;
-  // height: 100%;
+  height: calc(100% - 1px);
   padding: 60px 20px;
   position: absolute;
   right: -100%;
