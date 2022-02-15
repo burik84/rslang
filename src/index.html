@@ -132,7 +132,7 @@
       <div class="dictionary visually-hidden" id="dictionary-page">
         <ul class="dictionary__lists">
           <li class="dictionary__list">
-            <button class="button dictionary__button dictionary__button-active" data-group="1">Группа 1</button>
+            <button class="button dictionary__button" data-group="1">Группа 1</button>
           </li>
           <li class="dictionary__list">
             <button class="button dictionary__button"
@@ -145,7 +145,7 @@
             <button class="button dictionary__button" data-group="4">Группа 4</button>
           </li>
           <li class="dictionary__list">
-            <button class="button dictionary__button" data-group="5">Группа 5</button>
+            <button class="button dictionary__button dictionary__button-active" data-group="5">Группа 5</button>
           </li>
           <li class="dictionary__list">
             <button class="button dictionary__button" data-group="6">Группа 6</button>
@@ -154,7 +154,38 @@
             <button class="button dictionary__button" data-group="7">Сложные слова</button>
           </li>
         </ul>
-        <section class="dictionary__words"></section>
+        <section class="dictionary__words">
+          <ul class="word__cards">
+            <li class="word">
+              <div class="word__image">
+                <img src="" alt="picture association ">
+              </div>
+              <div class="word__description">
+                <div class="word__english">
+                  <button class="button button__icon button__icon-play"></button>
+                  <p class="english"><span>alcohol</span><span>[ǽlkəhɔ̀ːl]</span><span>алкоголь</span></p>
+                  <div class="word__icons">
+                    <button class="button button__icon button__icon-difficult"></button>
+                    <button class="button button__icon button__icon-learned"></button>
+                  </div>
+                  <p class="word__static">
+                    верно <span class="word__static-true">4</span> / <span class="word__static-true">1</span> не верно
+                  </p>
+                </div>
+                <div class="word__sentense">
+                  <button class="button button__icon button__icon-play"></button>
+                  <p class="sentense__english">Alcohol is a type of drink that can make people drunk.</p>
+                  <p class="sentense__translate">Алкоголь - это тип напитка, который может сделать людей пьяными"</p>
+                </div>
+                <div class="word__example">
+                  <button class="button button__icon button__icon-play"></button>
+                  <p class="example__english">A person should not drive a car after he or she has been drinking alcohol.</p>
+                  <p class="example__translate">Человек не должен водить машину после того, как он выпил алкоголь</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
         <div class="dictionary__pagination">
           <ul class="dictionary__pages"></ul>
         </div>

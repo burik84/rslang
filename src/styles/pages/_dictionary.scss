@@ -12,9 +12,17 @@
 }
 .dictionary__lists {
   display: flex;
+  padding: 4px 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
   align-items: center;
   border-radius: 4px;
-  padding: 4px 8px;
+  row-gap: 14px;
   list-style-type: none;
 }
-
+.dictionary__words{
+  margin: 0 80px;
+}
+.dictionary__list{
+  // width: 145px;
+}

@@ -1,0 +1,54 @@
+@import "../constants";
+
+.word {
+  display: flex;
+  flex-direction: row;
+  font-size: 24px;
+  background-color: $color-button-bcg-modal;
+  border-radius: 5px;
+  color: $color-word-primary;
+}
+.word__description {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+.word__english {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.word__icons {
+  display: flex;
+  flex-direction: row;
+}
+.word__sentense,
+.word__example {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-size:0.7em;
+}
+.sentense__translate,
+.example__translate {
+  color: $color-word-secondary;
+}
+.english {
+  span {
+    color: $color-word-gray;
+    margin-right: 12px;
+    &:first-of-type {
+      color: $color-word-primary;
+    }
+    &:last-of-type {
+      color: $color-word-secondary;
+      margin-right: 0;
+    }
+  }
+}
+.word__static{
+  font-size: 0.6em;
+}

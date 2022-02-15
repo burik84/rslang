@@ -14,7 +14,8 @@ button {
 
 .button-link,
 .menu-user-name,
-.dictionary__button {
+.dictionary__button,
+.button__icon {
   background-color: inherit;
   border: none;
   border-radius: 0;
@@ -95,9 +96,6 @@ header.login {
   padding: 14px 0;
   margin-right: 22px;
   border-radius: 0;
-  &.dictionary__button-active {
-    border-bottom: 1px solid #1f9da5;
-  }
   &::before {
     content: "";
     position: absolute;
@@ -107,25 +105,103 @@ header.login {
     left: 0;
     right: 0;
   }
-  &[data-group="1"]::before {
-    background-color: $color-background-group-1;
+  &[data-group="1"] {
+    &.dictionary__button-active {
+      background-color: $color-background-group-1;
+      &:hover {
+        cursor: auto;
+      }
+    }
+    &::before {
+      background-color: $color-background-group-1;
+    }
   }
-  &[data-group="2"]::before {
-    background-color: $color-background-group-2;
+  &[data-group="2"] {
+    &.dictionary__button-active {
+      background-color: $color-background-group-2;
+      &:hover {
+        cursor: auto;
+      }
+    }
+    &::before {
+      background-color: $color-background-group-2;
+    }
   }
-  &[data-group="3"]::before {
-    background-color: $color-background-group-3;
+  &[data-group="3"] {
+    &.dictionary__button-active {
+      background-color: $color-background-group-3;
+      &:hover {
+        cursor: auto;
+      }
+    }
+    &::before {
+      background-color: $color-background-group-3;
+    }
   }
-  &[data-group="4"]::before {
-    background-color: $color-background-group-4;
+  &[data-group="4"] {
+    &.dictionary__button-active {
+      background-color: $color-background-group-4;
+      &:hover {
+        cursor: auto;
+      }
+    }
+    &::before {
+      background-color: $color-background-group-4;
+    }
   }
-  &[data-group="5"]::before {
-    background-color: $color-background-group-5;
+  &[data-group="5"] {
+    &.dictionary__button-active {
+      background-color: $color-background-group-5;
+      &:hover {
+        cursor: auto;
+      }
+    }
+    &::before {
+      background-color: $color-background-group-5;
+    }
   }
-  &[data-group="6"]::before {
-    background-color: $color-background-group-6;
+  &[data-group="6"] {
+    &.dictionary__button-active {
+      background-color: $color-background-group-6;
+      &:hover {
+        cursor: auto;
+      }
+    }
+    &::before {
+      background-color: $color-background-group-6;
+    }
   }
-  &[data-group="7"]::before {
-    background-color: $color-background-group-7;
+  &[data-group="7"] {
+    &.dictionary__button-active {
+      background-color: $color-background-group-7;
+      &:hover {
+        cursor: auto;
+      }
+    }
+    &::before {
+      background-color: $color-background-group-7;
+    }
+  }
+}
+
+.button__icon {
+  width: 32px;
+  height: 32px;
+  padding: 14px 0;
+  border-radius: 0;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  &.button__icon-play {
+    position: absolute;
+    top: 0;
+    left: -35px;
+    background-image: url("../assets/icons/button_play_sound.svg");
+  }
+  &.button__icon-difficult {
+    background-image: url("../assets/icons/button_difficult.svg");
+  }
+  &.button__icon-learned {
+    background-image: url("../assets/icons/button_studied.svg");
   }
 }
