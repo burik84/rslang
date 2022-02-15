@@ -47,16 +47,9 @@ const controllers: IControllers = {
     model.start();
     controllers.updateUser();
   },
-  userSign: () => {
-    const result: string[] = [];
-    const inputs = document.querySelectorAll('.login-form-field');
-
-    inputs.forEach((element: HTMLInputElement) => {
-      result.push(element.value);
-    });
-
-    if (result.length === 2) signIn(result);
-    if (result.length === 3) signUp(result);
+  userSign: (data:string[]) => {
+    if (data.length === 2) signIn(data);
+    if (data.length === 3) signUp(data);
   },
   updateUser: () => {
     model.isSignIn();
