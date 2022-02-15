@@ -8,9 +8,9 @@ const model = {
     console.log('start model');
     // model.isLogin();
   },
-  login: async (user: TUser) => {
+  signin: async (user: TUser) => {
     try {
-      const response = await servicesApi.login(user);
+      const response = await servicesApi.signin(user);
       const login = {
         name: response.name,
         token: response.token,
@@ -23,15 +23,15 @@ const model = {
       return false;
     }
   },
-  signin: async (user: TUserCreate) => {
+  signup: async (user: TUserCreate) => {
     try {
-      const response = await servicesApi.signin(user);
+      const response = await servicesApi.signup(user);
       return response;
     } catch (error) {
       return false;
     }
   },
-  isLogin: () => {
+  isSignIn: () => {
     const user: IUserAuth = getValue();
     controllers.user = user;
   },

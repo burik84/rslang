@@ -111,15 +111,22 @@ const addUserForm = () => {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-
+    const result:string[]=[];
     let isValidate = 0;
     const containersInput = document.querySelectorAll('.login-input-container');
 
     containersInput.forEach((element: HTMLInputElement) => {
-      if (!element.classList.contains('validate')) isValidate += 1;
+      if (!element.classList.contains('validate')){
+        isValidate += 1;
+      }else{
+        const text=element.querySelector('input').value
+        result.push(text)
+      }
     });
 
-    if (isValidate === 0) controllers.userSign();
+    if (isValidate === 0){
+      controllers.userSign(result);
+    }
   });
   messageButtonSwtchAuth.addEventListener('click', () => {
     currentSignin = !currentSignin;

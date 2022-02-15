@@ -43,7 +43,7 @@ interface IControllers {
   user: IUserAuth | any;
   refreshToken: string;
   init: () => void;
-  userSign: () => void;
+  userSign: (data:string[]) => void;
   updateUser: () => void;
 }
 
