@@ -4,7 +4,6 @@ const userTitle = (text = 'Авторизация') => {
   title.textContent = `${text} пользователя`;
   return title;
 };
-const spinner = '<div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>';
 
 const errorLogin = 'Не правильное имя пользователя и/или пароль';
 const errorSignin = 'Пользователь с указанным email уже существует';
@@ -41,26 +40,43 @@ const removeElement = (tag: string) => {
   }, 3000);
 };
 
-const showImage = (url: string, picture: HTMLImageElement) => {
+const showImage = (url: string, parent:HTMLElement, picture?: HTMLImageElement) => {
   const img = new Image();
   img.src = url;
 
   img.addEventListener('load', () => {
+    console.log('load picture');
+
     picture.src = url;
-  });
+    getSpinner.hide(parent);
+  },false);
 };
 
 const getSpinner = {
   tag: 'loading',
-  show: () => {
-    console.log('show spinner');
-    const parent: HTMLElement = document.querySelector(getSpinner.tag);
-    if (!parent.classList.contains('active')) parent.classList.add('active');
+  elementSpinner:
+    '<div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>',
+  add: (parent: HTMLElement) => {
+    const loading: HTMLDivElement = document.createElement('div');
+    const container: HTMLDivElement = document.createElement('div');
+    const overflow: HTMLDivElement = document.createElement('div');
+    overflow.className = 'loading__overflow';
+    container.className = 'loading__spinner';
+    loading.className = 'loading';
+
+    container.insertAdjacentHTML('afterbegin', getSpinner.elementSpinner);
+
+    loading.append(overflow, container);
+    parent.append(loading);
   },
-  hide: () => {
-    console.log('hide spinner');
-    const parent: HTMLElement = document.querySelector(getSpinner.tag);
-    if (parent.classList.contains('active')) parent.classList.remove('active');
+  show: (parent:HTMLElement) => {
+    const spinner=parent.querySelector('.loading')
+    if(!spinner.classList.contains('active')) spinner.classList.add('active')
+  },
+  hide: (parent:HTMLElement) => {
+
+    const spinner=parent.querySelector('.loading')
+    if(spinner.classList.contains('active')) spinner.classList.remove('active')
   },
 };
 export {
@@ -72,5 +88,4 @@ export {
   isHideElement,
   showImage,
   getSpinner,
-  spinner,
 };

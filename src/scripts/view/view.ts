@@ -1,4 +1,4 @@
-import { isToggleElement, errorMessage, removeElement } from './components/elements';
+import { isToggleElement, errorMessage, removeElement,getSpinner } from './components/elements';
 import { addUserForm, renderUserForm } from './components/form';
 import { updateDictionary, renderTextBook } from './components/dictionary/dictionary';
 import { controllers } from '../controllers/controller';
@@ -97,5 +97,12 @@ const view = {
     }
     renderTextBook(controllers.isUserSignIn, `${controllers.wordsGroup}`);
   },
+  showSpinnerWords:()=>{
+    const listsWordCard:HTMLUListElement=document.querySelector('.word__cards')
+    const cardsWord=listsWordCard.querySelectorAll('.word')
+    cardsWord.forEach((item:HTMLElement)=>{
+      getSpinner.show(item)
+    })
+  }
 };
 export { view };

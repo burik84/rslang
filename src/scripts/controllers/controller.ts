@@ -71,6 +71,7 @@ const controllers: IControllers = {
     }
   },
   getDataWords:()=>{
+    view.showSpinnerWords()
     const getWords = model
     .getWords()
     .then((data) => {

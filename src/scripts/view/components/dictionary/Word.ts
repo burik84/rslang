@@ -1,7 +1,7 @@
 import { IWordAPI } from '../../../shared/interface';
 import { BaseComponent, elementBaseComponent } from './base';
 import { urlAPI } from '../../../shared/api';
-import { showImage, spinner as spinnerElements } from '../elements';
+import { showImage, getSpinner } from '../elements';
 
 const classButtonPlaySound = 'button button__icon button__icon-play';
 class Word {
@@ -14,7 +14,6 @@ class Word {
   buttonPlayExample: BaseComponent;
   buttonWordDifficult: BaseComponent;
   buttonWordLearned: BaseComponent;
-  spinner: BaseComponent;
   constructor(body: IWordAPI, signIn: boolean, statistics: number[]) {
     this.body = body;
     this.signIn = signIn;
@@ -25,7 +24,6 @@ class Word {
     this.buttonPlayExample = new BaseComponent('button');
     this.buttonWordDifficult = new BaseComponent('button');
     this.buttonWordLearned = new BaseComponent('button');
-    this.spinner = new BaseComponent('div');
   }
   init() {
     const picture: HTMLElement = document.createElement('figure');
@@ -37,13 +35,11 @@ class Word {
     const textSentenseTranslate: HTMLParagraphElement = document.createElement('p');
     const textExampleEnglish: HTMLParagraphElement = document.createElement('p');
     const textExampleTranslate: HTMLParagraphElement = document.createElement('p');
-    const overflow: HTMLDivElement = document.createElement('div');
-    const spinner: HTMLDivElement = document.createElement('div');
 
     image.alt = `picture association ${this.body.word}`;
     // image.src = `${urlAPI}/${this.body.image}`;
 
-    showImage(`${urlAPI}/${this.body.image}`, image);
+    showImage(`${urlAPI}/${this.body.image}`, this.card.element, image, );
 
     textHeader.className = 'word__header-text';
     this.buttonPlayWord.element.className = classButtonPlaySound;
@@ -55,9 +51,6 @@ class Word {
     textSentenseTranslate.className = 'sentense__translate';
     textExampleEnglish.className = 'example__english';
     textExampleTranslate.className = 'example__translate';
-    this.spinner.element.className = 'loading';
-    overflow.className = 'loading__overflow';
-    spinner.className = 'loading__spinner';
 
     caption.textContent = this.body.word;
     textHeader.insertAdjacentHTML(
@@ -104,12 +97,18 @@ class Word {
       ['word__description'],
       [blockHeader.element, blockSentense.element, blockExample.element]
     );
-    spinner.insertAdjacentHTML('afterbegin', spinnerElements)
 
     this.card.element.className = 'word';
-    this.spinner.element.append(overflow, spinner);
-    this.card.element.append(blockImage.element, blockDescription.element, this.spinner.element);
+    this.card.element.append(blockImage.element, blockDescription.element);
+
+    getSpinner.add(this.card.element)
     return this.card;
+  }
+  showSpinner(){
+    getSpinner.show(this.card.element)
+  }
+  hideSpinner(){
+    getSpinner.hide(this.card.element)
   }
 }
 
