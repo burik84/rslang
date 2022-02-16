@@ -52,7 +52,6 @@ const controllers: IControllers = {
     view.init();
     controllers.updateUser();
     controllers.getDataWords();
-
   },
   userSign: (data: string[]) => {
     if (data.length === 2) signIn(data);
@@ -70,16 +69,19 @@ const controllers: IControllers = {
       controllers.wordsPage = 1;
     }
   },
-  getDataWords:()=>{
-    view.showSpinnerWords()
+  getDataWords: () => {
+    view.showSpinnerWords();
     const getWords = model
-    .getWords()
-    .then((data) => {
-      controllers.words = data;
-      view.renderWordsDictionary();
-    })
-    .catch();
-  }
+      .getWords()
+      .then((data) => {
+        controllers.words = data;
+        view.renderWordsDictionary();
+      })
+      .catch();
+  },
+  getDataWordsDifficult: () => {
+    console.log("Show cards for difficilt user's words");
+  },
 };
 
 export { controllers };

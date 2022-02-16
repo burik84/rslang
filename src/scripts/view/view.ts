@@ -43,7 +43,11 @@ const changeGroupWords = () => {
         controllers.wordsGroup=group
         controllers.wordsPage=1
         view.updateViewDictionary()
-        controllers.getDataWords()
+        if(controllers.wordsGroup==='6'){
+          controllers.getDataWordsDifficult()
+        }else{
+          controllers.getDataWords()
+        }
       }
     },
     true
