@@ -4,9 +4,9 @@ import { isShowElement, isHideElement } from '../elements';
 import { IWordAPI } from '../../../shared/interface';
 import { Word } from './Word';
 
-const renderTextBook = (isUserSignIn: boolean, group:string) => {
+const renderTextBook = (isUserSignIn: boolean, group: string) => {
   const lists: HTMLUListElement = document.querySelector('.word__cards');
-  lists.setAttribute('data-group',group)
+  lists.setAttribute('data-group', group);
   controllers.words.forEach((word: IWordAPI) => {
     const statistics: number[] = [0, 0];
     const li = new Word(word, isUserSignIn, statistics);
@@ -16,9 +16,12 @@ const renderTextBook = (isUserSignIn: boolean, group:string) => {
 const updateDictionary = () => {
   const lists: HTMLUListElement = document.querySelector('.dictionary__lists');
   const paginationLists: HTMLUListElement = document.querySelector('.dictionary__pages');
+  const containerGroupButtons: HTMLUListElement = document.querySelector('.dictionary__lists');
+  const buttonsGroup = containerGroupButtons.querySelectorAll('button');
+
   if (controllers.isUserSignIn) {
     isShowElement(lists);
-    if (controllers.wordsGroup === 7) {
+    if (controllers.wordsGroup === '7') {
       isHideElement(paginationLists);
     }
   } else {
@@ -28,6 +31,18 @@ const updateDictionary = () => {
     size: 30, // pages size
     page: controllers.wordsPage, // selected page
     step: 3, // pages before and after current
+  });
+  buttonsGroup.forEach((button: HTMLButtonElement) => {
+    const group = button.getAttribute('data-group');
+    if (button.classList.contains('dictionary__button-active')) {
+      button.classList.remove('dictionary__button-active');
+    }
+    if (
+      group === controllers.wordsGroup &&
+      !button.classList.contains('dictionary__button-active')
+    ) {
+      button.classList.add('dictionary__button-active');
+    }
   });
 };
 export { renderTextBook, updateDictionary };

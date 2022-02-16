@@ -30,7 +30,7 @@ export const servicesApi = {
 };
 
 export const servicesWordsApi = {
-  getWords: async (group=1,page=1) => {
+  getWords: async (group='1',page=1) => {
     const dataAllWords = await fetch(`${urlAPI}/words?group=${group}&page=${page}`)
       .then((res) => res.json())
       .then((data) => {

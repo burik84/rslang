@@ -43,7 +43,7 @@ interface IControllers {
   user: IUserAuth | any;
   words:IWordAPI[];
   refreshToken: string;
-  wordsGroup: number;
+  wordsGroup: string;
   wordsPage: number;
   init: () => void;
   userSign: (data: string[]) => void;
@@ -87,7 +87,7 @@ interface IAudio {
   copyToChannel(source: Float32Array, channelNumber: number, bufferOffset?: number): void;
 }
 interface IDictinaryData {
-  group: number;
+  group: string;
   page: number;
 }
 

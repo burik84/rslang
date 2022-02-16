@@ -45,7 +45,7 @@ const controllers: IControllers = {
   user: {},
   words: [],
   refreshToken: '',
-  wordsGroup: 1,
+  wordsGroup: '1',
   wordsPage: 1,
   init: () => {
     console.log('Init view');
@@ -72,7 +72,7 @@ const controllers: IControllers = {
     } else {
       controllers.isUserSignIn = false;
       view.renderUserLogin();
-      controllers.wordsGroup = 1;
+      controllers.wordsGroup = '1';
       controllers.wordsPage = 1;
     }
   },

@@ -1,7 +1,7 @@
 import { isToggleElement, errorMessage, removeElement } from './components/elements';
 import { addUserForm, renderUserForm } from './components/form';
 import { updateDictionary, renderTextBook } from './components/dictionary/dictionary';
-import {controllers} from '../controllers/controller'
+import { controllers } from '../controllers/controller';
 
 const showAdaptiveMenu = () => {
   const buttonMenu: HTMLButtonElement = document.querySelector('.menu__button');
@@ -30,19 +30,39 @@ const renderFormUser = () => {
     showModalUser(button);
   });
 };
+const changeGroupWords = () => {
+  const buttons = document.querySelector('.dictionary__lists');
+
+  buttons.addEventListener(
+    'click',
+    (e: Event) => {
+      const target: any = e.target;
+      const group: string = target.dataset.group;
+      const lists: string[] = Object.values(target.classList);
+      if (!lists.includes('dictionary__button-active')) {
+        controllers.wordsGroup=group
+      }
+      view.updateViewDictionary()
+    },
+    true
+  );
+};
 const addErrorLogin = (type?: string) => {
   const message = document.querySelector('#user-sign-msg-holder');
 
   message.insertAdjacentHTML('afterend', errorMessage(type));
   removeElement('#user-error-msg-holder');
 };
-
+const clickButtons = () => {
+  showAdaptiveMenu();
+  renderFormUser();
+  changeGroupWords();
+};
 const view = {
   init: () => {
     const section = document.querySelector('.user-handler');
     section.append(addUserForm());
-    showAdaptiveMenu();
-    renderFormUser();
+    clickButtons();
     view.updateViewDictionary();
   },
   renderUserMessageError: (type?: string) => {
@@ -68,7 +88,7 @@ const view = {
     updateDictionary();
   },
   renderWordsDictionary: () => {
-    renderTextBook(controllers.isUserSignIn,`${controllers.wordsGroup}`);
+    renderTextBook(controllers.isUserSignIn, `${controllers.wordsGroup}`);
   },
 };
 export { view };
