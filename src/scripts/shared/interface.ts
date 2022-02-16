@@ -37,8 +37,8 @@ interface IUserCreated {
 
 interface IControllers {
   signin: boolean;
-  isUserLogin: boolean;
-  isUserSignin: boolean;
+  isUserSignIn: boolean;
+  isUserSignUp: boolean;
   isSpinner: boolean;
   user: IUserAuth | any;
   refreshToken: string;

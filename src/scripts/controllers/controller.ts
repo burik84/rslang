@@ -9,11 +9,13 @@ const signIn = (result: string[]) => {
       password: result[1],
     })
     .then((data) => {
-      if (!data) view.renderUserMessage();
-      controllers.isUserLogin = data ? true : false;
-      if (controllers.isUserLogin) {
+      if (!data){
+        view.renderUserMessageError()
+        controllers.isUserSignIn=false
+      }else{
         controllers.updateUser();
         view.closeModalUserSign();
+        controllers.isUserSignIn=true
       }
     });
 };
@@ -25,9 +27,11 @@ const signUp = (result: string[]) => {
       password: result[2],
     })
     .then((data) => {
-      if (!data) view.renderUserMessage('signin');
-      controllers.isUserSignin = data ? true : false;
-      if (controllers.isUserSignin) {
+      if (!data){
+        view.renderUserMessageError('signin');
+        controllers.isUserSignUp=false
+      } else{
+        controllers.isUserSignUp = true
         const user = result.slice(1);
         signIn(user);
       }
@@ -35,8 +39,8 @@ const signUp = (result: string[]) => {
 };
 const controllers: IControllers = {
   signin: true,
-  isUserLogin: false,
-  isUserSignin: false,
+  isUserSignIn: false,
+  isUserSignUp: false,
   isSpinner: false,
   user: {},
   refreshToken: '',
@@ -53,11 +57,11 @@ const controllers: IControllers = {
   updateUser: () => {
     model.isSignIn();
     if (controllers.user) {
-      controllers.isUserLogin = true;
-      view.renderUserLogin(controllers.isUserLogin, controllers.user.name);
+      controllers.isUserSignIn = true;
+      view.renderUserLogin(controllers.isUserSignIn, controllers.user.name);
     } else {
-      controllers.isUserLogin = false;
-      view.renderUserLogin(controllers.isUserLogin);
+      controllers.isUserSignIn = false;
+      view.renderUserLogin(controllers.isUserSignIn);
     }
   },
 };
