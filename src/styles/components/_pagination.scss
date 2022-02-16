@@ -7,12 +7,12 @@
   a,
   i {
     display: inline-block;
-    vertical-align: middle;
     width: 22px;
+    padding: 3px 0;
+    vertical-align: middle;
     color: $color-primary-background;
     text-align: center;
     font-size: 12px;
-    padding: 3px 0;
     user-select: none;
   }
   a {
