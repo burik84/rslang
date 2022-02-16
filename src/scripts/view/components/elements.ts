@@ -40,23 +40,11 @@ const removeElement = (tag: string) => {
   }, 3000);
 };
 
-const showImage = (url: string, parent:HTMLElement, picture?: HTMLImageElement) => {
-  const img = new Image();
-  img.src = url;
-
-  img.addEventListener('load', () => {
-    console.log('load picture');
-
-    picture.src = url;
-    getSpinner.hide(parent);
-  },false);
-};
-
 const getSpinner = {
-  tag: 'loading',
+  tag: '.loading',
   elementSpinner:
     '<div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>',
-  add: (parent: HTMLElement) => {
+  add: ():HTMLDivElement => {
     const loading: HTMLDivElement = document.createElement('div');
     const container: HTMLDivElement = document.createElement('div');
     const overflow: HTMLDivElement = document.createElement('div');
@@ -67,15 +55,14 @@ const getSpinner = {
     container.insertAdjacentHTML('afterbegin', getSpinner.elementSpinner);
 
     loading.append(overflow, container);
-    parent.append(loading);
+    return loading
   },
   show: (parent:HTMLElement) => {
-    const spinner=parent.querySelector('.loading')
+    const spinner=parent.querySelector(getSpinner.tag)
     if(!spinner.classList.contains('active')) spinner.classList.add('active')
   },
   hide: (parent:HTMLElement) => {
-
-    const spinner=parent.querySelector('.loading')
+    const spinner=parent.querySelector(getSpinner.tag)
     if(spinner.classList.contains('active')) spinner.classList.remove('active')
   },
 };
@@ -86,6 +73,5 @@ export {
   removeElement,
   isShowElement,
   isHideElement,
-  showImage,
   getSpinner,
 };

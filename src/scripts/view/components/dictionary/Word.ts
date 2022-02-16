@@ -1,7 +1,8 @@
 import { IWordAPI } from '../../../shared/interface';
 import { BaseComponent, elementBaseComponent } from './base';
 import { urlAPI } from '../../../shared/api';
-import { showImage, getSpinner } from '../elements';
+import { getSpinner } from '../elements';
+import { loadImage } from '../../../shared/services';
 
 const classButtonPlaySound = 'button button__icon button__icon-play';
 class Word {
@@ -26,6 +27,7 @@ class Word {
     this.buttonWordLearned = new BaseComponent('button');
   }
   init() {
+    const srcImage = `${urlAPI}/${this.body.image}`;
     const picture: HTMLElement = document.createElement('figure');
     const image: HTMLImageElement = document.createElement('img');
     const caption: HTMLElement = document.createElement('figcaption');
@@ -35,11 +37,23 @@ class Word {
     const textSentenseTranslate: HTMLParagraphElement = document.createElement('p');
     const textExampleEnglish: HTMLParagraphElement = document.createElement('p');
     const textExampleTranslate: HTMLParagraphElement = document.createElement('p');
+    const spinner: HTMLDivElement = getSpinner.add();
 
     image.alt = `picture association ${this.body.word}`;
-    // image.src = `${urlAPI}/${this.body.image}`;
 
-    showImage(`${urlAPI}/${this.body.image}`, this.card.element, image, );
+    loadImage(srcImage)
+      .then((data: HTMLImageElement) => {
+        image.src = srcImage;
+        // picture.append(image)
+        if (data) this.hideSpinner();
+        return data;
+      })
+      .then((data) => {
+        picture.classList.add('no-blur');
+      })
+      .catch((error) => {
+        image.alt = "undefined picter's";
+      });
 
     textHeader.className = 'word__header-text';
     this.buttonPlayWord.element.className = classButtonPlaySound;
@@ -97,18 +111,18 @@ class Word {
       ['word__description'],
       [blockHeader.element, blockSentense.element, blockExample.element]
     );
-
     this.card.element.className = 'word';
-    this.card.element.append(blockImage.element, blockDescription.element);
+    this.card.element.append(blockImage.element, blockDescription.element, spinner);
 
-    getSpinner.add(this.card.element)
     return this.card;
   }
-  showSpinner(){
-    getSpinner.show(this.card.element)
+  showSpinner() {
+    const spinnerElement = this.card.element.querySelector('.loading');
+    if (!spinnerElement.classList.contains('active')) spinnerElement.classList.add('active');
   }
-  hideSpinner(){
-    getSpinner.hide(this.card.element)
+  hideSpinner() {
+    const spinnerElement = this.card.element.querySelector('.loading');
+    if (spinnerElement.classList.contains('active')) spinnerElement.classList.remove('active');
   }
 }
 

@@ -43,3 +43,12 @@ export const servicesWordsApi = {
     return dataAllWords;
   }
 };
+
+export const  loadImage=(url:string)=> {
+  return new Promise((resolve, reject)=> {
+    const img = new Image();
+    img.onload = ()=> resolve(img);
+    img.src = url;
+  });
+}
+
