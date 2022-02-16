@@ -1,6 +1,8 @@
 import { IWordAPI } from '../../../shared/interface';
 import { BaseComponent, elementBaseComponent } from './base';
 import { urlAPI } from '../../../shared/api';
+import {showImage} from '../elements';
+
 const classButtonPlaySound = 'button button__icon button__icon-play';
 class Word {
   body: IWordAPI;
@@ -35,7 +37,9 @@ class Word {
     const textExampleTranslate: HTMLParagraphElement = document.createElement('p');
 
     image.alt = `picture association ${this.body.word}`;
-    image.src = `${urlAPI}/${this.body.image}`;
+    // image.src = `${urlAPI}/${this.body.image}`;
+
+    showImage(`${urlAPI}/${this.body.image}`,image)
 
     textHeader.className = 'word__header-text';
     this.buttonPlayWord.element.className = classButtonPlaySound;
@@ -53,7 +57,7 @@ class Word {
       'afterbegin',
       `<span>${this.body.transcription}</span><span>${this.body.wordTranslate}</span>`
     );
-    textStatic.className = 'word__static';
+    textStatic.className = this.signIn ? 'word__static open' : 'word__static';
     textStatic.insertAdjacentHTML(
       'afterbegin',
       `верно <span class="word__static-true">${this.statistics[0]}</span> / <span class="word__static-true">${this.statistics[1]}</span> не верно`
@@ -66,11 +70,13 @@ class Word {
     picture.append(image, caption);
 
     const blockImage = elementBaseComponent('div', ['word__image'], [picture]);
-    const blockWordIcons = elementBaseComponent(
-      'div',
-      ['word__icons'],
-      [this.buttonWordDifficult.element, this.buttonWordLearned.element]
-    );
+    const blockWordIcons = this.signIn
+      ? elementBaseComponent(
+          'div',
+          ['word__icons'],
+          [this.buttonWordDifficult.element, this.buttonWordLearned.element]
+        )
+      : elementBaseComponent('div', ['word__icons'], []);
     const blockHeader = elementBaseComponent(
       'div',
       ['word__header'],

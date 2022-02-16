@@ -9,7 +9,7 @@
   background-color: $color-button-bcg-modal;
   // border-radius: 5px;
   color: $color-word-primary;
-  column-gap: 42px;
+  column-gap: 48px;
 }
 .word__image {
   max-width: 150px;
@@ -77,9 +77,13 @@
   }
 }
 .word__static {
+  display: none;
   font-size: 0.6em;
+  &.open {
+    display: block;
+  }
 }
-.word__cards{
+.word__cards {
   display: flex;
   flex-direction: column;
   row-gap: 6px;

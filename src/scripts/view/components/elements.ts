@@ -39,4 +39,13 @@ const removeElement = (tag: string) => {
     element.remove();
   }, 3000);
 };
-export { userTitle, errorMessage, isToggleElement, removeElement, isShowElement, isHideElement };
+
+const showImage = (url:string, picture:HTMLImageElement) => {
+  const img = new Image();
+  img.src = url;
+
+  img.addEventListener("load", () => {
+    picture.src = url;
+  });
+};
+export { userTitle, errorMessage, isToggleElement, removeElement, isShowElement, isHideElement, showImage };
