@@ -1,6 +1,7 @@
 import { isToggleElement, errorMessage, removeElement } from './components/elements';
 import { addUserForm, renderUserForm } from './components/form';
 import { updateDictionary, renderTextBook } from './components/dictionary/dictionary';
+import {controllers} from '../controllers/controller'
 
 const showAdaptiveMenu = () => {
   const buttonMenu: HTMLButtonElement = document.querySelector('.menu__button');
@@ -50,10 +51,10 @@ const view = {
   closeModalUserSign: () => {
     isToggleElement('.user-handler');
   },
-  renderUserLogin: (isLogin: boolean, name?: string) => {
+  renderUserLogin: (name?: string) => {
     const header = document.querySelector('header');
     const buttonsUser = document.querySelectorAll('.menu-user-name');
-    if (isLogin) {
+    if (controllers.isUserSignIn) {
       if (!header.classList.contains('login')) header.classList.add('login');
       buttonsUser.forEach((button) => {
         button.textContent = name;
@@ -67,7 +68,7 @@ const view = {
     updateDictionary();
   },
   renderWordsDictionary: () => {
-    renderTextBook();
+    renderTextBook(controllers.isUserSignIn);
   },
 };
 export { view };

@@ -68,10 +68,10 @@ const controllers: IControllers = {
     model.isSignIn();
     if (controllers.user) {
       controllers.isUserSignIn = true;
-      view.renderUserLogin(controllers.isUserSignIn, controllers.user.name);
+      view.renderUserLogin(controllers.user.name);
     } else {
       controllers.isUserSignIn = false;
-      view.renderUserLogin(controllers.isUserSignIn);
+      view.renderUserLogin();
       controllers.wordsGroup = 1;
       controllers.wordsPage = 1;
     }
