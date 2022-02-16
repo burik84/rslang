@@ -4,8 +4,9 @@ import { isShowElement, isHideElement } from '../elements';
 import { IWordAPI } from '../../../shared/interface';
 import { Word } from './Word';
 
-const renderTextBook = (isUserSignIn: boolean) => {
+const renderTextBook = (isUserSignIn: boolean, group:string) => {
   const lists: HTMLUListElement = document.querySelector('.word__cards');
+  lists.setAttribute('data-group',group)
   controllers.words.forEach((word: IWordAPI) => {
     const statistics: number[] = [0, 0];
     const li = new Word(word, isUserSignIn, statistics);

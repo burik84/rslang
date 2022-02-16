@@ -68,7 +68,7 @@ const view = {
     updateDictionary();
   },
   renderWordsDictionary: () => {
-    renderTextBook(controllers.isUserSignIn);
+    renderTextBook(controllers.isUserSignIn,`${controllers.wordsGroup}`);
   },
 };
 export { view };
