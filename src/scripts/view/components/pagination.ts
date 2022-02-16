@@ -7,7 +7,7 @@ import {IPagination} from '../../shared/interface'
 
 const pagination:IPagination = {
   code: '',
-  size: 300,
+  size: 30,
   page: 1,
   step: 3,
 
@@ -136,6 +136,12 @@ const pagination:IPagination = {
     pagination.create(element);
     pagination.start();
   },
+
+  //render
+  render:function (data) {
+    pagination.extend(data);
+    pagination.start();
+  }
 };
 
 

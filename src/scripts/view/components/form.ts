@@ -1,4 +1,4 @@
-import { isShowElement, userTitle } from './elements';
+import { isToggleElement, userTitle } from './elements';
 import { validateInput } from './validate';
 import { controllers } from '../../controllers/controller';
 import { resetValue } from '../../shared/localstorage';
@@ -134,12 +134,12 @@ const addUserForm = () => {
     renderUserForm();
   });
   buttonReset.addEventListener('click', () => {
-    isShowElement('.user-handler');
+    isToggleElement('.user-handler');
   });
   buttonUserLogout.addEventListener('click', () => {
     resetValue();
     controllers.updateUser();
-    isShowElement('.user-handler');
+    isToggleElement('.user-handler');
   });
   form.append(buttonSubmit);
 

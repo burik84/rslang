@@ -13,8 +13,17 @@ const errorMessage = (type?: string) => {
   <p id="user-error-msg">${text}</p>
   </div>`;
 };
-
-const isShowElement = (tag: string) => {
+const isShowElement = (element: HTMLElement) => {
+  if (!element.classList.contains('open')) {
+    element.classList.add('open');
+  }
+};
+const isHideElement = (element: HTMLElement) => {
+  if (element.classList.contains('open')) {
+    element.classList.remove('open');
+  }
+};
+const isToggleElement = (tag: string) => {
   const element: HTMLDivElement = document.querySelector(tag);
 
   if (element.classList.contains('open')) {
@@ -30,4 +39,4 @@ const removeElement = (tag: string) => {
     element.remove();
   }, 3000);
 };
-export { userTitle, errorMessage, isShowElement, removeElement };
+export { userTitle, errorMessage, isToggleElement, removeElement, isShowElement, isHideElement };

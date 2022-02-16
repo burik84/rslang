@@ -1,13 +1,13 @@
-import { isShowElement, errorMessage, removeElement } from './components/elements';
+import { isToggleElement, errorMessage, removeElement } from './components/elements';
 import { addUserForm, renderUserForm } from './components/form';
-import {pagination} from './components/pagination';
+import { updateDictionary } from './components/dictionary/dictionary';
 
 const showAdaptiveMenu = () => {
   const buttonMenu: HTMLButtonElement = document.querySelector('.menu__button');
 
   buttonMenu.addEventListener('click', () => {
     ['.menu__button', '.menu-adaptive'].forEach((element) => {
-      isShowElement(element);
+      isToggleElement(element);
     });
   });
 };
@@ -17,7 +17,7 @@ const renderFormUser = () => {
 
   const showModalUser = (element: HTMLButtonElement) => {
     element.addEventListener('click', () => {
-      isShowElement('.user-handler');
+      isToggleElement('.user-handler');
       renderUserForm();
     });
   };
@@ -42,17 +42,13 @@ const view = {
     section.append(addUserForm());
     showAdaptiveMenu();
     renderFormUser();
-    pagination.init(document.querySelector('.dictionary__pages'), {
-      size: 30, // pages size
-      page: 1, // selected page
-      step: 3, // pages before and after current
-    });
+    updateDictionary();
   },
-  renderUserMessage: (type?: string) => {
+  renderUserMessageError: (type?: string) => {
     addErrorLogin(type);
   },
   closeModalUserSign: () => {
-    isShowElement('.user-handler');
+    isToggleElement('.user-handler');
   },
   renderUserLogin: (isLogin: boolean, name?: string) => {
     const header = document.querySelector('header');
@@ -65,6 +61,7 @@ const view = {
     } else {
       if (header.classList.contains('login')) header.classList.remove('login');
     }
+    updateDictionary()
   },
 };
 export { view };

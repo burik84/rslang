@@ -11,7 +11,8 @@
   font-size: 30px;
 }
 .dictionary__lists {
-  display: flex;
+  // display: flex;
+  display: none;
   padding: 4px 8px;
   margin-bottom: 24px;
   flex-wrap: wrap;
@@ -19,10 +20,27 @@
   border-radius: 4px;
   row-gap: 14px;
   list-style-type: none;
+  &.open{
+    display: flex;
+  }
 }
 .dictionary__words{
-  margin: 0 80px;
+  margin: 0 80px 48px;
 }
 .dictionary__list{
   // width: 145px;
+}
+.dictionary__pagination{
+
+}
+.dictionary__pages {
+  display: none;
+  align-items: center;
+  border-radius: 4px;
+  padding: 8px 16px;
+  border-top: 1px solid #aeaeae;
+  border-bottom: 1px solid #ffffff;
+  &.open{
+    display: flex;
+  }
 }

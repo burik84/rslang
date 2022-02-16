@@ -71,6 +71,7 @@ interface IPagination {
   buttons: (element: HTMLElement) => void;
   create: (element: HTMLElement) => void;
   init: (element: HTMLElement, data: TDataPagination) => void;
+  render: (data: TDataPagination) => void;
 }
 
 interface IAudio {
