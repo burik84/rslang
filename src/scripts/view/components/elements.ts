@@ -4,6 +4,7 @@ const userTitle = (text = 'Авторизация') => {
   title.textContent = `${text} пользователя`;
   return title;
 };
+const spinner = '<div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>';
 
 const errorLogin = 'Не правильное имя пользователя и/или пароль';
 const errorSignin = 'Пользователь с указанным email уже существует';
@@ -40,12 +41,36 @@ const removeElement = (tag: string) => {
   }, 3000);
 };
 
-const showImage = (url:string, picture:HTMLImageElement) => {
+const showImage = (url: string, picture: HTMLImageElement) => {
   const img = new Image();
   img.src = url;
 
-  img.addEventListener("load", () => {
+  img.addEventListener('load', () => {
     picture.src = url;
   });
 };
-export { userTitle, errorMessage, isToggleElement, removeElement, isShowElement, isHideElement, showImage };
+
+const getSpinner = {
+  tag: 'loading',
+  show: () => {
+    console.log('show spinner');
+    const parent: HTMLElement = document.querySelector(getSpinner.tag);
+    if (!parent.classList.contains('active')) parent.classList.add('active');
+  },
+  hide: () => {
+    console.log('hide spinner');
+    const parent: HTMLElement = document.querySelector(getSpinner.tag);
+    if (parent.classList.contains('active')) parent.classList.remove('active');
+  },
+};
+export {
+  userTitle,
+  errorMessage,
+  isToggleElement,
+  removeElement,
+  isShowElement,
+  isHideElement,
+  showImage,
+  getSpinner,
+  spinner,
+};
