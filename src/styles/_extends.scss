@@ -1,0 +1,7 @@
+@import "./constants";
+
+%filter-button {
+  background-color: $color-button-bcg-modal;
+  border: 1px solid #1f9da5;
+  border-radius: 10px;
+}

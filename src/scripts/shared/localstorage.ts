@@ -1,20 +1,20 @@
+import { IUserAuth } from './interface';
+const setValue = (value: IUserAuth, key = 'user') => {
+  const name = `rsteam17-${key}`;
+  const valueJSON = JSON.stringify(value);
 
-const setValue = (value, key='user') => {
-    const name=`burik84-${key}`;
-    const valueJSON=JSON.stringify(value);
-
-    localStorage.setItem(name, valueJSON);
+  localStorage.setItem(name, valueJSON);
 };
 
-const getValue = (key='user') => {
-    const name=`burik84-${key}`;
-    const value = JSON.parse(localStorage.getItem(name));
+const getValue = (key = 'user') => {
+  const name = `rsteam17-${key}`;
+  const value = JSON.parse(localStorage.getItem(name));
 
-    return value;
+  return value;
 };
 
-const resetValue = (key='user') => {
-    const name=`burik84-${key}`;
-    localStorage.removeItem(name);
+const resetValue = (key = 'user') => {
+  const name = `rsteam17-${key}`;
+  localStorage.removeItem(name);
 };
-export { setValue, getValue,  resetValue };
+export { setValue, getValue, resetValue };

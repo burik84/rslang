@@ -1,17 +1,30 @@
-@import '../constants';
+@import "../constants";
+
 button {
   width: 150px;
   height: 38px;
   font-size: 18px;
   line-height: 21.88px;
   border-radius: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
-.button-link {
+.button-link,
+.menu-user-name,
+.dictionary__button {
   background-color: inherit;
   border: none;
+  border-radius: 0;
   outline: none;
   line-height: inherit;
+  opacity: 1;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .menu__button {
@@ -23,9 +36,11 @@ button {
   background-color: inherit;
   z-index: 20;
   transition: all 0.5s ease;
+
   &:hover {
     cursor: pointer;
   }
+
   span {
     display: block;
     width: 100%;
@@ -35,9 +50,11 @@ button {
     top: 16px;
     transform: rotate(0deg);
     transition: 0.5s ease-in-out;
+
     &:first-of-type {
       top: 0;
     }
+
     &:last-of-type {
       top: 34px;
     }
@@ -47,15 +64,68 @@ button {
 .menu__button.open {
   span {
     opacity: 0;
+
     &:first-of-type {
       top: 16px;
       transform: rotate(45deg);
       opacity: 1;
     }
+
     &:last-of-type {
       top: 16px;
       transform: rotate(-45deg);
       opacity: 1;
     }
+  }
+}
+
+header.login {
+  .menu-user-name {
+    height: 28px;
+    padding-left: 4px;
+    text-align: start;
+    border-radius: 0;
+    border-bottom: 1px solid $color-primary-background;
+    order: -1;
+  }
+}
+
+.dictionary__button {
+  position: relative;
+  padding: 14px 0;
+  margin-right: 22px;
+  border-radius: 0;
+  &.dictionary__button-active {
+    border-bottom: 1px solid #1f9da5;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  &[data-group="1"]::before {
+    background-color: $color-background-group-1;
+  }
+  &[data-group="2"]::before {
+    background-color: $color-background-group-2;
+  }
+  &[data-group="3"]::before {
+    background-color: $color-background-group-3;
+  }
+  &[data-group="4"]::before {
+    background-color: $color-background-group-4;
+  }
+  &[data-group="5"]::before {
+    background-color: $color-background-group-5;
+  }
+  &[data-group="6"]::before {
+    background-color: $color-background-group-6;
+  }
+  &[data-group="7"]::before {
+    background-color: $color-background-group-7;
   }
 }

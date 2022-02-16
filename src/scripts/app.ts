@@ -1,10 +1,14 @@
 import { servicesApi } from './shared/services';
-import {handleClickMenuBurger} from './view/view';
+import { audioGame } from './games/audioGame';
+import { controllers } from './controllers/controller';
+import { nav } from './view/components/nav';
 
 const app = {
-  init: () => {
+  start: () => {
     console.log('Start App');
-    handleClickMenuBurger()
+    nav();
+    audioGame();
+    controllers.init();
   },
   testSevice: () => {
     servicesApi.getAllWords();

@@ -6,7 +6,7 @@ export const servicesApi = {
     const dataAllWords = await fetch(`${urlAPI}/words`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         return data;
       })
       .catch((error) => {
@@ -26,7 +26,7 @@ export const servicesApi = {
     const content: IUserAuth = await rawResponse.json();
     return content;
   },
-  createUser: async (user: TUserCreate) => {
+  signup: async (user: TUserCreate) => {
     const rawResponse = await fetch(`${urlAPI}/users`, {
       method: 'POST',
       headers: {
@@ -35,7 +35,7 @@ export const servicesApi = {
       },
       body: JSON.stringify(user),
     });
-    const content: IUserCreated = await rawResponse.json();
+    const content: IUserCreated = await rawResponse.json().catch(() => false);
 
     return content;
   },
