@@ -61,6 +61,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 700;
+  font-weight: 750;
   color: #41445c;
+}
+
+.chart-1,
+.chart-2 {
+  width: 700px;
+  height: 400px;
+  border: 1px solid #1f9da5;
+  border-radius: 10px;
 }
