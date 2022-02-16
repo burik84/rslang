@@ -94,32 +94,32 @@
   }
   &[data-group="2"] {
     .word__description {
-      background-color: $color-background-group-2;
+      border-right: 14px solid $color-background-group-2;
     }
   }
   &[data-group="3"] {
     .word__description {
-      background-color: $color-background-group-3;
+      border-right: 14px solid $color-background-group-3;
     }
   }
   &[data-group="4"] {
     .word__description {
-      background-color: $color-background-group-4;
+      border-right: 14px solid $color-background-group-4;
     }
   }
   &[data-group="5"] {
     .word__description {
-      background-color: $color-background-group-5;
+      border-right: 14px solid $color-background-group-5;
     }
   }
   &[data-group="6"] {
     .word__description {
-      background-color: $color-background-group-6;
+      border-right: 14px solid $color-background-group-6;
     }
   }
   &[data-group="7"] {
-    .word__description{
-      background-color: $color-background-group-7;
+    .word__description {
+      border-right: 14px solid $color-background-group-7;
     }
   }
 }

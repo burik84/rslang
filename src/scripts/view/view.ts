@@ -39,10 +39,11 @@ const changeGroupWords = () => {
       const target: any = e.target;
       const group: string = target.dataset.group;
       const lists: string[] = Object.values(target.classList);
-      if (!lists.includes('dictionary__button-active')) {
+      if (lists.includes('dictionary__button')&&!lists.includes('dictionary__button-active')) {
         controllers.wordsGroup=group
+        view.updateViewDictionary()
+        view.renderWordsDictionary()
       }
-      view.updateViewDictionary()
     },
     true
   );
@@ -83,11 +84,16 @@ const view = {
       if (header.classList.contains('login')) header.classList.remove('login');
     }
     view.updateViewDictionary();
+    view.renderWordsDictionary()
   },
   updateViewDictionary: () => {
     updateDictionary();
   },
   renderWordsDictionary: () => {
+    const lists = document.querySelector('.word__cards');
+    while (lists.firstChild) {
+      lists.removeChild(lists.firstChild)
+    }
     renderTextBook(controllers.isUserSignIn, `${controllers.wordsGroup}`);
   },
 };
