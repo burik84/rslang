@@ -10,11 +10,9 @@ const elementBaseComponent = (tag = 'div', classes: string[], children?: HTMLEle
   const element = new BaseComponent(tag);
   const classesElement = classes.join(' ');
   element.element.className = classesElement;
-  children.forEach((child:HTMLElement)=>{
-    console.log(child);
-
+  children.forEach((child: HTMLElement) => {
     element.element.append(child);
-  })
+  });
 
   return element;
 };
