@@ -105,7 +105,7 @@ header.login {
     left: 0;
     right: 0;
   }
-  &[data-group="1"] {
+  &[data-group="0"] {
     &.dictionary__button-active {
       background-color: $color-background-group-1;
       &:hover {
@@ -114,64 +114,64 @@ header.login {
     }
     &::before {
       background-color: $color-background-group-1;
+    }
+  }
+  &[data-group="1"] {
+    &.dictionary__button-active {
+      background-color: $color-background-group-2;
+      &:hover {
+        cursor: auto;
+      }
+    }
+    &::before {
+      background-color: $color-background-group-2;
     }
   }
   &[data-group="2"] {
     &.dictionary__button-active {
-      background-color: $color-background-group-2;
+      background-color: $color-background-group-3;
       &:hover {
         cursor: auto;
       }
     }
     &::before {
-      background-color: $color-background-group-2;
+      background-color: $color-background-group-3;
     }
   }
   &[data-group="3"] {
     &.dictionary__button-active {
-      background-color: $color-background-group-3;
+      background-color: $color-background-group-4;
       &:hover {
         cursor: auto;
       }
     }
     &::before {
-      background-color: $color-background-group-3;
+      background-color: $color-background-group-4;
     }
   }
   &[data-group="4"] {
     &.dictionary__button-active {
-      background-color: $color-background-group-4;
+      background-color: $color-background-group-5;
       &:hover {
         cursor: auto;
       }
     }
     &::before {
-      background-color: $color-background-group-4;
+      background-color: $color-background-group-5;
     }
   }
   &[data-group="5"] {
     &.dictionary__button-active {
-      background-color: $color-background-group-5;
+      background-color: $color-background-group-6;
       &:hover {
         cursor: auto;
       }
     }
     &::before {
-      background-color: $color-background-group-5;
+      background-color: $color-background-group-6;
     }
   }
   &[data-group="6"] {
-    &.dictionary__button-active {
-      background-color: $color-background-group-6;
-      &:hover {
-        cursor: auto;
-      }
-    }
-    &::before {
-      background-color: $color-background-group-6;
-    }
-  }
-  &[data-group="7"] {
     &.dictionary__button-active {
       background-color: $color-background-group-7;
       &:hover {

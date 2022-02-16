@@ -22,7 +22,7 @@ const updateDictionary = () => {
   if (controllers.isUserSignIn) {
     isShowElement(lists);
     isShowElement(paginationLists);
-    if (controllers.wordsGroup === '7') {
+    if (controllers.wordsGroup === '6') {
       isHideElement(paginationLists);
     }
   } else {

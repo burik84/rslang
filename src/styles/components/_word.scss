@@ -87,37 +87,37 @@
   display: flex;
   flex-direction: column;
   row-gap: 6px;
-  &[data-group="1"] {
+  &[data-group="0"] {
     .word__description {
       border-right: 14px solid $color-background-group-1;
     }
   }
-  &[data-group="2"] {
+  &[data-group="1"] {
     .word__description {
       border-right: 14px solid $color-background-group-2;
     }
   }
-  &[data-group="3"] {
+  &[data-group="2"] {
     .word__description {
       border-right: 14px solid $color-background-group-3;
     }
   }
-  &[data-group="4"] {
+  &[data-group="3"] {
     .word__description {
       border-right: 14px solid $color-background-group-4;
     }
   }
-  &[data-group="5"] {
+  &[data-group="4"] {
     .word__description {
       border-right: 14px solid $color-background-group-5;
     }
   }
-  &[data-group="6"] {
+  &[data-group="5"] {
     .word__description {
       border-right: 14px solid $color-background-group-6;
     }
   }
-  &[data-group="7"] {
+  &[data-group="6"] {
     .word__description {
       border-right: 14px solid $color-background-group-7;
     }

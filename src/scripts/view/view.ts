@@ -41,8 +41,9 @@ const changeGroupWords = () => {
       const lists: string[] = Object.values(target.classList);
       if (lists.includes('dictionary__button')&&!lists.includes('dictionary__button-active')) {
         controllers.wordsGroup=group
+        controllers.wordsPage=1
         view.updateViewDictionary()
-        view.renderWordsDictionary()
+        controllers.getDataWords()
       }
     },
     true

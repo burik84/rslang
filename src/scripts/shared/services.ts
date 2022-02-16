@@ -31,7 +31,7 @@ export const servicesApi = {
 
 export const servicesWordsApi = {
   getWords: async (group='1',page=1) => {
-    const dataAllWords = await fetch(`${urlAPI}/words?group=${group}&page=${page}`)
+    const dataAllWords = await fetch(`${urlAPI}/words?group=${group}&page=${page-1}`)
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);

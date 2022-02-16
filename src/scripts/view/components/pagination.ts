@@ -1,11 +1,12 @@
 // https://codepen.io/karpovsystems/pen/VwKdoe
-import {IPagination} from '../../shared/interface'
+import { IPagination } from '../../shared/interface';
+import { controllers } from '../../controllers/controller';
 /* * * * * * * * * * * * * * * * *
  * pagination
  * javascript page navigation
  * * * * * * * * * * * * * * * * */
 
-const pagination:IPagination = {
+const pagination: IPagination = {
   code: '',
   size: 30,
   page: 1,
@@ -16,7 +17,7 @@ const pagination:IPagination = {
   // --------------------
 
   // converting initialize data
-  extend: (data)=> {
+  extend: (data) => {
     // data = data || {};
     pagination.size = data.size || pagination.size;
     pagination.page = data.page || pagination.page;
@@ -47,7 +48,9 @@ const pagination:IPagination = {
   // change page
   click: function () {
     pagination.page = +this.innerHTML;
+    controllers.wordsPage = pagination.page;
     pagination.start();
+    controllers.getDataWords();
   },
 
   // previous page
@@ -74,7 +77,7 @@ const pagination:IPagination = {
 
   // binding pages
   bind: function () {
-    const links:HTMLCollection = pagination.element.getElementsByTagName('a');
+    const links: HTMLCollection = pagination.element.getElementsByTagName('a');
     for (let i = 0; i < links.length; i += 1) {
       if (+links[i].innerHTML === pagination.page) links[i].className = 'current';
       links[i].addEventListener('click', pagination.click, false);
@@ -138,11 +141,10 @@ const pagination:IPagination = {
   },
 
   //render
-  render:function (data) {
-    pagination.extend(data);
-    pagination.start();
-  }
+  // render:function (data) {
+  //   pagination.extend(data);
+  //   pagination.start();
+  // }
 };
 
-
-export {pagination}
+export { pagination };

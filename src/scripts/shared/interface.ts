@@ -41,13 +41,14 @@ interface IControllers {
   isUserSignUp: boolean;
   isSpinner: boolean;
   user: IUserAuth | any;
-  words:IWordAPI[];
+  words: IWordAPI[];
   refreshToken: string;
   wordsGroup: string;
   wordsPage: number;
   init: () => void;
   userSign: (data: string[]) => void;
   updateUser: () => void;
+  getDataWords: () => void;
 }
 
 type TDataPagination = {
@@ -74,7 +75,7 @@ interface IPagination {
   buttons: (element: HTMLElement) => void;
   create: (element: HTMLElement) => void;
   init: (element: HTMLElement, data: TDataPagination) => void;
-  render: (data: TDataPagination) => void;
+  // render: (data: TDataPagination) => void;
 }
 
 interface IAudio {

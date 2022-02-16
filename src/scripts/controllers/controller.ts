@@ -45,20 +45,14 @@ const controllers: IControllers = {
   user: {},
   words: [],
   refreshToken: '',
-  wordsGroup: '1',
+  wordsGroup: '0',
   wordsPage: 1,
   init: () => {
     console.log('Init view');
     view.init();
     controllers.updateUser();
+    controllers.getDataWords();
 
-    const getWords = model
-      .getWords()
-      .then((data) => {
-        controllers.words = data;
-        view.renderWordsDictionary();
-      })
-      .catch();
   },
   userSign: (data: string[]) => {
     if (data.length === 2) signIn(data);
@@ -72,10 +66,19 @@ const controllers: IControllers = {
     } else {
       controllers.isUserSignIn = false;
       view.renderUserLogin();
-      controllers.wordsGroup = '1';
+      controllers.wordsGroup = '0';
       controllers.wordsPage = 1;
     }
   },
+  getDataWords:()=>{
+    const getWords = model
+    .getWords()
+    .then((data) => {
+      controllers.words = data;
+      view.renderWordsDictionary();
+    })
+    .catch();
+  }
 };
 
 export { controllers };
