@@ -21,16 +21,18 @@ const updateDictionary = () => {
 
   if (controllers.isUserSignIn) {
     isShowElement(lists);
+    isShowElement(paginationLists);
     if (controllers.wordsGroup === '7') {
       isHideElement(paginationLists);
     }
   } else {
     isHideElement(lists);
+    isShowElement(paginationLists);
   }
   pagination.init(paginationLists, {
     size: 30, // pages size
     page: controllers.wordsPage, // selected page
-    step: 3, // pages before and after current
+    step: 2, // pages before and after current
   });
   buttonsGroup.forEach((button: HTMLButtonElement) => {
     const group = button.getAttribute('data-group');
