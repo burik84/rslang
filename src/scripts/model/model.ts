@@ -1,5 +1,5 @@
-import { servicesApi } from '../shared/services';
-import { TUser, TUserCreate, IUserAuth } from '../shared/interface';
+import { servicesApi, servicesWordsApi } from '../shared/services';
+import { TUser, TUserCreate, IUserAuth, IDictinaryData } from '../shared/interface';
 import { setValue, getValue } from '../shared/localstorage';
 import { controllers } from '../controllers/controller';
 
@@ -7,6 +7,7 @@ const model = {
   start: () => {
     console.log('start model');
     // model.isLogin();
+    model.getWords();
   },
   signin: async (user: TUser) => {
     try {
@@ -33,7 +34,25 @@ const model = {
   },
   isSignIn: () => {
     const user: IUserAuth = getValue();
+    const dictionaryData: IDictinaryData = getValue('dictionary');
+
     controllers.user = user;
+
+    if (dictionaryData) {
+      controllers.wordsGroup = dictionaryData.group;
+      controllers.wordsPage = dictionaryData.page;
+    }
+  },
+  getWords: async () => {
+    try {
+      const responce = await servicesWordsApi.getWords(
+        controllers.wordsGroup,
+        controllers.wordsPage
+      );
+      return responce;
+    } catch (error) {
+      return false;
+    }
   },
 };
 

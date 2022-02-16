@@ -138,6 +138,7 @@ const addUserForm = () => {
   });
   buttonUserLogout.addEventListener('click', () => {
     resetValue();
+    resetValue('dictionary');
     controllers.updateUser();
     isToggleElement('.user-handler');
   });

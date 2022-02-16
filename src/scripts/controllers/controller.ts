@@ -1,4 +1,4 @@
-import { IControllers } from '../shared/interface';
+import { IControllers, IWordAPI } from '../shared/interface';
 import { view } from '../view/view';
 import { model } from '../model/model';
 
@@ -9,13 +9,13 @@ const signIn = (result: string[]) => {
       password: result[1],
     })
     .then((data) => {
-      if (!data){
-        view.renderUserMessageError()
-        controllers.isUserSignIn=false
-      }else{
+      if (!data) {
+        view.renderUserMessageError();
+        controllers.isUserSignIn = false;
+      } else {
         controllers.updateUser();
         view.closeModalUserSign();
-        controllers.isUserSignIn=true
+        controllers.isUserSignIn = true;
       }
     });
 };
@@ -27,11 +27,11 @@ const signUp = (result: string[]) => {
       password: result[2],
     })
     .then((data) => {
-      if (!data){
+      if (!data) {
         view.renderUserMessageError('signin');
-        controllers.isUserSignUp=false
-      } else{
-        controllers.isUserSignUp = true
+        controllers.isUserSignUp = false;
+      } else {
+        controllers.isUserSignUp = true;
         const user = result.slice(1);
         signIn(user);
       }
@@ -43,14 +43,24 @@ const controllers: IControllers = {
   isUserSignUp: false,
   isSpinner: false,
   user: {},
+  words: [],
   refreshToken: '',
+  wordsGroup: 1,
+  wordsPage: 1,
   init: () => {
     console.log('Init view');
     view.init();
-    model.start();
     controllers.updateUser();
+
+    const getWords = model
+      .getWords()
+      .then((data) => {
+        controllers.words = data;
+        view.renderWordsDictionary();
+      })
+      .catch();
   },
-  userSign: (data:string[]) => {
+  userSign: (data: string[]) => {
     if (data.length === 2) signIn(data);
     if (data.length === 3) signUp(data);
   },
@@ -62,6 +72,8 @@ const controllers: IControllers = {
     } else {
       controllers.isUserSignIn = false;
       view.renderUserLogin(controllers.isUserSignIn);
+      controllers.wordsGroup = 1;
+      controllers.wordsPage = 1;
     }
   },
 };

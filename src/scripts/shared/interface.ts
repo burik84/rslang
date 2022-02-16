@@ -41,9 +41,12 @@ interface IControllers {
   isUserSignUp: boolean;
   isSpinner: boolean;
   user: IUserAuth | any;
+  words:IWordAPI[];
   refreshToken: string;
+  wordsGroup: number;
+  wordsPage: number;
   init: () => void;
-  userSign: (data:string[]) => void;
+  userSign: (data: string[]) => void;
   updateUser: () => void;
 }
 
@@ -83,5 +86,19 @@ interface IAudio {
   copyFromChannel(destination: Float32Array, channelNumber: number, bufferOffset?: number): void;
   copyToChannel(source: Float32Array, channelNumber: number, bufferOffset?: number): void;
 }
+interface IDictinaryData {
+  group: number;
+  page: number;
+}
 
-export { IWordAPI, TUser, TUserCreate, IUserAuth, IUserCreated, IControllers, IPagination, IAudio };
+export {
+  IWordAPI,
+  TUser,
+  TUserCreate,
+  IUserAuth,
+  IUserCreated,
+  IControllers,
+  IPagination,
+  IAudio,
+  IDictinaryData,
+};

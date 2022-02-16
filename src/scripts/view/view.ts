@@ -1,6 +1,6 @@
 import { isToggleElement, errorMessage, removeElement } from './components/elements';
 import { addUserForm, renderUserForm } from './components/form';
-import { updateDictionary } from './components/dictionary/dictionary';
+import { updateDictionary, renderTextBook } from './components/dictionary/dictionary';
 
 const showAdaptiveMenu = () => {
   const buttonMenu: HTMLButtonElement = document.querySelector('.menu__button');
@@ -42,7 +42,7 @@ const view = {
     section.append(addUserForm());
     showAdaptiveMenu();
     renderFormUser();
-    updateDictionary();
+    view.updateViewDictionary();
   },
   renderUserMessageError: (type?: string) => {
     addErrorLogin(type);
@@ -61,7 +61,13 @@ const view = {
     } else {
       if (header.classList.contains('login')) header.classList.remove('login');
     }
-    updateDictionary()
+    view.updateViewDictionary();
+  },
+  updateViewDictionary: () => {
+    updateDictionary();
+  },
+  renderWordsDictionary: () => {
+    renderTextBook();
   },
 };
 export { view };

@@ -2,18 +2,6 @@ import { urlAPI } from './api';
 import { TUser, TUserCreate, IUserAuth, IUserCreated } from './interface';
 
 export const servicesApi = {
-  getAllWords: async () => {
-    const dataAllWords = await fetch(`${urlAPI}/words`)
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data);
-        return data;
-      })
-      .catch((error) => {
-        console.log('Something went wrong', error.message);
-      });
-    return dataAllWords;
-  },
   signin: async (user: TUser) => {
     const rawResponse = await fetch(`${urlAPI}/signin`, {
       method: 'POST',
@@ -39,4 +27,19 @@ export const servicesApi = {
 
     return content;
   },
+};
+
+export const servicesWordsApi = {
+  getWords: async (group=1,page=1) => {
+    const dataAllWords = await fetch(`${urlAPI}/words?group=${group}&page=${page}`)
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        return data;
+      })
+      .catch((error) => {
+        console.log('Something went wrong', error.message);
+      });
+    return dataAllWords;
+  }
 };
