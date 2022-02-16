@@ -1,4 +1,4 @@
-import { servicesApi } from './shared/services';
+import { servicesWordsApi } from './shared/services';
 import { audioGame } from './games/audioGame';
 import { controllers } from './controllers/controller';
 import { nav } from './view/components/nav';
@@ -11,7 +11,7 @@ const app = {
     controllers.init();
   },
   testSevice: () => {
-    servicesApi.getAllWords();
+    servicesWordsApi.getWords();
   },
 };
 
