@@ -2,7 +2,7 @@ import { IWordAPI } from '../../../shared/interface';
 import { BaseComponent, elementBaseComponent } from './base';
 import { urlAPI } from '../../../shared/api';
 import { getSpinner } from '../elements';
-import { loadImage } from '../../../shared/services';
+import { loadImage,audioPlayWord } from '../../../shared/services';
 
 const classButtonPlaySound = 'button button__icon button__icon-play';
 class Word {
@@ -28,6 +28,9 @@ class Word {
   }
   init() {
     const srcImage = `${urlAPI}/${this.body.image}`;
+    const srcAudioWord = `${urlAPI}/${this.body.audio}`;
+    const srcAudioExample = `${urlAPI}/${this.body.audioExample}`;
+    const srcAudioSentense = `${urlAPI}/${this.body.audioMeaning}`;
     const picture: HTMLElement = document.createElement('figure');
     const image: HTMLImageElement = document.createElement('img');
     const caption: HTMLElement = document.createElement('figcaption');
@@ -111,6 +114,15 @@ class Word {
       ['word__description'],
       [blockHeader.element, blockSentense.element, blockExample.element]
     );
+    this.buttonPlayWord.element.addEventListener('click',()=>{
+      audioPlayWord(srcAudioWord)
+    })
+    this.buttonPlaySentense.element.addEventListener('click',()=>{
+      audioPlayWord(srcAudioSentense)
+    })
+    this.buttonPlayExample.element.addEventListener('click',()=>{
+      audioPlayWord(srcAudioExample)
+    })
     this.card.element.className = 'word';
     this.card.element.append(blockImage.element, blockDescription.element, spinner);
 
