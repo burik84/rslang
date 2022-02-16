@@ -60,6 +60,8 @@ const pagination: IPagination = {
       pagination.page = 1;
     }
     pagination.start();
+    controllers.wordsPage = pagination.page;
+    controllers.getDataWords();
   },
 
   // next page
@@ -69,6 +71,8 @@ const pagination: IPagination = {
       pagination.page = pagination.size;
     }
     pagination.start();
+    controllers.wordsPage = pagination.page;
+    controllers.getDataWords();
   },
 
   // --------------------
