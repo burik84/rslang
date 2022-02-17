@@ -197,4 +197,9 @@ header.login {
     left: -42px;
     background-image: url("../assets/icons/button_play_sound.svg");
   }
+  &.button__icon-difficult {
+    &.check {
+      cursor: auto;
+    }
+  }
 }
