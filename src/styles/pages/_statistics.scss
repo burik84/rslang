@@ -7,6 +7,7 @@
 }
 
 .statistics-container {
+  position: relative;
   margin: 0 auto;
   padding: 10px;
   display: flex;
@@ -63,4 +64,16 @@
   align-items: center;
   font-weight: 700;
   color: #41445c;
+}
+
+.statistics-non-authorised-modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e5e5e5;
 }
