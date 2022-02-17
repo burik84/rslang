@@ -35,6 +35,19 @@ interface IUserCreated {
   email: string;
 }
 
+type TUserWordGet = {
+  userId: string;
+  wordId: string;
+};
+type TUserWordCreated = TUserWordGet & {
+  word: {
+    difficulty: string;
+    optional: {
+      testFieldString: 'string';
+      testFieldBoolean: boolean;
+    };
+  };
+};
 interface IControllers {
   signin: boolean;
   isUserSignIn: boolean;
@@ -99,6 +112,8 @@ export {
   TUserCreate,
   IUserAuth,
   IUserCreated,
+  TUserWordGet,
+  TUserWordCreated,
   IControllers,
   IPagination,
   IAudio,

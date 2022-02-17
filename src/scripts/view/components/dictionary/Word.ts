@@ -3,6 +3,7 @@ import { BaseComponent, elementBaseComponent } from './base';
 import { urlAPI } from '../../../shared/api';
 import { getSpinner } from '../elements';
 import { loadImage,audioPlayWord } from '../../../shared/services';
+import {svgDifficult, svgLearning} from '../../../shared/svg';
 
 const classButtonPlaySound = 'button button__icon button__icon-play';
 class Word {
@@ -85,6 +86,10 @@ class Word {
     textExampleTranslate.textContent = this.body.textExampleTranslate;
 
     picture.append(image, caption);
+
+
+    this.buttonWordDifficult.element.insertAdjacentHTML('afterbegin',svgDifficult())
+    this.buttonWordLearned.element.insertAdjacentHTML('afterbegin',svgLearning())
 
     const blockImage = elementBaseComponent('div', ['word__image'], [picture]);
     const blockWordIcons = this.signIn
