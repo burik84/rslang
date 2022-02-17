@@ -66,13 +66,25 @@
   color: #41445c;
 }
 
+.statistics-graphics-cont {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 40px;
+}
+
 .chart-1,
 .chart-2 {
-  width: 700px;
-  height: 400px;
+  // padding: 20px 40px;
+  padding-left: 40px;
+  padding-right: 40px;
+  width: 540px;
+  height: 230px;
   border: 1px solid #1f9da5;
   border-radius: 10px;
 }
+
 .statistics-non-authorised-modal {
   position: absolute;
   top: 0;
@@ -83,4 +95,11 @@
   justify-content: center;
   align-items: center;
   background: #e5e5e5;
+}
+
+@media screen and (max-width: 960px) {
+  .statistics-non-authorised-modal {
+    align-items: flex-start;
+    padding-top: 200px;
+  }
 }
