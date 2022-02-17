@@ -2,7 +2,7 @@ import { servicesWordsApi } from './shared/services';
 import { audioGame } from './games/audioGame';
 import { controllers } from './controllers/controller';
 import { nav } from './view/components/nav';
-import { statistics } from './view/components/statistics';
+import { statistics, statisticsChart } from './view/components/statistics';
 
 const app = {
   start: () => {
@@ -10,6 +10,7 @@ const app = {
     nav();
     audioGame();
     statistics();
+    statisticsChart();
     controllers.init();
   },
   testSevice: () => {

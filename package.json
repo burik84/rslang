@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/burik84/rslang#readme",
   "devDependencies": {
+    "@types/chart.js": "^2.9.35",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
     "@webpack-cli/generators": "^2.4.2",
@@ -40,5 +41,8 @@
     "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.7.3"
+  },
+  "dependencies": {
+    "chart.js": "^2.9.4"
   }
 }

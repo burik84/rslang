@@ -2,6 +2,7 @@ import { isToggleElement, errorMessage, removeElement,getSpinner } from './compo
 import { addUserForm, renderUserForm } from './components/form';
 import { updateDictionary, renderTextBook } from './components/dictionary/dictionary';
 import { controllers } from '../controllers/controller';
+import { showStatisticsModal } from './components/statistics';
 
 const showAdaptiveMenu = () => {
   const buttonMenu: HTMLButtonElement = document.querySelector('.menu__button');
@@ -89,7 +90,8 @@ const view = {
       if (header.classList.contains('login')) header.classList.remove('login');
     }
     view.updateViewDictionary();
-    view.renderWordsDictionary()
+    view.renderWordsDictionary();
+    showStatisticsModal();
   },
   updateViewDictionary: () => {
     updateDictionary();
