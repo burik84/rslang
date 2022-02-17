@@ -50,7 +50,7 @@
       <section class="user-handler"></section>
     </header>
     <main>
-      <div class="start-page visually-hidden" id="start-page">
+      <div class="start-page" id="start-page">
         <section class="app-description">
           <h1 class="big-font app-description__header wide-lines">
             RS Lang поможет изучить английский
@@ -134,31 +134,32 @@
       <div class="dictionary visually-hidden" id="dictionary-page">
         <ul class="dictionary__lists">
           <li class="dictionary__list">
-            <button class="button dictionary__button dictionary__button-active" data-group="1">Группа 1</button>
+            <button class="button dictionary__button" data-group="0">Группа 1</button>
           </li>
           <li class="dictionary__list">
-            <button class="button dictionary__button"
-            data-group="2">Группа 2</button>
+            <button class="button dictionary__button" data-group="1">Группа 2</button>
           </li>
           <li class="dictionary__list">
-            <button class="button dictionary__button" data-group="3">Группа 3</button>
+            <button class="button dictionary__button" data-group="2">Группа 3</button>
           </li>
           <li class="dictionary__list">
-            <button class="button dictionary__button" data-group="4">Группа 4</button>
+            <button class="button dictionary__button" data-group="3">Группа 4</button>
           </li>
           <li class="dictionary__list">
-            <button class="button dictionary__button" data-group="5">Группа 5</button>
+            <button class="button dictionary__button" data-group="4">Группа 5</button>
           </li>
           <li class="dictionary__list">
-            <button class="button dictionary__button" data-group="6">Группа 6</button>
+            <button class="button dictionary__button" data-group="5">Группа 6</button>
           </li>
           <li class="dictionary__list">
-            <button class="button dictionary__button" data-group="7">Сложные слова</button>
+            <button class="button dictionary__button" data-group="6">Сложные слова</button>
           </li>
         </ul>
-        <section class="dictionary__words"></section>
+        <section class="dictionary__words">
+          <ul class="word__cards"></ul>
+        </section>
         <div class="dictionary__pagination">
-          <ul class="dictionary__pages"></ul>
+          <ul class="dictionary__pages open"></ul>
         </div>
       </div>
       <div class="sprint-game visually-hidden" id="sprint-game-page">
@@ -211,7 +212,11 @@
             &#129046;
           </button>
           <div class="audio-choice-level-modal" id="audio-choice-level-modal">
-            <p class="audio-choice-level-text-1">Тренировка Аудиовызов улучшает <br> твое восприятие речи на слух.</p>
+            <p class="audio-choice-level-text-1">
+              Тренировка Аудиовызов улучшает
+              <br />
+              твое восприятие речи на слух.
+            </p>
             <p class="audio-choice-level-text-2">Выбери уровень сложности:</p>
             <ul class="audio-choice-level-list">
               <li class="audio-choice-level-item">1</li>
@@ -221,7 +226,9 @@
               <li class="audio-choice-level-item">5</li>
               <li class="audio-choice-level-item">6</li>
             </ul>
-            <button class="audio-start-game-button" id="audio-start-game-button" disabled>Начать</button>
+            <button class="audio-start-game-button" id="audio-start-game-button" disabled>
+              Начать
+            </button>
           </div>
         </div>
         <div class="audio-game-result-container visually-hidden" id="audio-game-result-container">
@@ -265,14 +272,22 @@
           <div class="audio-restart-game-cont">
             <div class="audio-restart-game-button" id="audio-restart-game-button">
               <span>Сыграть еще раз</span>
-              <svg width="16px" height="16px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12.75 8a4.5 4.5 0 0 1-8.61 1.834l-1.391.565A6.001 6.001 0 0 0 14.25 8 6 6 0 0 0 3.5 4.334V2.5H2v4l.75.75h3.5v-1.5H4.352A4.5 4.5 0 0 1 12.75 8z"/>
+              <svg
+                width="16px"
+                height="16px"
+                viewBox="0 0 16 16"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12.75 8a4.5 4.5 0 0 1-8.61 1.834l-1.391.565A6.001 6.001 0 0 0 14.25 8 6 6 0 0 0 3.5 4.334V2.5H2v4l.75.75h3.5v-1.5H4.352A4.5 4.5 0 0 1 12.75 8z" />
               </svg>
             </div>
           </div>
         </div>
       </div>
-      <div class="statistics " id="statistics-page">
+      <div class="statistics visually-hidden" id="statistics-page">
         <div class="statistics-container">
           <div class="statistics-audio-game-container">
             <div class="statistics-audio-game-key statistics-title">Аудиовызов</div>
@@ -313,13 +328,15 @@
 
           <div class="chart-2">
             <canvas  id="myChart-2"></canvas>
+          <div class="statistics-non-authorised-modal" id="statistics-non-authorised-modal">
+            <p>Статистика доступна только авторизованным пользователям</p>
           </div>
 
         </div>
-        
+
       </div>
     </main>
-    <footer class="white-text visually-hidden" id="footer">
+    <footer class="white-text" id="footer">
       <div class="footer">
         <nav>
           <h2 class="footer-heading small-font narrow-lines">Меню</h2>
@@ -334,12 +351,18 @@
         <div>
           <h2 class="footer-heading small-font narrow-lines">Разработчики</h2>
           <div class="developers-list small-text">
-            <a href="https://github.com/burik84" class="white-text footer-link" target="_blank">burik84</a>
+            <a href="https://github.com/burik84" class="white-text footer-link" target="_blank">
+              burik84
+            </a>
             <a
               href="https://github.com/Blackdoll-Loki"
               class="white-text footer-link"
-              target="_blank">Blackdoll-Loki</a>
-            <a href="https://github.com/lg0leg" class="white-text footer-link" target="_blank">Oleg</a>
+              target="_blank">
+              Blackdoll-Loki
+            </a>
+            <a href="https://github.com/lg0leg" class="white-text footer-link" target="_blank">
+              Oleg
+            </a>
           </div>
         </div>
       </div>
@@ -377,12 +400,12 @@
       //   },
       //   options: {
       //       scales: {
-                
+
       //       }
       //   }
       //   });
 
-        
+
 
     //   const stackedLine = new Chart(ctx, {
     //     type: 'line',

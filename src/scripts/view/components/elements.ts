@@ -13,8 +13,17 @@ const errorMessage = (type?: string) => {
   <p id="user-error-msg">${text}</p>
   </div>`;
 };
-
-const isShowElement = (tag: string) => {
+const isShowElement = (element: HTMLElement) => {
+  if (!element.classList.contains('open')) {
+    element.classList.add('open');
+  }
+};
+const isHideElement = (element: HTMLElement) => {
+  if (element.classList.contains('open')) {
+    element.classList.remove('open');
+  }
+};
+const isToggleElement = (tag: string) => {
   const element: HTMLDivElement = document.querySelector(tag);
 
   if (element.classList.contains('open')) {
@@ -30,4 +39,39 @@ const removeElement = (tag: string) => {
     element.remove();
   }, 3000);
 };
-export { userTitle, errorMessage, isShowElement, removeElement };
+
+const getSpinner = {
+  tag: '.loading',
+  elementSpinner:
+    '<div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>',
+  add: ():HTMLDivElement => {
+    const loading: HTMLDivElement = document.createElement('div');
+    const container: HTMLDivElement = document.createElement('div');
+    const overflow: HTMLDivElement = document.createElement('div');
+    overflow.className = 'loading__overflow';
+    container.className = 'loading__spinner';
+    loading.className = 'loading';
+
+    container.insertAdjacentHTML('afterbegin', getSpinner.elementSpinner);
+
+    loading.append(overflow, container);
+    return loading
+  },
+  show: (parent:HTMLElement) => {
+    const spinner=parent.querySelector(getSpinner.tag)
+    if(!spinner.classList.contains('active')) spinner.classList.add('active')
+  },
+  hide: (parent:HTMLElement) => {
+    const spinner=parent.querySelector(getSpinner.tag)
+    if(spinner.classList.contains('active')) spinner.classList.remove('active')
+  },
+};
+export {
+  userTitle,
+  errorMessage,
+  isToggleElement,
+  removeElement,
+  isShowElement,
+  isHideElement,
+  getSpinner,
+};

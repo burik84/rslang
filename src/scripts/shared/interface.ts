@@ -37,14 +37,19 @@ interface IUserCreated {
 
 interface IControllers {
   signin: boolean;
-  isUserLogin: boolean;
-  isUserSignin: boolean;
+  isUserSignIn: boolean;
+  isUserSignUp: boolean;
   isSpinner: boolean;
   user: IUserAuth | any;
+  words: IWordAPI[];
   refreshToken: string;
+  wordsGroup: string;
+  wordsPage: number;
   init: () => void;
-  userSign: (data:string[]) => void;
+  userSign: (data: string[]) => void;
   updateUser: () => void;
+  getDataWords: () => void;
+  getDataWordsDifficult: () => void;
 }
 
 type TDataPagination = {
@@ -71,6 +76,7 @@ interface IPagination {
   buttons: (element: HTMLElement) => void;
   create: (element: HTMLElement) => void;
   init: (element: HTMLElement, data: TDataPagination) => void;
+  // render: (data: TDataPagination) => void;
 }
 
 interface IAudio {
@@ -82,5 +88,19 @@ interface IAudio {
   copyFromChannel(destination: Float32Array, channelNumber: number, bufferOffset?: number): void;
   copyToChannel(source: Float32Array, channelNumber: number, bufferOffset?: number): void;
 }
+interface IDictinaryData {
+  group: string;
+  page: number;
+}
 
-export { IWordAPI, TUser, TUserCreate, IUserAuth, IUserCreated, IControllers, IPagination, IAudio };
+export {
+  IWordAPI,
+  TUser,
+  TUserCreate,
+  IUserAuth,
+  IUserCreated,
+  IControllers,
+  IPagination,
+  IAudio,
+  IDictinaryData,
+};
