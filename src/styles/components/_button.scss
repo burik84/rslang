@@ -187,7 +187,6 @@ header.login {
 .button__icon {
   width: 32px;
   height: 32px;
-  padding: 14px 0;
   border-radius: 0;
   background-repeat: no-repeat;
   background-position: center center;
@@ -199,9 +198,8 @@ header.login {
     background-image: url("../assets/icons/button_play_sound.svg");
   }
   &.button__icon-difficult {
-    background-image: url("../assets/icons/button_difficult.svg");
-  }
-  &.button__icon-learned {
-    background-image: url("../assets/icons/button_studied.svg");
+    &.check {
+      cursor: auto;
+    }
   }
 }

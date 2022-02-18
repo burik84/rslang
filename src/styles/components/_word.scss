@@ -61,6 +61,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  column-gap: 12px;
 }
 .word__icons {
   display: flex;
@@ -87,6 +88,9 @@
       margin-right: 0;
     }
   }
+}
+.word__header-text{
+  flex-grow: 1;
 }
 .word__static {
   display: none;
