@@ -40,7 +40,8 @@ const audioGame = () => {
   let currentWinStreak = 0;
   const winStreakArr: Array<number> = [];
 
-  let statisticsAGNewWords: Array<string>;
+  let statisticsAGNewWordsArr: Array<string>;
+  const statisticsAGNewWordsSet = new Set();
   let statisticsAG: IStatisticsAG = {
     newWords: 0,
     winRate: 0,
@@ -133,6 +134,7 @@ const audioGame = () => {
       totalCorrectAnswers += 1;
       rightWordsArr.push(bufferWordBeforePush);
       currentWinStreak += 1;
+      statisticsAGNewWordsSet.add(bufferWordBeforePush.word);
     } else {
       wrongWordsArr.push(bufferWordBeforePush);
       winStreakArr.push(currentWinStreak);
@@ -290,62 +292,78 @@ const audioGame = () => {
     })
   }
 
-/*для перезапуска игры*/
+  /*для перезапуска игры*/
 
-audioRestartGgameBtn.addEventListener('click', () => {
-  clearAllBeforeRestart();
-})
+  audioRestartGgameBtn.addEventListener('click', () => {
+    clearAllBeforeRestart();
+  })
 
-function clearAllBeforeRestart() {
-  wordsForAGarr.length = 0;
-  currentQuestionNumber = 1;
-  totalCorrectAnswers = 0;
-  rightWordsArr.length = 0;
-  wrongWordsArr.length = 0;
-  currentWinStreak = 0;
-  winStreakArr.length = 0;
+  function clearAllBeforeRestart() {
+    wordsForAGarr.length = 0;
+    currentQuestionNumber = 1;
+    totalCorrectAnswers = 0;
+    rightWordsArr.length = 0;
+    wrongWordsArr.length = 0;
+    currentWinStreak = 0;
+    winStreakArr.length = 0;
 
-  audioResultRightWordsCont.innerHTML = '';
-  audioResultWrongWordsCont.innerHTML = '';
-  audioResultModal.classList.add('visually-hidden');
+    audioResultRightWordsCont.innerHTML = '';
+    audioResultWrongWordsCont.innerHTML = '';
+    audioResultModal.classList.add('visually-hidden');
 
-  clearButtonsColor();
-  clearSelectedButtonBorder();
+    clearButtonsColor();
+    clearSelectedButtonBorder();
 
-  audioChoiceLevelModal.classList.remove('visually-hidden');
-  audioChoiceLevelItems.forEach(item => item.classList.remove('audio-choice-level-item-active'));
-  audioStartGameBtn.setAttribute('disabled', 'disabled');
-}
+    audioChoiceLevelModal.classList.remove('visually-hidden');
+    audioChoiceLevelItems.forEach(item => item.classList.remove('audio-choice-level-item-active'));
+    audioStartGameBtn.setAttribute('disabled', 'disabled');
+  }
 
-/*для статистики*/
+  /*для статистики*/
 
-function setStatisticsAG() {
-  if (localStorage.getItem('statisticsAG')) {
-    statisticsAG = JSON.parse(localStorage.getItem('statisticsAG'));
-  } else {
-    statisticsAG = {
-      newWords: 0,
-      winRate: 0,
-      longestWinStreak: 0,
-      numberOfGames: 0 
+  function setStatisticsAG() {
+    if (localStorage.getItem('statisticsAG')) {
+      statisticsAG = JSON.parse(localStorage.getItem('statisticsAG'));
+    } else {
+      statisticsAG = {
+        newWords: 0,
+        winRate: 0,
+        longestWinStreak: 0,
+        numberOfGames: 0 
+      }
     }
+
+    if (localStorage.getItem('statisticsAGWords')) {
+      statisticsAGNewWordsArr = JSON.parse(localStorage.getItem('statisticsAGWords'));
+    } else {
+      statisticsAGNewWordsArr = [];
+    }
+
+    statisticsAGNewWordsSet.forEach(value => {
+      if (!statisticsAGNewWordsArr.includes(String(value))) {
+        statisticsAGNewWordsArr.push(String(value));
+        statisticsAG.newWords += 1;
+      }
+    })
+
+    const pers = Math.round(totalCorrectAnswers / totalNumberOfQuestions * 100);
+    statisticsAG.winRate = Math.round((statisticsAG.winRate * statisticsAG.numberOfGames + pers) / (statisticsAG.numberOfGames + 1));
+
+    if (Math.max(...winStreakArr) > statisticsAG.longestWinStreak) {
+      statisticsAG.longestWinStreak = Math.max(...winStreakArr);
+    }
+
+    statisticsAG.numberOfGames += 1;
+
+    localStorage.setItem('statisticsAG', JSON.stringify(statisticsAG));
+    localStorage.setItem('statisticsAGWords', JSON.stringify(statisticsAGNewWordsArr));
+
+    // console.log('процент побед текущий: ' + statisticsAG.winRate);
+    // console.log(winStreakArr);
+    // console.log('лучшая серия: ' + Math.max(...winStreakArr))
+    // console.log(statisticsAGNewWordsSet);
+    // console.log(statisticsAGNewWordsArr);
   }
-
-  const pers = Math.round(totalCorrectAnswers / totalNumberOfQuestions * 100);
-  statisticsAG.winRate = Math.round((statisticsAG.winRate * statisticsAG.numberOfGames + pers) / (statisticsAG.numberOfGames + 1));
-
-  if (Math.max(...winStreakArr) > statisticsAG.longestWinStreak) {
-    statisticsAG.longestWinStreak = Math.max(...winStreakArr);
-  }
-
-  statisticsAG.numberOfGames += 1;
-
-  localStorage.setItem('statisticsAG', JSON.stringify(statisticsAG));
-
-  // console.log('процент побед текущий: ' + statisticsAG.winRate);
-  // console.log(winStreakArr);
-  // console.log('лучшая серия: ' + Math.max(...winStreakArr))
-}
 
 
 };
