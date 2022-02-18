@@ -103,21 +103,40 @@ const statisticsChart = () => {
       })
 };
 
+/*скрывает статистику для неавторизованных пользователей*/
+
 function showStatisticsModal() {
   const statisticsNonAuthorisedModal = document.querySelector('#statistics-non-authorised-modal');
   if (controllers.isUserSignIn == true) {
     statisticsNonAuthorisedModal.classList.add('visually-hidden');
+    updateStatisticsAG();
   } else {
     statisticsNonAuthorisedModal.classList.remove('visually-hidden');
   }
 }
 
+/*обновляет блок статистики для аудиовызова*/
+
+const statisticsAGWordsHTML = document.querySelector('#statistics-audio-game-new-words');
+const statisticsAGWinrateHTML = document.querySelector('#statistics-audio-game-winrate');
+const statisticsAGWinstreakHtml = document.querySelector('#statistics-audio-game-winstreak');
+
+function updateStatisticsAG() {
+  if (localStorage.getItem('statisticsAG')) {
+    const statisticsAG = JSON.parse(localStorage.getItem('statisticsAG'));
+    statisticsAGWordsHTML.innerHTML = String(statisticsAG.newWords);
+    statisticsAGWinrateHTML.innerHTML = `${String(statisticsAG.winRate)}%`;
+    statisticsAGWinstreakHtml.innerHTML = String(statisticsAG.longestWinStreak);
+  }
+}
+
 const statistics = () => {
+  
   showStatisticsModal();
 
   document.querySelector('#nav-statistics').addEventListener('click', showStatisticsModal);
-
   document.querySelector('#nav-statistics-adaptive').addEventListener('click', showStatisticsModal);
+
 };
 
 export { statistics, statisticsChart, showStatisticsModal };
