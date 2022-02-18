@@ -2,23 +2,36 @@ import { IWordAPI } from '../../../shared/interface';
 import { BaseComponent, elementBaseComponent } from './base';
 import { urlAPI } from '../../../shared/api';
 import { getSpinner } from '../elements';
-import { loadImage,audioPlayWord } from '../../../shared/services';
+import { loadImage, audioPlayWord } from '../../../shared/services';
+import { svgDifficult, svgLearning } from '../../../shared/svg';
+import { controllers } from '../../../controllers/controller';
 
 const classButtonPlaySound = 'button button__icon button__icon-play';
 class Word {
   body: IWordAPI;
   signIn: boolean;
   statistics: number[];
+  isDifficult: boolean;
+  isLearning: boolean;
   card: BaseComponent;
   buttonPlayWord: BaseComponent;
   buttonPlaySentense: BaseComponent;
   buttonPlayExample: BaseComponent;
   buttonWordDifficult: BaseComponent;
   buttonWordLearned: BaseComponent;
-  constructor(body: IWordAPI, signIn: boolean, statistics: number[]) {
+
+  constructor(
+    body: IWordAPI,
+    signIn: boolean,
+    statistics: number[],
+    isDifficult = false,
+    isLearning = false
+  ) {
     this.body = body;
     this.signIn = signIn;
     this.statistics = statistics;
+    this.isDifficult = isDifficult;
+    this.isLearning = isLearning;
     this.card = new BaseComponent('li');
     this.buttonPlayWord = new BaseComponent('button');
     this.buttonPlaySentense = new BaseComponent('button');
@@ -86,6 +99,9 @@ class Word {
 
     picture.append(image, caption);
 
+    this.buttonWordDifficult.element.insertAdjacentHTML('afterbegin', svgDifficult());
+    this.buttonWordLearned.element.insertAdjacentHTML('afterbegin', svgLearning());
+
     const blockImage = elementBaseComponent('div', ['word__image'], [picture]);
     const blockWordIcons = this.signIn
       ? elementBaseComponent(
@@ -114,15 +130,38 @@ class Word {
       ['word__description'],
       [blockHeader.element, blockSentense.element, blockExample.element]
     );
-    this.buttonPlayWord.element.addEventListener('click',()=>{
-      audioPlayWord(srcAudioWord)
-    })
-    this.buttonPlaySentense.element.addEventListener('click',()=>{
-      audioPlayWord(srcAudioSentense)
-    })
-    this.buttonPlayExample.element.addEventListener('click',()=>{
-      audioPlayWord(srcAudioExample)
-    })
+    this.buttonPlayWord.element.addEventListener('click', () => {
+      audioPlayWord(srcAudioWord);
+    });
+    this.buttonPlaySentense.element.addEventListener('click', () => {
+      audioPlayWord(srcAudioSentense);
+    });
+    this.buttonPlayExample.element.addEventListener('click', () => {
+      audioPlayWord(srcAudioExample);
+    });
+
+    this.buttonWordDifficult.element.addEventListener('click', () => {
+      if ((!this.isDifficult && !this.isLearning) || controllers.wordsGroup === '6') {
+        this.isDifficult = !this.isDifficult;
+      }
+      if (this.isDifficult && !this.buttonWordDifficult.element.classList.contains('check'))
+        this.buttonWordDifficult.element.classList.add('check');
+      if (controllers.wordsGroup === '6') {
+        if (this.buttonWordDifficult.element.classList.contains('check'))
+          this.buttonWordDifficult.element.classList.remove('check');
+      }
+      this.renderIcon();
+    });
+    this.buttonWordLearned.element.addEventListener('click', () => {
+      this.isLearning = !this.isLearning;
+      this.isDifficult = false;
+      if (!this.buttonWordDifficult.element.classList.contains('check'))
+        this.buttonWordDifficult.element.classList.add('check');
+      if (!this.isLearning && this.buttonWordDifficult.element.classList.contains('check'))
+        this.buttonWordDifficult.element.classList.remove('check');
+      this.renderIcon();
+    });
+
     this.card.element.className = 'word';
     this.card.element.append(blockImage.element, blockDescription.element, spinner);
 
@@ -135,6 +174,24 @@ class Word {
   hideSpinner() {
     const spinnerElement = this.card.element.querySelector('.loading');
     if (spinnerElement.classList.contains('active')) spinnerElement.classList.remove('active');
+  }
+  renderIcon() {
+    const defaultColor = '#C4C4C4';
+    const colorIconDifficult: string = this.isDifficult ? 'red' : defaultColor;
+    const colorIconLearning: string = this.isLearning ? 'green' : defaultColor;
+
+    while (this.buttonWordDifficult.element.firstChild) {
+      this.buttonWordDifficult.element.removeChild(this.buttonWordDifficult.element.firstChild);
+    }
+
+    while (this.buttonWordLearned.element.firstChild) {
+      this.buttonWordLearned.element.removeChild(this.buttonWordLearned.element.firstChild);
+    }
+    this.buttonWordDifficult.element.insertAdjacentHTML(
+      'afterbegin',
+      svgDifficult(colorIconDifficult)
+    );
+    this.buttonWordLearned.element.insertAdjacentHTML('afterbegin', svgLearning(colorIconLearning));
   }
 }
 
