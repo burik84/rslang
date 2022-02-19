@@ -34,14 +34,10 @@ const model = {
   },
   isSignIn: () => {
     const user: IUserAuth = getValue();
-    const dictionaryData: IDictinaryData = getValue('dictionary');
 
     controllers.user = user;
 
-    if (dictionaryData) {
-      controllers.wordsGroup = dictionaryData.group;
-      controllers.wordsPage = dictionaryData.page;
-    }
+    model.savePageLibrary();
   },
   getWords: async () => {
     try {
@@ -53,6 +49,25 @@ const model = {
     } catch (error) {
       return false;
     }
+  },
+  getPageLibrary: () => {
+    const dictionaryData: IDictinaryData = getValue('dictionary');
+    console.log('loacal data page', dictionaryData)
+    if (dictionaryData) {
+      controllers.wordsGroup = dictionaryData.group;
+      controllers.wordsPage = dictionaryData.page;
+    } else {
+      controllers.wordsGroup = '0';
+      controllers.wordsPage = 1;
+    }
+  },
+  savePageLibrary: () => {
+    const dictionaryData: IDictinaryData = {
+      group: controllers.wordsGroup,
+      page: controllers.wordsPage,
+    };
+
+    setValue(dictionaryData, 'dictionary');
   },
 };
 
