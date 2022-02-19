@@ -1,18 +1,29 @@
-import { IWordAPI } from '../../../shared/interface';
+import { IWordAPI, TUserWord, TWordBody } from '../../../shared/interface';
 import { BaseComponent, elementBaseComponent } from './base';
 import { urlAPI } from '../../../shared/api';
 import { getSpinner } from '../elements';
 import { loadImage, audioPlayWord } from '../../../shared/services';
 import { svgDifficult, svgLearning } from '../../../shared/svg';
 import { controllers } from '../../../controllers/controller';
+import { model } from '../../../model/model';
 
 const classButtonPlaySound = 'button button__icon button__icon-play';
+// const data: TWordBody = {
+//   difficulty: '0',
+//   optional: {
+//     testFieldString: '0',
+//     isNew: true,
+//     correctlyGuessed: 0,
+//     incorrectlyGuessed: 0,
+//   },
+// };
 class Word {
   body: IWordAPI;
   signIn: boolean;
   statistics: number[];
   isDifficult: boolean;
   isLearning: boolean;
+  data: TWordBody;
   card: BaseComponent;
   buttonPlayWord: BaseComponent;
   buttonPlaySentense: BaseComponent;
@@ -39,7 +50,7 @@ class Word {
     this.buttonWordDifficult = new BaseComponent('button');
     this.buttonWordLearned = new BaseComponent('button');
   }
-  init() {
+  show() {
     const srcImage = `${urlAPI}/${this.body.image}`;
     const srcAudioWord = `${urlAPI}/${this.body.audio}`;
     const srcAudioExample = `${urlAPI}/${this.body.audioExample}`;
@@ -140,31 +151,8 @@ class Word {
       audioPlayWord(srcAudioExample);
     });
 
-    this.buttonWordDifficult.element.addEventListener('click', () => {
-      if ((!this.isDifficult && !this.isLearning) || controllers.wordsGroup === '6') {
-        this.isDifficult = !this.isDifficult;
-      }
-      if (this.isDifficult && !this.buttonWordDifficult.element.classList.contains('check'))
-        this.buttonWordDifficult.element.classList.add('check');
-      if (controllers.wordsGroup === '6') {
-        if (this.buttonWordDifficult.element.classList.contains('check'))
-          this.buttonWordDifficult.element.classList.remove('check');
-      }
-      this.renderIcon();
-    });
-    this.buttonWordLearned.element.addEventListener('click', () => {
-      this.isLearning = !this.isLearning;
-      this.isDifficult = false;
-      if (!this.buttonWordDifficult.element.classList.contains('check'))
-        this.buttonWordDifficult.element.classList.add('check');
-      if (!this.isLearning && this.buttonWordDifficult.element.classList.contains('check'))
-        this.buttonWordDifficult.element.classList.remove('check');
-      this.renderIcon();
-    });
-
     this.card.element.className = 'word';
     this.card.element.append(blockImage.element, blockDescription.element, spinner);
-
     return this.card;
   }
   showSpinner() {
@@ -175,6 +163,7 @@ class Word {
     const spinnerElement = this.card.element.querySelector('.loading');
     if (spinnerElement.classList.contains('active')) spinnerElement.classList.remove('active');
   }
+
   renderIcon() {
     const defaultColor = '#C4C4C4';
     const colorIconDifficult: string = this.isDifficult ? 'red' : defaultColor;
@@ -192,6 +181,143 @@ class Word {
       svgDifficult(colorIconDifficult)
     );
     this.buttonWordLearned.element.insertAdjacentHTML('afterbegin', svgLearning(colorIconLearning));
+  }
+  handleClick(isCreate = true) {
+    this.buttonWordDifficult.element.addEventListener('click', () => {
+      if ((!this.isDifficult && !this.isLearning) || controllers.wordsGroup === '6') {
+        this.isDifficult = !this.isDifficult;
+      }
+
+      if (controllers.wordsGroup === '6') {
+        if (!this.isDifficult && this.buttonWordDifficult.element.classList.contains('check')) {
+          this.buttonWordDifficult.element.classList.remove('check');
+          this.data.difficulty = '0';
+          model.updateUserWord(this.body.id, this.data);
+        }
+      }
+
+      if (this.isDifficult && !this.buttonWordDifficult.element.classList.contains('check')) {
+        console.log('click button is diff');
+        this.data.difficulty = 'hard';
+        if (isCreate) {
+          console.log('create word', this.data);
+          model.createUserWord(this.body.id, this.data).finally(() => {
+            if (!this.isDifficult && this.buttonWordDifficult.element.classList.contains('check'))
+              this.buttonWordDifficult.element.classList.remove('check');
+          });
+        } else {
+          model.updateUserWord(this.body.id, this.data).finally(() => {
+            if (
+              !this.isDifficult &&
+              !this.isLearning &&
+              this.buttonWordDifficult.element.classList.contains('check')
+            )
+              this.buttonWordDifficult.element.classList.remove('check');
+          });
+        }
+      } else {
+        this.data.difficulty = '';
+        model.deleteUserWord(this.body.id).finally(() => {
+          if (
+            !this.isDifficult &&
+            !this.isLearning &&
+            this.buttonWordDifficult.element.classList.contains('check')
+          )
+            this.buttonWordDifficult.element.classList.remove('check');
+        });
+      }
+
+      if (this.isDifficult && !this.buttonWordDifficult.element.classList.contains('check')) {
+        this.buttonWordDifficult.element.classList.add('check');
+      }
+      this.renderIcon();
+    });
+    this.buttonWordLearned.element.addEventListener('click', () => {
+      if (!this.buttonWordLearned.element.classList.contains('check'))
+        this.buttonWordLearned.element.classList.add('check');
+
+      this.isLearning = !this.isLearning;
+      this.isDifficult = false;
+
+      if (!this.buttonWordDifficult.element.classList.contains('check'))
+        this.buttonWordDifficult.element.classList.add('check');
+      if (!this.isLearning && this.buttonWordDifficult.element.classList.contains('check'))
+        this.buttonWordDifficult.element.classList.remove('check');
+
+      if (this.isLearning) {
+        this.data.difficulty = 'easy';
+        if (isCreate) {
+          model.createUserWord(this.body.id, this.data).finally(() => {
+            if (this.buttonWordLearned.element.classList.contains('check'))
+              this.buttonWordLearned.element.classList.remove('check');
+          });
+        } else {
+          model.updateUserWord(this.body.id, this.data).finally(() => {
+            if (this.buttonWordLearned.element.classList.contains('check'))
+              this.buttonWordLearned.element.classList.remove('check');
+          });
+        }
+      } else {
+        this.data.difficulty = '';
+        model
+          .deleteUserWord(this.body.id)
+          .then((data) => data)
+          .catch((err) => {
+            console.error(err);
+          })
+          .finally(() => {
+            if (this.buttonWordLearned.element.classList.contains('check'))
+              this.buttonWordLearned.element.classList.remove('check');
+          });
+      }
+
+      this.renderIcon();
+    });
+  }
+  init() {
+    const data = model
+      .getUserWord(this.body.id)
+      .then((data) => {
+        const res: TWordBody = data;
+        this.data = {
+          difficulty: res.difficulty,
+          optional: res.optional,
+        };
+
+        if (this.data.difficulty === 'hard') {
+          this.isDifficult = true;
+          if (this.isDifficult && !this.buttonWordDifficult.element.classList.contains('check')) {
+            this.buttonWordDifficult.element.classList.add('check');
+            // model.createUserWord(this.body.id,)
+          }
+        }
+        if (this.data.difficulty === 'easy') {
+          this.isLearning = true;
+          this.isDifficult = false;
+          if (!this.isDifficult && !this.buttonWordDifficult.element.classList.contains('check')) {
+            this.buttonWordDifficult.element.classList.add('check');
+            // model.createUserWord(this.body.id,)
+          }
+        }
+
+        console.log('old word', this.body.word);
+        this.handleClick(false);
+      })
+      .catch((err) => {
+        this.data = {
+          difficulty: '',
+          optional: {
+            testFieldString: '0',
+            testFieldStatus: true,
+          },
+        };
+        console.log('new word', this.body.word);
+
+        this.handleClick();
+      })
+      .finally(() => {
+        this.renderIcon();
+      });
   }
 }
 

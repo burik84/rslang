@@ -39,15 +39,19 @@ type TUserWordGet = {
   userId: string;
   wordId: string;
 };
-type TUserWordCreated = TUserWordGet & {
-  word: {
-    difficulty: string;
-    optional: {
-      testFieldString: 'string';
-      testFieldBoolean: boolean;
-    };
+type TWordBody = {
+  difficulty: string;
+  optional: {
+    testFieldString: string;
+    testFieldStatus: boolean;
   };
 };
+
+type TUserWord = {
+  wordId: string;
+  word: TWordBody;
+};
+
 interface IControllers {
   signin: boolean;
   isUserSignIn: boolean;
@@ -113,7 +117,8 @@ export {
   IUserAuth,
   IUserCreated,
   TUserWordGet,
-  TUserWordCreated,
+  TUserWord,
+  TWordBody,
   IControllers,
   IPagination,
   IAudio,
