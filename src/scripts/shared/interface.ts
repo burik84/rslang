@@ -14,6 +14,7 @@ interface IWordAPI {
   textMeaningTranslate: string;
   wordTranslate: string;
 }
+
 type TUser = {
   email: string;
   password: string;
@@ -22,6 +23,7 @@ type TUser = {
 type TUserCreate = TUser & {
   name: string;
 };
+
 interface IUserAuth {
   message?: string;
   token: string;
@@ -29,6 +31,7 @@ interface IUserAuth {
   userId: string;
   name: string;
 }
+
 interface IUserCreated {
   id: string;
   name: string;
@@ -51,7 +54,6 @@ type TUserWord = {
   wordId: string;
   word: TWordBody;
 };
-
 interface IControllers {
   signin: boolean;
   isUserSignIn: boolean;
@@ -74,6 +76,7 @@ type TDataPagination = {
   page: number;
   step: number;
 };
+
 interface IPagination {
   code: string;
   size: number;
@@ -105,9 +108,17 @@ interface IAudio {
   copyFromChannel(destination: Float32Array, channelNumber: number, bufferOffset?: number): void;
   copyToChannel(source: Float32Array, channelNumber: number, bufferOffset?: number): void;
 }
+
 interface IDictinaryData {
   group: string;
   page: number;
+}
+
+interface IStatisticsAG {
+  newWords: number;
+  winRate: number;
+  longestWinStreak: number;
+  numberOfGames: number;
 }
 
 export {
@@ -123,4 +134,5 @@ export {
   IPagination,
   IAudio,
   IDictinaryData,
+  IStatisticsAG
 };
