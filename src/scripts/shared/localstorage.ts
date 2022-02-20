@@ -1,5 +1,5 @@
-import { IUserAuth } from './interface';
-const setValue = (value: IUserAuth, key = 'user') => {
+import { IUserAuth, IDictinaryData } from './interface';
+const setValue = (value: IUserAuth | IDictinaryData, key = 'user') => {
   const name = `rsteam17-${key}`;
   const valueJSON = JSON.stringify(value);
 
