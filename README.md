@@ -44,6 +44,7 @@ Local web server will be available at `http://localhost:8080/`
 - mode develop `npm run build:dev`
 - mode production `npm run build:prod`
 - run linter `npm run lint`
+- run formatting code `npm run prettier`
 - run watcher `npm run watch`
 - run server `npm run serve`
 

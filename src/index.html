@@ -2,109 +2,202 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RS Lang team 17</title>
   </head>
-  <body>
+
+  <body class="body">
     <header>
       <nav>
-        <ul class="header__ul font-size24 line-height29">
-          <li class="font-size48 line-height50">RSLang</li>
-          <li>Учебник</li>
-          <li>Спринт</li>
-          <li>Аудиовызов</li>
-          <li>Статистика</li>
+        <ul class="header__ul small-font narrow-lines">
+          <li class="nav-item nav-item-active big-font wide-lines" id="nav-main-page">RSLang</li>
+          <li class="nav-item" id="nav-dictionary">Учебник</li>
+          <li class="nav-item" id="nav-sprint-game">Спринт</li>
+          <li class="nav-item" id="nav-audio-game">Аудиовызов</li>
+          <li class="nav-item" id="nav-statistics">Статистика</li>
           <li>
-            <button type="button" class="menu-sign" >Вход</button>
+            <button type="button" class="menu-sign">Вход</button>
+            <button type="button" class="menu-user-name">Имя</button>
           </li>
         </ul>
       </nav>
       <div class="menu-adaptive">
         <nav>
-          <button type="button" class="button-link font-size48 line-height50">RSLang</button>
+          <button
+            type="button"
+            class="button-link font-size48 line-height50"
+            id="nav-main-page-adaptive">
+            RSLang
+          </button>
           <ul class="header__ul font-size24 line-height29">
-            <li>Учебник</li>
-            <li>Спринт</li>
-            <li>Аудиовызов</li>
-            <li>Статистика</li>
+            <li class="nav-item-adaptive" id="nav-dictionary-adaptive">Учебник</li>
+            <li class="nav-item-adaptive" id="nav-sprint-game-adaptive">Спринт</li>
+            <li class="nav-item-adaptive" id="nav-audio-game-adaptive">Аудиовызов</li>
+            <li class="nav-item-adaptive" id="nav-statistics-adaptive">Статистика</li>
           </ul>
           <button class="menu-sign" type="button">Вход</button>
+          <button type="button" class="menu-user-name">Имя</button>
         </nav>
         <button type="button" class="menu__button">
-          <span></span><span></span><span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
       </div>
-      <section class="user-handler">
-      </section>
+      <section class="user-handler"></section>
     </header>
     <main>
-      <div class="start-page visually-hidden">
+      <div class="start-page" id="start-page">
         <section class="app-description">
-            <h1 class="font-size48 app-description__header line-height50">RS Lang поможет<br>изучить английский</h1>
-            <p class="font-size24 app-description__text line-height50">RS lang– приложение для изучения иностранных слов, включающее электронный учебник с базой слов для изучения, мини-игры для их повторения, страницу статистики для отслеживания индивидуального прогресса.</p>
-            <div class="about-video">
-              <div class="about-video__text font-size24 line-height50">
-                <p>О приложении</p>
-                <p>См. видео</p>
+          <h1 class="big-font app-description__header wide-lines">
+            RS Lang поможет изучить английский
+          </h1>
+          <p class="small-font app-description__text wide-lines">
+            RS lang– приложение для изучения иностранных слов, включающее электронный учебник с
+            базой слов для изучения, мини-игры для их повторения, страницу статистики для
+            отслеживания индивидуального прогресса.
+          </p>
+          <div class="about-video">
+            <div class="about-video__text small-font wide-lines">
+              <p>О приложении</p>
+              <p>См. видео</p>
+            </div>
+            <a href="" class="video-icon"></a>
+          </div>
+        </section>
+        <section class="app-advantagies">
+          <h2 class="app-advantagies__h2 big-font white-text wide-lines">
+            <span class="app-advantagies__header-items">Оцените все</span>
+            <span class="app-advantagies__header-items">преимущества приложения</span>
+          </h2>
+          <div class="app-advantagies__div small-font">
+            <h3 class="app-advantagies__h3 narrow-lines">Учебник</h3>
+            <p class="app-advantagies__p middle-lines white-text">
+              Более 3500 слов для изучения, рабитых на разделы по уровню твоей подготовки с удобной
+              навигацией
+            </p>
+          </div>
+          <div class="app-advantagies__div small-font">
+            <h3 class="app-advantagies__h3 narrow-lines">Игры</h3>
+            <p class="app-advantagies__p middle-lines white-text">
+              2 увлекательные игры на развитие запоминания слов и восприятия на слух
+            </p>
+          </div>
+          <div class="app-advantagies__div small-font">
+            <h3 class="app-advantagies__h3 narrow-lines">Статистика</h3>
+            <p class="app-advantagies__p middle-lines white-text">
+              Отслеживайте свой прогресс в индивидуальной статистике, ставь цели и вдохновляйся на
+              достижения новых результатов каждый день
+            </p>
+          </div>
+        </section>
+        <section class="dev-section">
+          <h2 class="dev-section-header big-font wide-lines">О разработчиках...</h2>
+          <div class="about-developers-blocks">
+            <div class="about-developers small-font">
+              <div class="name-logo line-height29">
+                <h3>Александр</h3>
+                <p class="white-text">Lead developer, designer</p>
+                <a href="https://github.com/burik84" class="git-link" target="_blank"></a>
               </div>
-              <a href="" class="video-icon"></a>
+              <p class="about-developers__p line-height35">
+                Кто чем занимался... Текст заполним ближе к окончанию проекта
+              </p>
             </div>
-          </section>
-          <section class="app-advantagies">
-            <h2 class="app-advantagies__h2 font-size48 white-text line-height50"><span class="app-advantagies__header-items">Оцените все</span><span class="app-advantagies__header-items">преимущества приложения<span></span></h2>
-            <div class="app-advantagies__div font-size24">
-              <h3 class="app-advantagies__h3 line-height29">Учебник</h3>
-              <p class="app-advantagies__p line-height35 white-text">Более 3500 слов для изучения, рабитых на разделы по уровню твоей подготовки с удобной навигацией</p>
-            </div>
-            <div class="app-advantagies__div font-size24">
-              <h3 class="app-advantagies__h3 line-height29">Игры</h3>
-              <p class="app-advantagies__p line-height35 white-text">2 увлекательные игры на развитие запоминания слов и восприятия на слух</p>
-            </div>
-            <div class="app-advantagies__div font-size24">
-              <h3 class="app-advantagies__h3 line-height29">Статистика</h3>
-              <p class="app-advantagies__p line-height35 white-text">Отслеживайте свой прогресс в индивидуальной статистике, ставь цели и вдохновляйся на достижения новых результатов каждый день</p>
-            </div>
-          </section>
-          <section class="dev-section">
-            <h2 class="dev-section-header font-size48 line-height50">О разработчиках...</h2>
-            <div class="about-developers-blocks">
-              <div class="about-developers font-size24">
-                <div class="name-logo line-height29">
-                  <!--где-то тут должна быть фотка по ТЗ-->
-                  <h3>Александр</h3>
-                  <p class="white-text">Lead developer, designer</p>
-                  <a href="https://github.com/burik84" class="git-link"></a>
-                </div>
-                <p class="about-developers__p line-height35">Кто чем занимался... Текст заполним ближе к окончанию проекта</p>
+            <div class="about-developers small-font">
+              <div class="name-logo narrow-lines">
+                <!--где-то тут должна быть фотка по ТЗ-->
+                <h3>Дарья</h3>
+                <p class="white-text">Developer</p>
+                <a href="https://github.com/Blackdoll-Loki" class="git-link" target="_blank"></a>
               </div>
-              <div class="about-developers font-size24">
-                <div class="name-logo line-height29">
-                  <!--где-то тут должна быть фотка по ТЗ-->
-                  <h3>Дарья</h3>
-                  <p class="white-text">Developer</p>
-                  <a href="https://github.com/Blackdoll-Loki" class="git-link"></a>
-                </div>
-                <p class="about-developers__p line-height35">Кто чем занимался... Текст заполним ближе к окончанию проекта</p>
-              </div>
+              <p class="about-developers__p middle-lines">
+                Кто чем занимался... Текст заполним ближе к окончанию проекта
+              </p>
             </div>
-          </section>
+            <div class="about-developers small-font">
+              <div class="name-logo narrow-lines">
+                <h3>Олег</h3>
+                <p class="white-text">Developer</p>
+                <a href="https://github.com/lg0leg" class="git-link" target="_blank"></a>
+              </div>
+              <p class="about-developers__p middle-lines">
+                Кто чем занимался... Текст заполним ближе к окончанию проекта
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
-      <div class="audio-game visually-hidden">
+      <div class="dictionary visually-hidden" id="dictionary-page">
+        <ul class="dictionary__lists">
+          <li class="dictionary__list">
+            <button class="button dictionary__button" data-group="0">Группа 1</button>
+          </li>
+          <li class="dictionary__list">
+            <button class="button dictionary__button" data-group="1">Группа 2</button>
+          </li>
+          <li class="dictionary__list">
+            <button class="button dictionary__button" data-group="2">Группа 3</button>
+          </li>
+          <li class="dictionary__list">
+            <button class="button dictionary__button" data-group="3">Группа 4</button>
+          </li>
+          <li class="dictionary__list">
+            <button class="button dictionary__button" data-group="4">Группа 5</button>
+          </li>
+          <li class="dictionary__list">
+            <button class="button dictionary__button" data-group="5">Группа 6</button>
+          </li>
+          <li class="dictionary__list">
+            <button class="button dictionary__button" data-group="6">Сложные слова</button>
+          </li>
+        </ul>
+        <section class="dictionary__words">
+          <ul class="word__cards"></ul>
+        </section>
+        <div class="dictionary__pagination">
+          <ul class="dictionary__pages open"></ul>
+        </div>
+      </div>
+      <div class="sprint-game visually-hidden" id="sprint-game-page">
+        <p>sprint game in progress</p>
+      </div>
+      <div class="audio-game visually-hidden" id="audio-game-page">
         <div class="audio-game-container">
           <div class="audio-title-and-counter">
             <h2 class="h2-audio">Аудиовызов</h2>
             <div class="audio-counter-container">
               <span id="audio-current-question-number">1</span>
               <span>/</span>
-              <span>20</span>
+              <span id="audio-total-question-number">20</span>
             </div>
           </div>
           <div class="audio-repeat-voice-button-cont">
-            <div class="audio-repeat-voice-button">
-              <svg width="52" height="37" viewBox="0 0 52 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 24.9998V14.9998C1 14.3368 1.26339 13.7009 1.73223 13.232C2.20107 12.7632 2.83696 12.4998 3.5 12.4998H10.2425C10.7363 12.4999 11.2191 12.3538 11.63 12.0798L22.1125 5.08981C22.4894 4.83838 22.9274 4.69407 23.38 4.67232C23.8325 4.65056 24.2824 4.75218 24.6816 4.9663C25.0809 5.18043 25.4144 5.49901 25.6466 5.88801C25.8788 6.277 26.001 6.72178 26 7.17481V32.8248C26.0001 33.2774 25.8773 33.7216 25.6447 34.1098C25.4121 34.4981 25.0785 34.816 24.6794 35.0295C24.2803 35.243 23.8308 35.3442 23.3787 35.3222C22.9266 35.3003 22.489 35.156 22.1125 34.9048L11.63 27.9173C11.2189 27.6442 10.7361 27.499 10.2425 27.4998H3.5C2.83696 27.4998 2.20107 27.2364 1.73223 26.7676C1.26339 26.2987 1 25.6629 1 24.9998V24.9998Z" stroke="#41445C" stroke-width="1.5"/>
-                <path d="M37.25 8.75C37.25 8.75 41 12.5 41 18.75C41 25 37.25 28.75 37.25 28.75" stroke="#41445C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M44.75 1.25C44.75 1.25 51 7.5 51 18.75C51 30 44.75 36.25 44.75 36.25" stroke="#41445C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+            <div class="audio-repeat-voice-button" id="audio-repeat-voice-button">
+              <svg
+                width="52"
+                height="37"
+                viewBox="0 0 52 37"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M1 24.9998V14.9998C1 14.3368 1.26339 13.7009 1.73223 13.232C2.20107 12.7632 2.83696 12.4998 3.5 12.4998H10.2425C10.7363 12.4999 11.2191 12.3538 11.63 12.0798L22.1125 5.08981C22.4894 4.83838 22.9274 4.69407 23.38 4.67232C23.8325 4.65056 24.2824 4.75218 24.6816 4.9663C25.0809 5.18043 25.4144 5.49901 25.6466 5.88801C25.8788 6.277 26.001 6.72178 26 7.17481V32.8248C26.0001 33.2774 25.8773 33.7216 25.6447 34.1098C25.4121 34.4981 25.0785 34.816 24.6794 35.0295C24.2803 35.243 23.8308 35.3442 23.3787 35.3222C22.9266 35.3003 22.489 35.156 22.1125 34.9048L11.63 27.9173C11.2189 27.6442 10.7361 27.499 10.2425 27.4998H3.5C2.83696 27.4998 2.20107 27.2364 1.73223 26.7676C1.26339 26.2987 1 25.6629 1 24.9998V24.9998Z"
+                  stroke="#41445C"
+                  stroke-width="1.5" />
+                <path
+                  d="M37.25 8.75C37.25 8.75 41 12.5 41 18.75C41 25 37.25 28.75 37.25 28.75"
+                  stroke="#41445C"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <path
+                  d="M44.75 1.25C44.75 1.25 51 7.5 51 18.75C51 30 44.75 36.25 44.75 36.25"
+                  stroke="#41445C"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
             </div>
           </div>
           <div class="audio-answer-options-container">
@@ -112,6 +205,128 @@
             <button class="audio-answer-button" id="audio-answer-button-2">Вариант 2</button>
             <button class="audio-answer-button" id="audio-answer-button-3">Вариант 3</button>
             <button class="audio-answer-button" id="audio-answer-button-4">Вариант 4</button>
+          </div>
+          <button class="audio-next-question-button" id="audio-next-question-button">
+            &#129046;
+          </button>
+          <div class="audio-choice-level-modal" id="audio-choice-level-modal">
+            <p class="audio-choice-level-text-1">
+              Тренировка Аудиовызов улучшает
+              <br />
+              твое восприятие речи на слух.
+            </p>
+            <p class="audio-choice-level-text-2">Выбери уровень сложности:</p>
+            <ul class="audio-choice-level-list">
+              <li class="audio-choice-level-item">1</li>
+              <li class="audio-choice-level-item">2</li>
+              <li class="audio-choice-level-item">3</li>
+              <li class="audio-choice-level-item">4</li>
+              <li class="audio-choice-level-item">5</li>
+              <li class="audio-choice-level-item">6</li>
+            </ul>
+            <button class="audio-start-game-button" id="audio-start-game-button" disabled>
+              Начать
+            </button>
+          </div>
+        </div>
+        <div class="audio-game-result-container visually-hidden" id="audio-game-result-container">
+          <div class="audio-result-statistics">
+            <p class="audio-result-wrong-number" id="audio-result-wrong-number">99</p>
+            <svg width="100" height="100" viewBox="0 0 40 40" class="donut">
+              <!-- <circle class="donut-hole" cx="50%" cy="50%" r="15.91549430918954" fill="#fff"></circle> -->
+              <circle
+                class="donut-ring"
+                cx="50%"
+                cy="50%"
+                r="15.9"
+                fill="transparent"
+                stroke="rgba(239, 82, 133, 1)"
+                stroke-width="4"></circle>
+              <circle
+                class="donut-segment"
+                id="audio-result-donut-segment"
+                cx="50%"
+                cy="50%"
+                r="15.9"
+                fill="transparent"
+                stroke="rgba(96, 197, 186, 1)"
+                stroke-width="4"
+                stroke-dasharray="50 50"
+                stroke-dashoffset="25"></circle>
+            </svg>
+            <p class="audio-result-right-number" id="audio-result-right-number">99</p>
+            <p class="audio-result-percentages-counter" id="audio-result-percentages-counter">
+              50%
+            </p>
+          </div>
+          <div class="audio-result-wrong-container">
+            <p class="audio-result-wrong-title">Ошибок</p>
+            <div class="audio-result-wrong-words" id="audio-result-wrong-words"></div>
+          </div>
+          <div class="audio-result-right-container">
+            <p class="audio-result-right-title">Правильно</p>
+            <div class="audio-result-right-words" id="audio-result-right-words"></div>
+          </div>
+          <div class="audio-restart-game-cont">
+            <div class="audio-restart-game-button" id="audio-restart-game-button">
+              <span>Сыграть еще раз</span>
+              <svg
+                width="16px"
+                height="16px"
+                viewBox="0 0 16 16"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12.75 8a4.5 4.5 0 0 1-8.61 1.834l-1.391.565A6.001 6.001 0 0 0 14.25 8 6 6 0 0 0 3.5 4.334V2.5H2v4l.75.75h3.5v-1.5H4.352A4.5 4.5 0 0 1 12.75 8z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="statistics visually-hidden" id="statistics-page">
+        <div class="statistics-container">
+          <div class="statistics-audio-game-container">
+            <div class="statistics-audio-game-key statistics-title">Аудиовызов</div>
+            <div class="statistics-audio-game-value"></div>
+            <div class="statistics-audio-game-key">Количество новых слов за день</div>
+            <div class="statistics-audio-game-value" id="statistics-audio-game-new-words">0</div>
+            <div class="statistics-audio-game-key separator">Процент правильных ответов</div>
+            <div class="statistics-audio-game-value" id="statistics-audio-game-winrate">0%</div>
+            <div class="statistics-audio-game-key separator">Самая длинная серия правильных ответов</div>
+            <div class="statistics-audio-game-value" id="statistics-audio-game-winstreak">0</div>
+          </div>
+          <div class="statistics-sprint-game-container">
+            <div class="statistics-sprint-game-key statistics-title">Спринт</div>
+            <div class="statistics-sprint-game-value"></div>
+            <div class="statistics-sprint-game-key">Количество новых слов за день</div>
+            <div class="statistics-sprint-game-value">0</div>
+            <div class="statistics-sprint-game-key separator">Процент правильных ответов</div>
+            <div class="statistics-sprint-game-value">0%</div>
+            <div class="statistics-sprint-game-key separator">Самая длинная серия правильных ответов</div>
+            <div class="statistics-sprint-game-value">0</div>
+          </div>
+          <div class="statistics-words-container">
+            <div class="statistics-words-key statistics-title">Слова</div>
+            <div class="statistics-words-value"></div>
+            <div class="statistics-words-key">Количество новых слов за день</div>
+            <div class="statistics-words-value">0</div>
+            <div class="statistics-words-key separator">Количество изученных слов за день</div>
+            <div class="statistics-words-value">0</div>
+            <div class="statistics-words-key separator">Процент правильных ответов за день</div>
+            <div class="statistics-words-value">0%</div>
+          </div>
+          <div class="statistics-graphics-cont">
+            <div class="chart-1">
+              <canvas  id="myChart-1"></canvas>
+            </div>
+            <div class="chart-2">
+              <canvas  id="myChart-2"></canvas>
+            </div>
+          </div>
+          <div class="statistics-non-authorised-modal" id="statistics-non-authorised-modal">
+            <p>Статистика доступна только авторизованным пользователям</p>
           </div>
         </div>
       </div>
@@ -149,10 +364,10 @@
         </section>
       </div>
     </main>
-    <footer class="white-text">
+    <footer class="white-text" id="footer">
       <div class="footer">
         <nav>
-          <h2 class="footer-heading font-size24 line-height29">Меню</h2>
+          <h2 class="footer-heading small-font narrow-lines">Меню</h2>
           <ul class="navigation-list small-text">
             <li>Главная</li>
             <li>Учебник</li>
@@ -162,14 +377,25 @@
           </ul>
         </nav>
         <div>
-          <h2 class="footer-heading">Разработчики</h2>
+          <h2 class="footer-heading small-font narrow-lines">Разработчики</h2>
           <div class="developers-list small-text">
-            <a href="https://github.com/burik84" class="white-text footer-link">burik84</a>
-            <a href="https://github.com/Blackdoll-Loki" class="white-text footer-link">Blackdoll-Loki</a>
+            <a href="https://github.com/burik84" class="white-text footer-link" target="_blank">
+              burik84
+            </a>
+            <a
+              href="https://github.com/Blackdoll-Loki"
+              class="white-text footer-link"
+              target="_blank">
+              Blackdoll-Loki
+            </a>
+            <a href="https://github.com/lg0leg" class="white-text footer-link" target="_blank">
+              Oleg
+            </a>
           </div>
         </div>
       </div>
       <p class="footer__p">2022 RS LANG Project for RS School Course JS / FRONT-END</p>
     </footer>
+
   </body>
 </html>

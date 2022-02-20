@@ -11,13 +11,10 @@ export const getExampleWords: IWordAPI[] = [
     audioMeaning: 'files/02_0621_meaning.mp3',
     audioExample: 'files/02_0621_example.mp3',
     textMeaning: '<i>Anxious</i> means feeling worried or nervous.',
-    textExample:
-      'She was <b>anxious</b> about not making her appointment on time.',
+    textExample: 'She was <b>anxious</b> about not making her appointment on time.',
     transcription: '[ǽŋkʃəs]',
-    textExampleTranslate:
-      'Она беспокоилась о том, чтобы не договориться о встрече вовремя',
-    textMeaningTranslate:
-      'Тревожно означает чувствовать себя обеспокоенным или нервным',
+    textExampleTranslate: 'Она беспокоилась о том, чтобы не договориться о встрече вовремя',
+    textMeaningTranslate: 'Тревожно означает чувствовать себя обеспокоенным или нервным',
     wordTranslate: 'озабоченный',
   },
   {
@@ -45,13 +42,10 @@ export const getExampleWords: IWordAPI[] = [
     audio: 'files/02_0623.mp3',
     audioMeaning: 'files/02_0623_meaning.mp3',
     audioExample: 'files/02_0623_example.mp3',
-    textMeaning:
-      'To <i>consist</i> of certain is to be made of parts or things them.',
-    textExample:
-      'Today’s choices for lunch <b>consisted</b> of pizza, hamburgers, and hot dogs.',
+    textMeaning: 'To <i>consist</i> of certain is to be made of parts or things them.',
+    textExample: 'Today’s choices for lunch <b>consisted</b> of pizza, hamburgers, and hot dogs.',
     transcription: '[kənsíst]',
-    textExampleTranslate:
-      'Сегодняшний выбор на обед состоял из пиццы, гамбургеров и хот-догов',
+    textExampleTranslate: 'Сегодняшний выбор на обед состоял из пиццы, гамбургеров и хот-догов',
     textMeaningTranslate:
       'Быть состоящим из определенного означает быть составленным из частей или вещей из них',
     wordTranslate: 'состоят',
@@ -98,13 +92,10 @@ export const getExampleWords: IWordAPI[] = [
     audioMeaning: 'files/02_0626_meaning.mp3',
     audioExample: 'files/02_0626_example.mp3',
     textMeaning: 'A <i>household</i> is all the people who live in one house.',
-    textExample:
-      'Our <b>household</b> is made up of my father, my mother, and me.',
+    textExample: 'Our <b>household</b> is made up of my father, my mother, and me.',
     transcription: '[háushòuld]',
-    textExampleTranslate:
-      'Наша семья состоит из моего отца, моей матери и меня',
-    textMeaningTranslate:
-      'Домохозяйство - это все люди, которые живут в одном доме',
+    textExampleTranslate: 'Наша семья состоит из моего отца, моей матери и меня',
+    textMeaningTranslate: 'Домохозяйство - это все люди, которые живут в одном доме',
     wordTranslate: 'домашнее хозяйство',
   },
   {
@@ -164,14 +155,11 @@ export const getExampleWords: IWordAPI[] = [
     audio: 'files/02_0631.mp3',
     audioMeaning: 'files/02_0631_meaning.mp3',
     audioExample: 'files/02_0631_example.mp3',
-    textMeaning:
-      'A <i>lung</i> is a part of the body that fills with air when breathing.',
+    textMeaning: 'A <i>lung</i> is a part of the body that fills with air when breathing.',
     textExample: 'Having strong <b>lungs</b> is necessary for a healthy life.',
     transcription: '[lʌŋ]',
-    textExampleTranslate:
-      'Наличие крепких легких необходимо для здоровой жизни',
-    textMeaningTranslate:
-      'Легкое - это часть тела, которая при дыхании наполняется воздухом',
+    textExampleTranslate: 'Наличие крепких легких необходимо для здоровой жизни',
+    textMeaningTranslate: 'Легкое - это часть тела, которая при дыхании наполняется воздухом',
     wordTranslate: 'легкое',
   },
   {
@@ -215,13 +203,11 @@ export const getExampleWords: IWordAPI[] = [
     audio: 'files/02_0633.mp3',
     audioMeaning: 'files/02_0633_meaning.mp3',
     audioExample: 'files/02_0633_example.mp3',
-    textMeaning:
-      'The <i>pace</i> of something is the speed at which it happens.',
+    textMeaning: 'The <i>pace</i> of something is the speed at which it happens.',
     textExample: 'I ran the race at a slower <b>pace</b> than my friend.',
     transcription: '[peis]',
     textExampleTranslate: 'Я провел гонку медленнее, чем мой друг',
-    textMeaningTranslate:
-      'Скорость чего-то - это скорость, с которой это происходит',
+    textMeaningTranslate: 'Скорость чего-то - это скорость, с которой это происходит',
     wordTranslate: 'темп',
   },
   {
@@ -234,13 +220,10 @@ export const getExampleWords: IWordAPI[] = [
     audioMeaning: 'files/02_0634_meaning.mp3',
     audioExample: 'files/02_0634_example.mp3',
     textMeaning: '<i>Polite</i> shows a thoughtful and kind behavior.',
-    textExample:
-      'The boy was very <b>polite</b>; he behaved very thoughtfully.',
+    textExample: 'The boy was very <b>polite</b>; he behaved very thoughtfully.',
     transcription: '[pəláit]',
-    textExampleTranslate:
-      'Мальчик был очень вежлив, он вел себя очень вдумчиво',
-    textMeaningTranslate:
-      'Вежливый демонстрирует продуманное и доброе поведение',
+    textExampleTranslate: 'Мальчик был очень вежлив, он вел себя очень вдумчиво',
+    textMeaningTranslate: 'Вежливый демонстрирует продуманное и доброе поведение',
     wordTranslate: 'вежливый',
   },
   {
@@ -253,8 +236,7 @@ export const getExampleWords: IWordAPI[] = [
     audioMeaning: 'files/02_0635_meaning.mp3',
     audioExample: 'files/02_0635_example.mp3',
     textMeaning: 'To <i>possess</i> something is to have it or own it.',
-    textExample:
-      'My uncle <b>possesses</b> three sheep, a chicken, a cow, and a dog.',
+    textExample: 'My uncle <b>possesses</b> three sheep, a chicken, a cow, and a dog.',
     transcription: '[pəzés]',
     textExampleTranslate: 'У моего дяди три овцы, курица, корова и собака',
     textMeaningTranslate: 'Иметь что-то - значит иметь это или владеть этим',
@@ -270,8 +252,7 @@ export const getExampleWords: IWordAPI[] = [
     audioMeaning: 'files/02_0637_meaning.mp3',
     audioExample: 'files/02_0637_example.mp3',
     textMeaning: 'To <i>remark</i> is to say something.',
-    textExample:
-      'The teacher <b>remarked</b> on how quickly the students were learning.',
+    textExample: 'The teacher <b>remarked</b> on how quickly the students were learning.',
     transcription: '[rimɑ́ːrk]',
     textExampleTranslate: 'Учитель отметил, как быстро учатся студенты',
     textMeaningTranslate: 'Замечать - значит говорить что-то',
@@ -305,8 +286,7 @@ export const getExampleWords: IWordAPI[] = [
     textMeaning: 'To <i>seek</i> is to look for something.',
     textExample: 'If I have a problem, I <b>seek</b> my sister’s advice.',
     transcription: '[siːk]',
-    textExampleTranslate:
-      'Если у меня есть проблема, я обращаюсь к совету моей сестры',
+    textExampleTranslate: 'Если у меня есть проблема, я обращаюсь к совету моей сестры',
     textMeaningTranslate: 'Искать значит искать что-то',
     wordTranslate: 'стремиться',
   },
@@ -335,13 +315,11 @@ export const getExampleWords: IWordAPI[] = [
     audio: 'files/02_0640.mp3',
     audioMeaning: 'files/02_0640_meaning.mp3',
     audioExample: 'files/02_0640_example.mp3',
-    textMeaning:
-      'To <i>spill</i> is to accidentally make something fall out of its container.',
+    textMeaning: 'To <i>spill</i> is to accidentally make something fall out of its container.',
     textExample: 'I <b>spilled</b> the coffee on the table.',
     transcription: '[spil]',
     textExampleTranslate: 'Я пролил кофе на стол',
-    textMeaningTranslate:
-      'Разлить - это случайно выпустить что-то из контейнера',
+    textMeaningTranslate: 'Разлить - это случайно выпустить что-то из контейнера',
     wordTranslate: 'проливать',
   },
 ];

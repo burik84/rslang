@@ -1,15 +1,21 @@
-import { servicesApi } from './shared/services';
-import {controllers} from './controllers/controller';
-import { sprintGame } from './games/sprintGame';
+import { servicesWordsApi } from './shared/services';
+import { audioGame } from './games/audioGame';
+import { controllers } from './controllers/controller';
+import { nav } from './view/components/nav';
+import { statistics, statisticsChart } from './view/components/statistics';
 
 const app = {
   start: () => {
     console.log('Start App');
+    nav();
+    audioGame();
+    statistics();
+    statisticsChart();
     controllers.init();
     sprintGame();
   },
   testSevice: () => {
-    servicesApi.getAllWords();
+    servicesWordsApi.getWords();
   },
 };
 

@@ -1,17 +1,27 @@
 .audio-game {
-  height: calc(100vh - 474px);
-  //   background-color: #348498;
+  position: relative;
+  // height: calc(100vh - 474px);
+  min-height: 350px;
+  height: calc(100vh - 400px);
+  background-color: aliceblue;
+  // background-color: #d5dee0;
 }
 
+/*styles for game start*/
+
 .audio-game-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 10px;
+  padding-bottom: 80px;
   width: 900px;
   height: 100%;
   background-color: aliceblue;
   margin: 0 auto;
+  border-left: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
 }
 
 .audio-title-and-counter {
@@ -43,12 +53,12 @@
   width: 100px;
   height: 100px;
   border-radius: 50px;
-  //   border: 2px solid red;
   background: linear-gradient(aliceblue, aliceblue) padding-box,
     linear-gradient(to right, #348498, #004d61) border-box;
   border-radius: 50em;
   border: 4px solid transparent;
   transition: all 0.5s;
+  cursor: pointer;
 }
 
 .audio-repeat-voice-button:hover {
@@ -67,18 +77,24 @@
   width: 100%;
 }
 
-.audio-answer-button {
+.audio-answer-button,
+.audio-next-question-button {
+  width: 170px;
+  height: 50px;
   background: aliceblue;
   border: 2px solid rgba(65, 182, 230, 1);
+  user-select: none;
 }
 
-.audio-answer-button:hover {
+.audio-answer-button:hover,
+.audio-next-question-button:hover {
   background: rgba(165, 223, 249, 1);
   border: 2px solid rgba(65, 182, 230, 1);
   box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
 }
 
-.audio-answer-button:active {
+.audio-answer-button:active,
+.audio-next-question-button:active {
   opacity: 0.8;
 }
 
@@ -91,6 +107,235 @@
   background: rgba(96, 197, 186, 0.7);
   border: 2px solid rgba(96, 197, 186, 1);
 }
+
+.audio-answer-button-selected {
+  border: 2px solid #004d61;
+}
+
+.audio-next-question-button {
+  font-size: 30px;
+  color: rgba(65, 182, 230, 1);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s;
+}
+
+.audio-button-enable {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0.5s, opacity 0.5s;
+}
+
+/*styles for game end*/
+
+/*styles for result start*/
+
+.audio-game-result-container {
+  position: absolute;
+  padding-bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 10px;
+  width: 400px;
+  // height: 100%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+}
+
+.audio-result-statistics {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 27px;
+}
+
+.audio-result-right-number {
+  width: 35px;
+  color: rgba(96, 197, 186, 1);
+}
+
+.audio-result-wrong-number {
+  width: 35px;
+  color: rgba(239, 82, 133, 1);
+}
+
+.audio-result-percentages-counter {
+  position: absolute;
+}
+
+.audio-result-wrong-container,
+.audio-result-right-container {
+  padding-left: 10px;
+  font-size: 20px;
+}
+
+.audio-result-wrong-title,
+.audio-result-right-title {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.audio-result-word-item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  gap: 14px;
+}
+
+.voice-small-svg:hover {
+  opacity: 0.7;
+}
+
+.audio-result-word-text {
+  color: #348498;
+}
+
+.audio-result-word-transcription {
+  color: darkgray;
+}
+
+.audio-result-word-translation {
+  color: #004d61;
+}
+
+.audio-restart-game-cont {
+  display: flex;
+  justify-content: center;
+}
+
+.audio-restart-game-button {
+  margin-top: 10px;
+  width: 170px;
+  height: 30px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  // color: #047c94;
+  font-size: 16px;
+  border: 2px solid rgba(65, 182, 230, 1);
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.audio-restart-game-button:hover {
+  background-color: rgba(65, 182, 230, 0.5);
+}
+
+.audio-restart-game-button:active {
+  opacity: 0.8;
+}
+
+/*styles for result end*/
+
+/*styles for init modal start*/
+
+.audio-choice-level-modal {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.audio-choice-level-text-1 {
+  font-size: 21px;
+  color: #348498;
+  border: 2px solid rgba(65, 182, 230, 1);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.audio-choice-level-text-2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #348498;
+}
+
+.audio-choice-level-list {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px;
+  width: 330px;
+  height: 160px;
+  // background-color: #348498;
+  user-select: none;
+}
+
+.audio-choice-level-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #047c94;
+  font-size: 30px;
+  font-weight: 900;
+  // border: 10px solid #e5e5e5;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.audio-choice-level-item:nth-child(1) {
+  border: 10px solid #b1cfd3;
+}
+
+.audio-choice-level-item:nth-child(2) {
+  border: 10px solid #98d4e4;
+}
+
+.audio-choice-level-item:nth-child(3) {
+  border: 10px solid #20a4b4;
+}
+
+.audio-choice-level-item:nth-child(4) {
+  border: 10px solid #509ba6;
+}
+
+.audio-choice-level-item:nth-child(5) {
+  border: 10px solid #047c94;
+}
+
+.audio-choice-level-item:nth-child(6) {
+  border: 10px solid #2f6366;
+}
+
+.audio-choice-level-item-active {
+  // color: rgba(65, 182, 230, 1);
+  background: #e5e5e5;
+}
+
+.audio-start-game-button {
+  width: 110px;
+  height: 40px;
+  color: #348498;
+  font-weight: 900;
+  background: aliceblue;
+  border: 2px solid rgba(65, 182, 230, 1);
+  user-select: none;
+}
+
+.audio-start-game-button:hover {
+  background: rgba(165, 223, 249, 1);
+  border: 2px solid rgba(65, 182, 230, 1);
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.audio-start-game-button:active {
+  opacity: 0.8;
+}
+
+/*styles for init modal end*/
 
 @media screen and (max-width: 960px) {
   .audio-game {
@@ -105,5 +350,9 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     row-gap: 20px;
+  }
+
+  .audio-choice-level-modal {
+    gap: 5px;
   }
 }
