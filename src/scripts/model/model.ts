@@ -16,11 +16,13 @@ const model = {
         name: response.name,
         token: response.token,
         userId: response.userId,
+        refreshToken: response.refreshToken,
       };
       controllers.refreshToken = response.refreshToken;
       setValue(login);
       return response;
     } catch (error) {
+
       return false;
     }
   },
@@ -54,6 +56,7 @@ const model = {
     const dictionaryData: IDictinaryData = getValue('dictionary');
 
     if (dictionaryData) {
+
       controllers.wordsGroup = dictionaryData.group;
       controllers.wordsPage = dictionaryData.page;
     } else {

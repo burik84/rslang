@@ -19,6 +19,8 @@ export const servicesApi = {
       },
       body: JSON.stringify(user),
     });
+    console.log('servis status code', rawResponse.statusText);
+
     const content: IUserAuth = await rawResponse.json();
     return content;
   },

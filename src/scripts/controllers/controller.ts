@@ -66,13 +66,15 @@ const controllers: IControllers = {
     } else {
       controllers.isUserSignIn = false;
       view.renderUserLogin();
-      controllers.wordsGroup = '0';
-      controllers.wordsPage = 1;
+      // controllers.wordsGroup = '0';
+      // controllers.wordsPage = 1;
     }
   },
   getDataWords: () => {
     view.showSpinnerWords();
+
     model.savePageLibrary()
+
     const getWords = model
       .getWords()
       .then((data) => {

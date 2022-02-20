@@ -197,10 +197,8 @@ class Word {
       }
 
       if (this.isDifficult && !this.buttonWordDifficult.element.classList.contains('check')) {
-        console.log('click button is diff');
         this.data.difficulty = 'hard';
         if (isCreate) {
-          console.log('create word', this.data);
           model.createUserWord(this.body.id, this.data).finally(() => {
             if (!this.isDifficult && this.buttonWordDifficult.element.classList.contains('check'))
               this.buttonWordDifficult.element.classList.remove('check');
@@ -300,7 +298,6 @@ class Word {
           }
         }
 
-        console.log('old word', this.body.word);
         this.handleClick(false);
       })
       .catch((err) => {
@@ -311,7 +308,6 @@ class Word {
             testFieldStatus: true,
           },
         };
-        console.log('new word', this.body.word);
 
         this.handleClick();
       })
