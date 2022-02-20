@@ -16,3 +16,5 @@ lvlBtn.addEventListener('click', function(){
   gameStartPage.classList.toggle('.visually-hidden');
   console.log('click');
 });
+
+export { lvlBtn }

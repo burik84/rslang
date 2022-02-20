@@ -1,5 +1,6 @@
 import { servicesApi } from './shared/services';
 import {controllers} from './controllers/controller';
+import { sprintGame } from './games/sprintGame';
 
 const app = {
   start: () => {
