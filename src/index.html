@@ -161,7 +161,37 @@
         </div>
       </div>
       <div class="sprint-game visually-hidden" id="sprint-game-page">
-        <p>sprint game in progress</p>
+        <section class="sprint-game-start">
+          <h2>Спринт</h2>
+          <h3>Тренировка на скорость. Попробуй угадать как можно больше слов. Выбери уровень английского</h3>
+          <div class="choose-level">
+            <div id="lvla1">A1</div>
+            <div id="lvla2">A2</div>
+            <div id="lvlb1">B1</div>
+            <div id="lvlb2">B2</div>
+            <div id="lvlc1">C1</div>
+            <div id="lvlc2">C2</div>
+          </div>
+          <button type="button" id="lvl-btn">Начать</button>
+        </section>
+        <section class="sprint-game-play visually-hidden">
+          <p class="sprint-game-timer">60</p>
+          <div class="score-blocks">
+            <p>Умножение: <span>+10</span></p>
+            <p>Очки: <span class="score">0</span></p>
+          </div>
+          <p class="sprint-question">
+            <span class="word"></span>это<span class="translation"></span>
+          </p>
+          <div class="answer-btns">
+            <button type="button" id="trueBtn">Верно</button>
+            <button type="button" id="falseBtn">Неверно</button>
+          </div>
+        </section>
+        <section class="sprint-results visually-hidden">
+          <h2 class="results-heading">Результаты</h2>
+          <div class="sprint-results__container"></div>
+        </section>
       </div>
       <div class="audio-game visually-hidden" id="audio-game-page">
         <div class="audio-game-container">
@@ -329,39 +359,6 @@
             <p>Статистика доступна только авторизованным пользователям</p>
           </div>
         </div>
-      </div>
-      <div class="sprint-game">
-        <section class="sprint-game-start">
-          <h2>Спринт</h2>
-          <h3>Тренировка на скорость. Попробуй угадать как можно больше слов. Выбери уровень английского</h3>
-          <div class="choose-level">
-            <div id="lvla1">A1</div>
-            <div id="lvla2">A2</div>
-            <div id="lvlb1">B1</div>
-            <div id="lvlb2">B2</div>
-            <div id="lvlc1">C1</div>
-            <div id="lvlc2">C2</div>
-          </div>
-          <button type="button" id="lvl-btn">Начать</button>
-        </section>
-        <section class="sprint-game-play visually-hidden">
-          <p class="sprint-game-timer">60</p>
-          <div class="score-blocks">
-            <p>Умножение: <span>+10</span></p>
-            <p>Очки: <span class="score">0</span></p>
-          </div>
-          <p class="sprint-question">
-            <span class="word"></span>это<span class="translation"></span>
-          </p>
-          <div class="answer-btns">
-            <button type="button" id="trueBtn">Верно</button>
-            <button type="button" id="falseBtn">Неверно</button>
-          </div>
-        </section>
-        <section class="sprint-results visually-hidden">
-          <h2 class="results-heading">Результаты</h2>
-          <div class="sprint-results__container"></div>
-        </section>
       </div>
     </main>
     <footer class="white-text" id="footer">
