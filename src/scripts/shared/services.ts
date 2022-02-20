@@ -19,6 +19,8 @@ export const servicesApi = {
       },
       body: JSON.stringify(user),
     });
+    console.log('servis status code', rawResponse.statusText);
+
     const content: IUserAuth = await rawResponse.json();
     return content;
   },
@@ -50,6 +52,18 @@ export const servicesWordsApi = {
       });
     return dataAllWords;
   },
+  getWord: async (wordID:string) => {
+    const dataAllWords = await fetch(`${urlAPI}/words/${wordID}`)
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        return data;
+      })
+      .catch((error) => {
+        console.log('Something went wrong', error.message);
+      });
+    return dataAllWords;
+  },
   getUserWords: async (token: string, userId: string) => {
     const rawResponse = await fetch(`${urlAPI}/users/${userId}/words`, {
       method: 'GET',
@@ -62,8 +76,12 @@ export const servicesWordsApi = {
     const content = await rawResponse.json();
     return content;
   },
-  createUserWord: async (token: string, userId: string, { wordId, word }: TUserWord) => {
-    const rawResponse = await fetch(`${urlAPI}/users/${userId}/words/${wordId}`, {
+  createUserWord: async (token: string, userId: string, data : TUserWord) => {
+    const word={
+      difficulty: data.difficulty,
+      optional:data.optional,
+    }
+    const rawResponse = await fetch(`${urlAPI}/users/${userId}/words/${data.wordId}`, {
       method: 'POST',
       // withCredentials: true,
       headers: {
@@ -76,8 +94,12 @@ export const servicesWordsApi = {
     const content = await rawResponse.json();
     return content;
   },
-  updateUserWord: async (token: string, userId: string, { wordId, word }: TUserWord) => {
-    const rawResponse = await fetch(`${urlAPI}/users/${userId}/words/${wordId}`, {
+  updateUserWord: async (token: string, userId: string, data: TUserWord) => {
+    const word={
+      difficulty: data.difficulty,
+      optional:data.optional,
+    }
+    const rawResponse = await fetch(`${urlAPI}/users/${userId}/words/${data.wordId}`, {
       method: 'PUT',
       // withCredentials: true,
       headers: {

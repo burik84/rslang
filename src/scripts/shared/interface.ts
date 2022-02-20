@@ -52,7 +52,11 @@ type TWordBody = {
 
 type TUserWord = {
   wordId: string;
-  word: TWordBody;
+  difficulty: string;
+  optional: {
+    testFieldString: string;
+    testFieldStatus: boolean;
+  };
 };
 interface IControllers {
   signin: boolean;
@@ -61,6 +65,7 @@ interface IControllers {
   isSpinner: boolean;
   user: IUserAuth | any;
   words: IWordAPI[];
+  userWords: TUserWord[];
   refreshToken: string;
   wordsGroup: string;
   wordsPage: number;
@@ -134,5 +139,5 @@ export {
   IPagination,
   IAudio,
   IDictinaryData,
-  IStatisticsAG
+  IStatisticsAG,
 };

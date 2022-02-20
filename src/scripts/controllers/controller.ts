@@ -44,6 +44,7 @@ const controllers: IControllers = {
   isSpinner: false,
   user: {},
   words: [],
+  userWords:[],
   refreshToken: '',
   wordsGroup: '0',
   wordsPage: 1,
@@ -52,7 +53,11 @@ const controllers: IControllers = {
     model.getPageLibrary();
     view.init();
     controllers.updateUser();
+    if (controllers.wordsGroup==='6') {
+      controllers.getDataWordsDifficult()
+    } else {
     controllers.getDataWords();
+    }
   },
   userSign: (data: string[]) => {
     if (data.length === 2) signIn(data);
@@ -60,19 +65,24 @@ const controllers: IControllers = {
   },
   updateUser: () => {
     model.isSignIn();
+    console.log(controllers.user, controllers.isUserSignIn);
     if (controllers.user) {
       controllers.isUserSignIn = true;
       view.renderUserLogin(controllers.user.name);
     } else {
       controllers.isUserSignIn = false;
+      if (controllers.wordsGroup === '6') {
+        controllers.wordsGroup = '0';
+        controllers.wordsPage = 1;
+      }
       view.renderUserLogin();
-      controllers.wordsGroup = '0';
-      controllers.wordsPage = 1;
     }
   },
   getDataWords: () => {
     view.showSpinnerWords();
-    model.savePageLibrary()
+
+    model.savePageLibrary();
+
     const getWords = model
       .getWords()
       .then((data) => {
@@ -82,8 +92,15 @@ const controllers: IControllers = {
       .catch();
   },
   getDataWordsDifficult: () => {
-    model.savePageLibrary()
-    console.log("Show cards for difficilt user's words");
+    view.showSpinnerWords();
+    model.savePageLibrary();
+    const getWords = model
+      .getUserWords()
+      .then((data) => {
+        controllers.words = data;
+        view.renderWordsDictionary();
+      })
+      .catch();
   },
 };
 
