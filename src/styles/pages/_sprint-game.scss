@@ -1,0 +1,113 @@
+.sprint-game{
+  background-color: var(--bg-light-color);
+  section{
+    h2 {
+      font-size: 28px;
+      line-height: 32px;
+      text-align: center;
+      padding-bottom: 30px;
+      line-height: 36px;
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--bg-dark-color);
+    }
+    h3 {
+      width: 70%;
+      margin: 0 auto;
+      text-align: center;
+      padding-bottom: 50px;
+      line-height: 28px;
+      font-size: 24px;
+      font-weight: 300;
+      color: var(--bg-dark-color);
+    }
+    #lvl-btn {
+      height: 45px;
+      margin: 0 46% 130px;
+      border-radius: 50px;
+      background-color: #3c5b74;
+      border: 1px solid #b0c3c9;
+      color: #ececdd;
+    }
+  }
+}
+.choose-level{
+  width: 35%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(6, auto);
+  justify-content: center;
+  grid-gap: 30px;
+  padding-bottom: 100px;
+  div {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #b0c3c9;
+    padding: 15px 12px;
+    color: #eceac7;
+    cursor: pointer;
+  }
+  div:hover {
+    border: 2px solid #f5f2b8;
+  }
+}
+
+#lvla1 {
+  background-color: #917898;
+}
+#lvla2 {
+  background-color: #503143;
+}
+#lvlb1 {
+  background-color: #9a532b;
+}
+#lvlb2 {
+  background-color: #c49b60;
+}
+#lvlc1 {
+  background-color: #79ad9f;
+}
+#lvlc2 {
+  background-color: #193439;
+}
+.sprint-game-timer {
+  width: 30px;
+  height: 70px;
+  background: top/contain no-repeat url("../assets/icons/timer1.svg");
+  margin: 0 auto;
+  padding-top: 50px;
+  text-align: center;
+}
+.score-blocks{
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  grid-gap: 50px;
+  padding: 50px 0;
+}
+.sprint-question {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: center;
+  padding: 50px 0;
+}
+.answer-btns {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  grid-gap: 20px;
+  padding-bottom: 130px;
+  button {
+    height: 45px;
+    border-radius: 50px;
+    border: 2px solid #593780;
+    background-color: #7cb2d1;
+    color: #1f006e;
+  }
+  button:hover {
+    background-color: #1f006e;
+    color:#e6b7c1;
+    border-color: #7cb2d1;
+  }
+}
