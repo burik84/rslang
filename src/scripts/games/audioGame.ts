@@ -6,6 +6,7 @@ const audioGame = () => {
   const audioChoiceLevelItems = document.querySelectorAll('.audio-choice-level-item');
   const audioStartGameBtn = document.querySelector('#audio-start-game-button');
   const audioRestartGgameBtn = document.querySelector('#audio-restart-game-button');
+  const startAGFromDictionaryBtn = document.querySelector('#dictionary-button-audio');
 
   const repeatVoiceButton = document.querySelector('#audio-repeat-voice-button');
   const answerButton1 = document.querySelector('#audio-answer-button-1');
@@ -170,6 +171,13 @@ const audioGame = () => {
   }
 
   /*обработчики для кнопок*/
+
+  startAGFromDictionaryBtn.addEventListener('click', () =>{
+    clearAllBeforeRestart();
+    document.querySelector('#audio-choice-level-modal').classList.add('visually-hidden');
+    const pageAndLevel = JSON.parse(localStorage.getItem('rsteam17-dictionary'));
+    getWordsForAG(pageAndLevel.page - 1, pageAndLevel.group);
+  })
 
   audioChoiceLevelItems.forEach(value => value.addEventListener('click', ()=> {
     audioChoiceLevelItems.forEach(item => item.classList.remove('audio-choice-level-item-active'));
