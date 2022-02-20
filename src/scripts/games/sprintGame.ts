@@ -46,11 +46,10 @@ function sprintGame(){
   }
 
   const showWord = (idx: number) => {
-    console.log(idx)
-    const wordPlace = document.querySelector('.word');
-    const answerPlace = document.querySelector('.translation');
-    wordPlace.innerHTML = sprintWords[idx].word;
-    const randomAnswer = Math.floor(Math.random() * 5);
+    const sprintWordPlace: HTMLSpanElement = document.querySelector('.word-question');
+    const answerPlace: HTMLSpanElement = document.querySelector('.sprint-translation');
+    sprintWordPlace.innerHTML = sprintWords[idx].word;
+    const randomAnswer: number = Math.floor(Math.random() * 5);
     let isTrue: boolean = true;
     if(idx+randomAnswer > sprintWords.length){
       answerPlace.innerHTML = sprintWords[randomAnswer].wordTranslate;
@@ -61,9 +60,9 @@ function sprintGame(){
     sprintResults.push([sprintWords[idx], isTrue]);
   }
 
-  const trueBtn = document.querySelector('#trueBtn');
-  const falseBtn = document.querySelector('#falseBtn');
-  const scoreBlock = document.querySelector('.score');
+  const trueBtn: HTMLButtonElement = document.querySelector('#trueBtn');
+  const falseBtn: HTMLButtonElement = document.querySelector('#falseBtn');
+  const scoreBlock: HTMLSpanElement = document.querySelector('.score');
 
   function updateScore(){
     const lastFourAnswers: Array<boolean> = sprintAnswer.slice(-4);
@@ -111,29 +110,29 @@ function sprintGame(){
     wordRow.append(resultIco);
     resultsContainer.append(wordRow);
   }
-  
+
   lvla1.addEventListener('click', (event) => {
-    const n = 0;
+    const n:number = 0;
     getWordsGroup(n);
   });
   lvla2.addEventListener('click', (event) => {
-    const n = 1;
+    const n: number = 1;
     getWordsGroup(n);
   });
   lvlb1.addEventListener('click', (event) => {
-    const n = 2;
+    const n: number = 2;
     getWordsGroup(n);
   });
   lvlb2.addEventListener('click', (event) => {
-    const n = 3;
+    const n: number = 3;
     getWordsGroup(n);
   });
   lvlc1.addEventListener('click', (event) => {
-    const n = 4;
+    const n: number = 4;
     getWordsGroup(n);
   });
   lvlc2.addEventListener('click', (event) => {
-    const n = 5;
+    const n: number = 5;
     getWordsGroup(n);
   });
 
