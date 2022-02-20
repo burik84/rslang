@@ -11,13 +11,28 @@ function sprintGame(){
   const lvlBtn: HTMLButtonElement = document.querySelector('#lvl-btn');
 
   lvlBtn.addEventListener('click', function(){
-    console.log(gamePlayPage.classList);
-    gamePlayPage.classList.toggle('.visually-hidden');
-
-    gameStartPage.classList.toggle('.visually-hidden');
-    console.log('click');
+    gamePlayPage.classList.toggle('visually-hidden');
+    gameStartPage.classList.toggle('visually-hidden');
   });
-}
 
+  const time: HTMLParagraphElement = document.querySelector('.sprint-game-timer');
+  const resultsPage: Element = document.querySelector('.sprint-results');
+  const timer = function(){
+    let curTime:number = +time.innerHTML;
+    let timerId = setInterval(() => {
+      if(curTime === 1){
+        showResults();
+        clearInterval(timerId);
+      }
+      curTime--;
+      time.innerHTML = '' + curTime;
+    }, 1000);
+  }
+  const showResults = function(){
+    resultsPage.classList.toggle('visually-hidden');
+    gamePlayPage.classList.toggle('visually-hidden');
+  }
+  timer();
+}
 
 export { sprintGame }

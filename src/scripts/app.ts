@@ -5,7 +5,8 @@ import { sprintGame } from './games/sprintGame';
 const app = {
   start: () => {
     console.log('Start App');
-    controllers.init()
+    controllers.init();
+    sprintGame();
   },
   testSevice: () => {
     servicesApi.getAllWords();

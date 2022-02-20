@@ -1,5 +1,6 @@
 .sprint-game{
   background-color: var(--bg-light-color);
+  padding-bottom: 130px;
   section{
     h2 {
       font-size: 28px;
@@ -23,7 +24,7 @@
     }
     #lvl-btn {
       height: 45px;
-      margin: 0 46% 130px;
+      margin: 0 46% 0;
       border-radius: 50px;
       background-color: #3c5b74;
       border: 1px solid #b0c3c9;
@@ -97,7 +98,6 @@
   grid-template-columns: auto auto;
   justify-content: center;
   grid-gap: 20px;
-  padding-bottom: 130px;
   button {
     height: 45px;
     border-radius: 50px;
@@ -110,4 +110,47 @@
     color:#e6b7c1;
     border-color: #7cb2d1;
   }
+}
+.sprint-results{
+  width: 45%;
+  height: 52vh;
+  margin: 0 auto;
+  padding: 30px 25px;
+  border-radius: 30px;
+  overflow: hidden;
+  background-color: #007a79;
+  color: #002a29;
+  .results-heading {
+    color: #002a29;
+  }
+}
+.sprint-results__container{
+  border: 2px solid #4d2a16;
+  background-color: #976f4f;
+  border-radius: 20px;
+  overflow: auto;
+}
+
+.sprint-word {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+.light-word{
+  background-color: #c7cedf;
+}
+.volume-icon{
+  background: no-repeat url("../assets/icons/volume.svg");
+}
+.sprint-icon{
+  width: 30px;
+  height: 30px;
+}
+.checkmark{
+  background: no-repeat url("../assets/icons/Checkmark.svg");
+}
+.wrong{
+  background: center/ contain no-repeat url("../assets/icons/wrong.svg");
 }
