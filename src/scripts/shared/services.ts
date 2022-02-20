@@ -6,7 +6,7 @@ export const servicesApi = {
     const dataAllWords = await fetch(`${urlAPI}/words`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+       // console.log(data);
         return data;
       })
       .catch((error) => {

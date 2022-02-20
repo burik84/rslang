@@ -88,9 +88,11 @@
   padding: 50px 0;
 }
 .sprint-question {
+  width: 25%;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: auto auto auto;
-  justify-content: center;
+  justify-content: space-between;
   padding: 50px 0;
 }
 .answer-btns {
@@ -133,7 +135,7 @@
 
 .sprint-word {
   display: grid;
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(5, 30px);
   justify-content: space-between;
   align-items: center;
   padding: 10px;

@@ -34,4 +34,5 @@ interface IUserCreated {
   name: string;
   email: string;
 }
+
 export { IWordAPI, TUser, TUserCreate, IUserAuth, IUserCreated };
