@@ -26,7 +26,6 @@ const audioGame = () => {
   const audioResultModal = document.querySelector('#audio-game-result-container');
 
   let userSelectedLevel: number;
-  // let userSelectedPage = 0;
   const userSelectedPage = 0;
   const wordsForAGarr: Array<IWordAPI> = [];
   let currentQuestionNumber = 1;
@@ -182,7 +181,13 @@ const audioGame = () => {
 
   audioStartGameBtn.addEventListener('click', () => {
     audioChoiceLevelModal.classList.add('visually-hidden');
-    getWordsForAG(userSelectedPage, userSelectedLevel);
+    if (localStorage.getItem('rsteam17-dictionary')) {
+      const pageAndLevel = JSON.parse(localStorage.getItem('rsteam17-dictionary'));
+      getWordsForAG(pageAndLevel.page - 1, userSelectedLevel);
+    } else {
+      const randomPage = Math.floor(Math.random() * 30);
+      getWordsForAG(randomPage, userSelectedLevel);
+    }
   });
 
   function enableNextButton() {
@@ -358,11 +363,6 @@ const audioGame = () => {
     localStorage.setItem('statisticsAG', JSON.stringify(statisticsAG));
     localStorage.setItem('statisticsAGWords', JSON.stringify(statisticsAGNewWordsArr));
 
-    // console.log('процент побед текущий: ' + statisticsAG.winRate);
-    // console.log(winStreakArr);
-    // console.log('лучшая серия: ' + Math.max(...winStreakArr))
-    // console.log(statisticsAGNewWordsSet);
-    // console.log(statisticsAGNewWordsArr);
   }
 
 
