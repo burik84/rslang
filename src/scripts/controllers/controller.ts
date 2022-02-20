@@ -49,6 +49,7 @@ const controllers: IControllers = {
   wordsPage: 1,
   init: () => {
     console.log('Init view');
+    model.getPageLibrary();
     view.init();
     controllers.updateUser();
     controllers.getDataWords();
@@ -71,6 +72,7 @@ const controllers: IControllers = {
   },
   getDataWords: () => {
     view.showSpinnerWords();
+    model.savePageLibrary()
     const getWords = model
       .getWords()
       .then((data) => {
@@ -80,6 +82,7 @@ const controllers: IControllers = {
       .catch();
   },
   getDataWordsDifficult: () => {
+    model.savePageLibrary()
     console.log("Show cards for difficilt user's words");
   },
 };

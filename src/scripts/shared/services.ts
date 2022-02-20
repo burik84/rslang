@@ -1,5 +1,13 @@
 import { urlAPI } from './api';
-import { TUser, TUserCreate, IUserAuth, IUserCreated,TUserWordGet, TUserWordCreated, IAudio } from './interface';
+import {
+  TUser,
+  TUserCreate,
+  IUserAuth,
+  IUserCreated,
+  TUserWord,
+  TUserWordGet,
+  IAudio,
+} from './interface';
 
 export const servicesApi = {
   signin: async (user: TUser) => {
@@ -42,69 +50,70 @@ export const servicesWordsApi = {
       });
     return dataAllWords;
   },
-  getUserWords: async (token:string, userId:string) => {
+  getUserWords: async (token: string, userId: string) => {
     const rawResponse = await fetch(`${urlAPI}/users/${userId}/words`, {
       method: 'GET',
       // withCredentials: true,
       headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/json',
-      }
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+      },
     });
     const content = await rawResponse.json();
-    return content
+    return content;
   },
-  createUserWord: async (token:string, { userId, wordId, word }:TUserWordCreated) => {
+  createUserWord: async (token: string, userId: string, { wordId, word }: TUserWord) => {
     const rawResponse = await fetch(`${urlAPI}/users/${userId}/words/${wordId}`, {
       method: 'POST',
       // withCredentials: true,
       headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(word)
+      body: JSON.stringify(word),
     });
     const content = await rawResponse.json();
-    return content
+    return content;
   },
-  updateUserWord: async (token:string, { userId, wordId, word }:TUserWordCreated) => {
+  updateUserWord: async (token: string, userId: string, { wordId, word }: TUserWord) => {
     const rawResponse = await fetch(`${urlAPI}/users/${userId}/words/${wordId}`, {
       method: 'PUT',
       // withCredentials: true,
       headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(word)
+      body: JSON.stringify(word),
     });
     const content = await rawResponse.json();
-    return content
+
+    return content;
   },
-  getUserWord: async (token:string, { userId, wordId }:TUserWordGet) => {
-    const rawResponse = await fetch(`${urlAPI}/users/${userId}/words/${wordId}`, {
+  getUserWord: async (token: string, { userId, wordId }: TUserWordGet) => {
+    const content = await fetch(`${urlAPI}/users/${userId}/words/${wordId}`, {
       method: 'GET',
       // withCredentials: true,
       headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/json',
-      }
-    });
-    const content = await rawResponse.json();
-    return content
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+      },
+    }).then((data) => data.json());
+
+    return content;
   },
-  deleteUserWord: async (token:string, { userId, wordId }:TUserWordGet) => {
-    const rawResponse = await fetch(`${urlAPI}/users/${userId}/words/${wordId}`, {
+  deleteUserWord: async (token: string, { userId, wordId }: TUserWordGet) => {
+    const content = await fetch(`${urlAPI}/users/${userId}/words/${wordId}`, {
       method: 'DELETE',
       // withCredentials: true,
       headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/json',
-      }
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+      },
     });
-    const content = await rawResponse.json();
-    return content
+    // const content = await rawResponse.json();
+    return content;
   },
 };
 

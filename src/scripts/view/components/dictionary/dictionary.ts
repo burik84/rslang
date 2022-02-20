@@ -10,7 +10,8 @@ const renderTextBook = (isUserSignIn: boolean, group: string) => {
   controllers.words.forEach((word: IWordAPI) => {
     const statistics: number[] = [0, 0];
     const li = new Word(word, isUserSignIn, statistics);
-    lists.append(li.init().element);
+    li.init()
+    lists.append(li.show().element);
   });
 };
 const updateDictionary = () => {
