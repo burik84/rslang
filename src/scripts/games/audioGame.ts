@@ -6,6 +6,7 @@ const audioGame = () => {
   const audioChoiceLevelItems = document.querySelectorAll('.audio-choice-level-item');
   const audioStartGameBtn = document.querySelector('#audio-start-game-button');
   const audioRestartGgameBtn = document.querySelector('#audio-restart-game-button');
+  const startAGFromDictionaryBtn = document.querySelector('#dictionary-button-audio');
 
   const repeatVoiceButton = document.querySelector('#audio-repeat-voice-button');
   const answerButton1 = document.querySelector('#audio-answer-button-1');
@@ -26,7 +27,6 @@ const audioGame = () => {
   const audioResultModal = document.querySelector('#audio-game-result-container');
 
   let userSelectedLevel: number;
-  // let userSelectedPage = 0;
   const userSelectedPage = 0;
   const wordsForAGarr: Array<IWordAPI> = [];
   let currentQuestionNumber = 1;
@@ -172,6 +172,13 @@ const audioGame = () => {
 
   /*обработчики для кнопок*/
 
+  startAGFromDictionaryBtn.addEventListener('click', () =>{
+    clearAllBeforeRestart();
+    document.querySelector('#audio-choice-level-modal').classList.add('visually-hidden');
+    const pageAndLevel = JSON.parse(localStorage.getItem('rsteam17-dictionary'));
+    getWordsForAG(pageAndLevel.page - 1, pageAndLevel.group);
+  })
+
   audioChoiceLevelItems.forEach(value => value.addEventListener('click', ()=> {
     audioChoiceLevelItems.forEach(item => item.classList.remove('audio-choice-level-item-active'));
     value.classList.add('audio-choice-level-item-active');
@@ -182,7 +189,13 @@ const audioGame = () => {
 
   audioStartGameBtn.addEventListener('click', () => {
     audioChoiceLevelModal.classList.add('visually-hidden');
-    getWordsForAG(userSelectedPage, userSelectedLevel);
+    if (localStorage.getItem('rsteam17-dictionary')) {
+      const pageAndLevel = JSON.parse(localStorage.getItem('rsteam17-dictionary'));
+      getWordsForAG(pageAndLevel.page - 1, userSelectedLevel);
+    } else {
+      const randomPage = Math.floor(Math.random() * 30);
+      getWordsForAG(randomPage, userSelectedLevel);
+    }
   });
 
   function enableNextButton() {
@@ -358,11 +371,6 @@ const audioGame = () => {
     localStorage.setItem('statisticsAG', JSON.stringify(statisticsAG));
     localStorage.setItem('statisticsAGWords', JSON.stringify(statisticsAGNewWordsArr));
 
-    // console.log('процент побед текущий: ' + statisticsAG.winRate);
-    // console.log(winStreakArr);
-    // console.log('лучшая серия: ' + Math.max(...winStreakArr))
-    // console.log(statisticsAGNewWordsSet);
-    // console.log(statisticsAGNewWordsArr);
   }
 
 

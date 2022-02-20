@@ -92,6 +92,13 @@ const nav = () => {
     hideUnnecessaryBlocks(4);
   })
 
+  /*для перехода в аудиоигру из учебника*/
+  document.querySelector('#dictionary-button-audio').addEventListener('click', () =>{
+    closeAdaptiveMenu();
+    switchActiveTab(3);
+    hideUnnecessaryBlocks(3);
+  })
+
 }
 
 export {nav};

@@ -63,3 +63,52 @@
     display: flex;
   }
 }
+
+.dictionary__game-buttons {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  // background-color: crimson;
+}
+
+.dictionary__game-buttons__sprint,
+.dictionary__game-buttons__audio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #1f9da5;
+  font-size: 17px;
+  color: #1f9da5;
+  background-color: #e5e5e5;
+}
+
+.dictionary__game-buttons__sprint:hover,
+.dictionary__game-buttons__audio:hover {
+  border: 1px solid #1f9da5;
+  color: #e5e5e5;
+  background-color: #1f9da5;
+}
+
+.dictionary__game-buttons__sprint:active,
+.dictionary__game-buttons__audio:active {
+  opacity: 0.8;
+}
+
+.dictionary__game-buttons__sprint {
+  background-image: url("/src/assets/icons/Sprint.svg");
+  background-size: 50px 50px;
+  background-repeat: no-repeat;
+  background-position: 110% 50%;
+}
+
+.dictionary__game-buttons__audio {
+  justify-content: flex-start;
+  padding-left: 10px;
+  background-image: url("/src/assets/icons/AudioGame.svg");
+  background-size: 50px 50px;
+  background-repeat: no-repeat;
+  background-position: 110% 50%;
+}
