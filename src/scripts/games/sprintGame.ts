@@ -29,8 +29,33 @@ function sprintGame(){
     }, 1000);
   }
   const showResults = function(){
+    createRow();
     resultsPage.classList.toggle('visually-hidden');
     gamePlayPage.classList.toggle('visually-hidden');
+  }
+  const resultsContainer: HTMLDivElement = document.querySelector('.sprint-results__container');
+  const createRow = function(){
+    const wordRow: HTMLDivElement = document.createElement('div');
+    wordRow.classList.add('sprint-word');
+    const volumeIcon: HTMLDivElement = document.createElement('div');
+    volumeIcon.classList.add('sprint-icon', 'volume-icon');
+    const spelling: HTMLParagraphElement = document.createElement('p');
+    spelling.classList.add('spelling');
+    spelling.innerHTML = 'bla';
+    const transcription: HTMLParagraphElement = document.createElement('p');
+    transcription.classList.add('transcription');
+    transcription.innerHTML = 'bla';
+    const translation: HTMLParagraphElement = document.createElement('p');
+    translation.classList.add('translation');
+    translation.innerHTML = 'bla';
+    const resultIco: HTMLDivElement = document.createElement('div');
+    resultIco.classList.add('sprint-icon', 'wrong');
+    wordRow.append(volumeIcon);
+    wordRow.append(spelling);
+    wordRow.append(transcription);
+    wordRow.append(translation);
+    wordRow.append(resultIco);
+    resultsContainer.append(wordRow);
   }
   timer();
 }
