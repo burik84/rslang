@@ -44,6 +44,7 @@ const controllers: IControllers = {
   isSpinner: false,
   user: {},
   words: [],
+  userWords:[],
   refreshToken: '',
   wordsGroup: '0',
   wordsPage: 1,
@@ -64,16 +65,17 @@ const controllers: IControllers = {
   },
   updateUser: () => {
     model.isSignIn();
+    console.log(controllers.user, controllers.isUserSignIn);
     if (controllers.user) {
       controllers.isUserSignIn = true;
       view.renderUserLogin(controllers.user.name);
     } else {
       controllers.isUserSignIn = false;
-      view.renderUserLogin();
       if (controllers.wordsGroup === '6') {
         controllers.wordsGroup = '0';
         controllers.wordsPage = 1;
       }
+      view.renderUserLogin();
     }
   },
   getDataWords: () => {

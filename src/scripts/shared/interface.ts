@@ -65,6 +65,7 @@ interface IControllers {
   isSpinner: boolean;
   user: IUserAuth | any;
   words: IWordAPI[];
+  userWords: TUserWord[];
   refreshToken: string;
   wordsGroup: string;
   wordsPage: number;
@@ -138,5 +139,5 @@ export {
   IPagination,
   IAudio,
   IDictinaryData,
-  IStatisticsAG
+  IStatisticsAG,
 };

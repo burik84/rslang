@@ -95,11 +95,12 @@ const model = {
     const data = await servicesWordsApi
       .getUserWords(controllers.user.token, userId)
       .then((words: TUserWord[]) => {
+        controllers.userWords = words;
         const hardWords = words.filter((word) => word.difficulty === 'hard');
-        const request=hardWords.map((word)=>{
-          return servicesWordsApi.getWord(word.wordId)
-        })
-        return Promise.all(request)
+        const request = hardWords.map((word) => {
+          return servicesWordsApi.getWord(word.wordId);
+        });
+        return Promise.all(request);
       });
     return data;
   },
