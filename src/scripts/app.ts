@@ -12,6 +12,7 @@ const app = {
     statistics();
     statisticsChart();
     controllers.init();
+    sprintGame();
   },
   testSevice: () => {
     servicesWordsApi.getWords();
