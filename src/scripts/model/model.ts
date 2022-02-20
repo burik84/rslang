@@ -1,5 +1,12 @@
 import { servicesApi, servicesWordsApi } from '../shared/services';
-import { TUser, TUserCreate, IUserAuth, IDictinaryData, TWordBody } from '../shared/interface';
+import {
+  TUser,
+  TUserCreate,
+  IUserAuth,
+  IDictinaryData,
+  TWordBody,
+  TUserWord,
+} from '../shared/interface';
 import { setValue, getValue } from '../shared/localstorage';
 import { controllers } from '../controllers/controller';
 
@@ -22,7 +29,6 @@ const model = {
       setValue(login);
       return response;
     } catch (error) {
-
       return false;
     }
   },
@@ -56,7 +62,6 @@ const model = {
     const dictionaryData: IDictinaryData = getValue('dictionary');
 
     if (dictionaryData) {
-
       controllers.wordsGroup = dictionaryData.group;
       controllers.wordsPage = dictionaryData.page;
     } else {
@@ -74,18 +79,28 @@ const model = {
   },
   createUserWord: async (wordId: string, word: TWordBody) => {
     const userId = controllers.user.userId;
+    const wordBody = {
+      wordId: wordId,
+      difficulty: word.difficulty,
+      optional: word.optional,
+    };
 
-    const data = await servicesWordsApi.createUserWord(controllers.user.token, userId, {
-      wordId,
-      word,
-    });
+    const data = await servicesWordsApi.createUserWord(controllers.user.token, userId, wordBody);
     return data;
   },
 
   getUserWords: async () => {
     const userId = controllers.user.userId;
 
-    const data = await servicesWordsApi.getUserWords(controllers.user.token, userId);
+    const data = await servicesWordsApi
+      .getUserWords(controllers.user.token, userId)
+      .then((words: TUserWord[]) => {
+        const hardWords = words.filter((word) => word.difficulty === 'hard');
+        const request=hardWords.map((word)=>{
+          return servicesWordsApi.getWord(word.wordId)
+        })
+        return Promise.all(request)
+      });
     return data;
   },
   getUserWord: async (wordId: string) => {
@@ -97,11 +112,12 @@ const model = {
 
   updateUserWord: async (wordId: string, word: TWordBody) => {
     const userId = controllers.user.userId;
-
-    const data = await servicesWordsApi.updateUserWord(controllers.user.token, userId, {
-      wordId,
-      word,
-    });
+    const wordBody = {
+      wordId: wordId,
+      difficulty: word.difficulty,
+      optional: word.optional,
+    };
+    const data = await servicesWordsApi.updateUserWord(controllers.user.token, userId, wordBody);
     return data;
   },
 

@@ -1,4 +1,4 @@
-import { isToggleElement, errorMessage, removeElement,getSpinner } from './components/elements';
+import { isToggleElement, errorMessage, removeElement, getSpinner } from './components/elements';
 import { addUserForm, renderUserForm } from './components/form';
 import { updateDictionary, renderTextBook } from './components/dictionary/dictionary';
 import { controllers } from '../controllers/controller';
@@ -40,14 +40,14 @@ const changeGroupWords = () => {
       const target: any = e.target;
       const group: string = target.dataset.group;
       const lists: string[] = Object.values(target.classList);
-      if (lists.includes('dictionary__button')&&!lists.includes('dictionary__button-active')) {
-        controllers.wordsGroup=group
-        controllers.wordsPage=1
-        view.updateViewDictionary()
-        if(controllers.wordsGroup==='6'){
-          controllers.getDataWordsDifficult()
-        }else{
-          controllers.getDataWords()
+      if (lists.includes('dictionary__button') && !lists.includes('dictionary__button-active')) {
+        controllers.wordsGroup = group;
+        controllers.wordsPage = 1;
+        view.updateViewDictionary();
+        if (controllers.wordsGroup === '6') {
+          controllers.getDataWordsDifficult();
+        } else {
+          controllers.getDataWords();
         }
       }
     },
@@ -99,16 +99,16 @@ const view = {
   renderWordsDictionary: () => {
     const lists = document.querySelector('.word__cards');
     while (lists.firstChild) {
-      lists.removeChild(lists.firstChild)
+      lists.removeChild(lists.firstChild);
     }
     renderTextBook(controllers.isUserSignIn, `${controllers.wordsGroup}`);
   },
-  showSpinnerWords:()=>{
-    const listsWordCard:HTMLUListElement=document.querySelector('.word__cards')
-    const cardsWord=listsWordCard.querySelectorAll('.word')
-    cardsWord.forEach((item:HTMLElement)=>{
-      getSpinner.show(item)
-    })
-  }
+  showSpinnerWords: () => {
+    const listsWordCard: HTMLUListElement = document.querySelector('.word__cards');
+    const cardsWord = listsWordCard.querySelectorAll('.word');
+    cardsWord.forEach((item: HTMLElement) => {
+      getSpinner.show(item);
+    });
+  },
 };
 export { view };

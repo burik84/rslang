@@ -225,7 +225,11 @@ class Word {
         });
       }
 
-      if (this.isDifficult && !this.buttonWordDifficult.element.classList.contains('check')) {
+      if (
+        this.isDifficult &&
+        controllers.wordsGroup !== '6' &&
+        !this.buttonWordDifficult.element.classList.contains('check')
+      ) {
         this.buttonWordDifficult.element.classList.add('check');
       }
       this.renderIcon();
@@ -237,7 +241,7 @@ class Word {
       this.isLearning = !this.isLearning;
       this.isDifficult = false;
 
-      if (!this.buttonWordDifficult.element.classList.contains('check'))
+      if (!this.buttonWordDifficult.element.classList.contains('check')&&controllers.wordsGroup!=='6')
         this.buttonWordDifficult.element.classList.add('check');
       if (!this.isLearning && this.buttonWordDifficult.element.classList.contains('check'))
         this.buttonWordDifficult.element.classList.remove('check');
@@ -284,7 +288,7 @@ class Word {
 
         if (this.data.difficulty === 'hard') {
           this.isDifficult = true;
-          if (this.isDifficult && !this.buttonWordDifficult.element.classList.contains('check')) {
+          if (this.isDifficult && !this.buttonWordDifficult.element.classList.contains('check')&&controllers.wordsGroup!=='6') {
             this.buttonWordDifficult.element.classList.add('check');
             // model.createUserWord(this.body.id,)
           }
@@ -292,7 +296,7 @@ class Word {
         if (this.data.difficulty === 'easy') {
           this.isLearning = true;
           this.isDifficult = false;
-          if (!this.isDifficult && !this.buttonWordDifficult.element.classList.contains('check')) {
+          if (!this.isDifficult && !this.buttonWordDifficult.element.classList.contains('check')&&controllers.wordsGroup!=='6') {
             this.buttonWordDifficult.element.classList.add('check');
             // model.createUserWord(this.body.id,)
           }

@@ -52,7 +52,11 @@ const controllers: IControllers = {
     model.getPageLibrary();
     view.init();
     controllers.updateUser();
+    if (controllers.wordsGroup==='6') {
+      controllers.getDataWordsDifficult()
+    } else {
     controllers.getDataWords();
+    }
   },
   userSign: (data: string[]) => {
     if (data.length === 2) signIn(data);
@@ -66,14 +70,16 @@ const controllers: IControllers = {
     } else {
       controllers.isUserSignIn = false;
       view.renderUserLogin();
-      // controllers.wordsGroup = '0';
-      // controllers.wordsPage = 1;
+      if (controllers.wordsGroup === '6') {
+        controllers.wordsGroup = '0';
+        controllers.wordsPage = 1;
+      }
     }
   },
   getDataWords: () => {
     view.showSpinnerWords();
 
-    model.savePageLibrary()
+    model.savePageLibrary();
 
     const getWords = model
       .getWords()
@@ -84,8 +90,15 @@ const controllers: IControllers = {
       .catch();
   },
   getDataWordsDifficult: () => {
-    model.savePageLibrary()
-    console.log("Show cards for difficilt user's words");
+    view.showSpinnerWords();
+    model.savePageLibrary();
+    const getWords = model
+      .getUserWords()
+      .then((data) => {
+        controllers.words = data;
+        view.renderWordsDictionary();
+      })
+      .catch();
   },
 };
 

@@ -7,12 +7,19 @@ import { Word } from './Word';
 const renderTextBook = (isUserSignIn: boolean, group: string) => {
   const lists: HTMLUListElement = document.querySelector('.word__cards');
   lists.setAttribute('data-group', group);
-  controllers.words.forEach((word: IWordAPI) => {
-    const statistics: number[] = [0, 0];
-    const li = new Word(word, isUserSignIn, statistics);
-    li.init()
-    lists.append(li.show().element);
-  });
+  if (controllers.words.length>0) {
+    controllers.words.forEach((word: IWordAPI) => {
+      const statistics: number[] = [0, 0];
+      const li = new Word(word, isUserSignIn, statistics);
+      li.init()
+      lists.append(li.show().element);
+    });
+  } else {
+    const p=document.createElement('p')
+    p.textContent='Отсутствуют сложные слова'
+    lists.append(p)
+  }
+
 };
 const updateDictionary = () => {
   const lists: HTMLUListElement = document.querySelector('.dictionary__lists');

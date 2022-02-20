@@ -52,7 +52,11 @@ type TWordBody = {
 
 type TUserWord = {
   wordId: string;
-  word: TWordBody;
+  difficulty: string;
+  optional: {
+    testFieldString: string;
+    testFieldStatus: boolean;
+  };
 };
 interface IControllers {
   signin: boolean;
