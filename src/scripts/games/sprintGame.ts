@@ -8,8 +8,8 @@ function sprintGame(){
   const lvlc1: HTMLUListElement = document.querySelector('#lvlc1');
   const lvlc2: HTMLUListElement = document.querySelector('#lvlc2');
 
-  const sprintWords: Array<IWordAPI> = [];
-  const sprintResults: any = [];
+  let sprintWords: Array<IWordAPI> = [];
+  let sprintResults: any = [];
   let sprintScore: number = 0;
   let page: number = 1;
 
@@ -195,12 +195,16 @@ function sprintGame(){
 
   function restartSprint(){
     console.log(sprintWords)
+    sprintWords = sprintWords.splice(0,sprintWords.length - 1);
+    console.log(sprintWords)
+    console.log(sprintResults)
+    sprintResults = sprintResults.splice(0,sprintResults.length - 1);
     console.log(sprintResults)
     sprintScore = 0;
     page = 1;
     const nodeCollection: any = resultsContainer.childNodes;
     for (let node of nodeCollection){
-      node.remove();
+      console.log(node)
     }
     //resultsPage.classList.toggle('visually-hidden');
     //gamePlayPage.classList.toggle('visually-hidden');
