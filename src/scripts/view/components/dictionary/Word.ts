@@ -165,6 +165,8 @@ class Word {
   }
 
   renderIcon() {
+    console.log(this.body.word, this.isDifficult, this.isLearning);
+
     const defaultColor = '#C4C4C4';
     const colorIconDifficult: string = this.isDifficult ? 'red' : defaultColor;
     const colorIconLearning: string = this.isLearning ? 'green' : defaultColor;
@@ -182,7 +184,9 @@ class Word {
     );
     this.buttonWordLearned.element.insertAdjacentHTML('afterbegin', svgLearning(colorIconLearning));
   }
-  handleClick(isCreate = true) {
+  handleClick() {
+    console.log('click button');
+
     this.buttonWordDifficult.element.addEventListener('click', () => {
       if ((!this.isDifficult && !this.isLearning) || controllers.wordsGroup === '6') {
         this.isDifficult = !this.isDifficult;
@@ -198,7 +202,8 @@ class Word {
 
       if (this.isDifficult && !this.buttonWordDifficult.element.classList.contains('check')) {
         this.data.difficulty = 'hard';
-        if (isCreate) {
+        if (this.data.optional.testFieldStatus) {
+          this.data.optional.testFieldStatus = false;
           model.createUserWord(this.body.id, this.data).finally(() => {
             if (!this.isDifficult && this.buttonWordDifficult.element.classList.contains('check'))
               this.buttonWordDifficult.element.classList.remove('check');
@@ -251,7 +256,8 @@ class Word {
 
       if (this.isLearning) {
         this.data.difficulty = 'easy';
-        if (isCreate) {
+        if (this.data.optional.testFieldStatus) {
+          this.data.optional.testFieldStatus = false;
           model.createUserWord(this.body.id, this.data).finally(() => {
             if (this.buttonWordLearned.element.classList.contains('check'))
               this.buttonWordLearned.element.classList.remove('check');
@@ -280,70 +286,79 @@ class Word {
     });
   }
   init() {
-    controllers.userWords.forEach((user: TUserWord) => {
-      if (user.wordId === this.body.id) {
-        const data = model
-          .getUserWord(this.body.id)
-          .then((data) => {
-            const res: TWordBody = data;
-            this.data = {
-              difficulty: res.difficulty,
-              optional: res.optional,
-            };
+    if (controllers.userWords.length > 0) {
+      controllers.userWords.forEach((user: TUserWord) => {
+        if (user.wordId === this.body.id) {
+          const data = model
+            .getUserWord(this.body.id)
+            .then((data) => {
+              const res: TWordBody = data;
+              this.data = {
+                difficulty: res.difficulty,
+                optional: res.optional,
+              };
 
-            if (this.data.difficulty === 'hard') {
-              this.isDifficult = true;
-              if (
-                this.isDifficult &&
-                !this.buttonWordDifficult.element.classList.contains('check') &&
-                controllers.wordsGroup !== '6'
-              ) {
-                this.buttonWordDifficult.element.classList.add('check');
-                // model.createUserWord(this.body.id,)
+              if (this.data.difficulty === 'hard') {
+                this.isDifficult = true;
+                if (
+                  this.isDifficult &&
+                  !this.buttonWordDifficult.element.classList.contains('check') &&
+                  controllers.wordsGroup !== '6'
+                ) {
+                  this.buttonWordDifficult.element.classList.add('check');
+                  // model.createUserWord(this.body.id,)
+                }
               }
-            }
-            if (this.data.difficulty === 'easy') {
-              this.isLearning = true;
-              this.isDifficult = false;
-              if (
-                !this.isDifficult &&
-                !this.buttonWordDifficult.element.classList.contains('check') &&
-                controllers.wordsGroup !== '6'
-              ) {
-                this.buttonWordDifficult.element.classList.add('check');
-                // model.createUserWord(this.body.id,)
+              if (this.data.difficulty === 'easy') {
+                this.isLearning = true;
+                this.isDifficult = false;
+                if (
+                  !this.isDifficult &&
+                  !this.buttonWordDifficult.element.classList.contains('check') &&
+                  controllers.wordsGroup !== '6'
+                ) {
+                  this.buttonWordDifficult.element.classList.add('check');
+                  // model.createUserWord(this.body.id,)
+                }
               }
-            }
 
-            this.handleClick(false);
-          })
-          .catch((err) => {
-            this.data = {
-              difficulty: '',
-              optional: {
-                testFieldString: '0',
-                testFieldStatus: true,
-              },
-            };
+              this.handleClick();
+              this.renderIcon();
+            })
+            .catch((err) => {
+              this.data = {
+                difficulty: '',
+                optional: {
+                  testFieldString: '0',
+                  testFieldStatus: true,
+                },
+              };
 
-            this.handleClick();
-          })
-          .finally(() => {
-            this.renderIcon();
-          });
-      } else {
-        this.data = {
-          difficulty: '',
-          optional: {
-            testFieldString: '0',
-            testFieldStatus: true,
-          },
-        };
-      }
+              this.handleClick();
+              this.renderIcon();
+            });
+        } else {
+          this.data = {
+            difficulty: '',
+            optional: {
+              testFieldString: '0',
+              testFieldStatus: true,
+            },
+          };
+        }
+      });
+    } else {
+      this.data = {
+        difficulty: '',
+        optional: {
+          testFieldString: '0',
+          testFieldStatus: true,
+        },
+      };
 
       this.handleClick();
       this.renderIcon();
-    });
+    }
   }
 }
 
