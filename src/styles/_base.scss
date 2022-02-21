@@ -40,6 +40,9 @@ body {
 .white-text {
   color: #ffffff;
 }
+.dark-blue-text {
+  color: var(--bg-dark-color);
+}
 .app-description {
   background-color: var(--bg-light-color);
   padding: 0 147px 25px 147px;
@@ -97,15 +100,17 @@ body {
   background-color: var(--div-bg-color);
   display: grid;
   grid-template-rows: 24px auto;
-  grid-row-gap: 60px;
-  padding: 42px 21px 38px;
+  grid-row-gap: 40px;
+  padding: 42px 30px 38px 40px;
 }
 .app-advantagies__p {
-  text-align: justify;
+  // text-align: justify;
   color: var(--bg-light-color);
 }
 .app-advantagies__h3,
 .app-advantagies__p {
+  // color: #ffffff;
+  color: var(--bg-dark-color);
   justify-self: center;
 }
 .dev-section {
@@ -145,4 +150,10 @@ body {
   padding-top: 27px;
   text-align: center;
   color: var(--bg-light-color);
+}
+
+@media screen and (max-width: 960px) {
+  .line-break {
+    display: none;
+  }
 }

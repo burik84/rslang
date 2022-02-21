@@ -25,6 +25,17 @@ footer {
 .navigation-list {
   li {
     padding-bottom: 5px;
+    list-style-type: square;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  li:hover {
+    opacity: 0.8;
+  }
+
+  li:active {
+    opacity: 0.6;
   }
 }
 .developers-list {

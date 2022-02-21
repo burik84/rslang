@@ -36,7 +36,8 @@ header {
 }
 
 .header__ul {
-  padding: 46px 101px 126px 0;
+  // padding: 46px 101px 126px 0;
+  padding: 46px 101px 60px 0;
   display: grid;
   grid-template-columns: repeat(6, auto);
   justify-content: space-evenly;

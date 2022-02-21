@@ -50,7 +50,7 @@
     <main>
       <div class="start-page" id="start-page">
         <section class="app-description">
-          <h1 class="big-font app-description__header wide-lines">
+          <h1 class="big-font app-description__header wide-lines dark-blue-text">
             RS Lang поможет изучить английский
           </h1>
           <p class="small-font app-description__text wide-lines">
@@ -74,8 +74,9 @@
           <div class="app-advantagies__div small-font">
             <h3 class="app-advantagies__h3 narrow-lines">Учебник</h3>
             <p class="app-advantagies__p middle-lines white-text">
-              Более 3500 слов для изучения, рабитых на разделы по уровню твоей подготовки с удобной
-              навигацией
+              Более 3500 слов для изучения, рабитых <br class="line-break"> 
+              на разделы по уровню твоей подготовки <br class="line-break"> 
+              с удобной навигацией
             </p>
           </div>
           <div class="app-advantagies__div small-font">
@@ -87,8 +88,8 @@
           <div class="app-advantagies__div small-font">
             <h3 class="app-advantagies__h3 narrow-lines">Статистика</h3>
             <p class="app-advantagies__p middle-lines white-text">
-              Отслеживайте свой прогресс в индивидуальной статистике, ставь цели и вдохновляйся на
-              достижения новых результатов каждый день
+              Отслеживайте свой прогресс в индивидуальной статистике, ставь цели <br class="line-break"> 
+              и вдохновляйся на достижения новых результатов каждый день!
             </p>
           </div>
         </section>
@@ -97,7 +98,7 @@
           <div class="about-developers-blocks">
             <div class="about-developers small-font">
               <div class="name-logo line-height29">
-                <h3>Александр</h3>
+                <h3 class="dark-blue-text">Александр</h3>
                 <p class="white-text">Lead developer, designer</p>
                 <a href="https://github.com/burik84" class="git-link" target="_blank"></a>
               </div>
@@ -108,7 +109,7 @@
             <div class="about-developers small-font">
               <div class="name-logo narrow-lines">
                 <!--где-то тут должна быть фотка по ТЗ-->
-                <h3>Дарья</h3>
+                <h3 class="dark-blue-text">Дарья</h3>
                 <p class="white-text">Developer</p>
                 <a href="https://github.com/Blackdoll-Loki" class="git-link" target="_blank"></a>
               </div>
@@ -118,7 +119,7 @@
             </div>
             <div class="about-developers small-font">
               <div class="name-logo narrow-lines">
-                <h3>Олег</h3>
+                <h3 class="dark-blue-text">Олег</h3>
                 <p class="white-text">Developer</p>
                 <a href="https://github.com/lg0leg" class="git-link" target="_blank"></a>
               </div>
@@ -158,6 +159,10 @@
         </section>
         <div class="dictionary__pagination">
           <ul class="dictionary__pages open"></ul>
+        </div>
+        <div class="dictionary__game-buttons">
+          <button class="dictionary__game-buttons__sprint" id="dictionary-button-sprint">Спринт</button>
+          <button class="dictionary__game-buttons__audio" id="dictionary-button-audio">Аудиовызов</button>
         </div>
       </div>
       <div class="sprint-game visually-hidden" id="sprint-game-page">
@@ -372,11 +377,11 @@
         <nav>
           <h2 class="footer-heading small-font narrow-lines">Меню</h2>
           <ul class="navigation-list small-text">
-            <li>Главная</li>
-            <li>Учебник</li>
-            <li>Статистика</li>
-            <li>Спринт</li>
-            <li>Аудиовызов</li>
+            <li id="nav-main-page-footer">Главная</li>
+            <li id="nav-dictionary-footer">Учебник</li>
+            <li id="nav-sprint-game-footer">Спринт</li>
+            <li id="nav-audio-game-footer">Аудиовызов</li>
+            <li id="nav-statistics-footer">Статистика</li>
           </ul>
         </nav>
         <div>

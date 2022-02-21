@@ -89,7 +89,7 @@
     }
   }
 }
-.word__header-text{
+.word__header-text {
   flex-grow: 1;
 }
 .word__static {
@@ -109,7 +109,6 @@
     }
     .loading__overflow {
       background-color: $color-background-group-1;
-
     }
   }
   &[data-group="1"] {
@@ -118,7 +117,6 @@
     }
     .loading__overflow {
       background-color: $color-background-group-2;
-
     }
   }
   &[data-group="2"] {
@@ -127,7 +125,6 @@
     }
     .loading__overflow {
       background-color: $color-background-group-3;
-
     }
   }
   &[data-group="3"] {
@@ -136,7 +133,6 @@
     }
     .loading__overflow {
       background-color: $color-background-group-4;
-
     }
   }
   &[data-group="4"] {
@@ -145,7 +141,6 @@
     }
     .loading__overflow {
       background-color: $color-background-group-5;
-
     }
   }
   &[data-group="5"] {
@@ -154,7 +149,6 @@
     }
     .loading__overflow {
       background-color: $color-background-group-6;
-
     }
   }
   &[data-group="6"] {
@@ -164,5 +158,10 @@
     .loading__overflow {
       background-color: $color-background-group-7;
     }
+    // &.button__icon-difficult {
+    //   &.check {
+    //     cursor: auto;
+    //   }
+    // }
   }
 }
