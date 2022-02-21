@@ -20,6 +20,12 @@ const nav = () => {
   const statisticsPage = document.querySelector('#statistics-page');
   const footer = document.querySelector('#footer');
 
+  const navMainPageBtnF = document.querySelector('#nav-main-page-footer');
+  const navDictionaryBtnF = document.querySelector('#nav-dictionary-footer');
+  const navSprintGameBtnF = document.querySelector('#nav-sprint-game-footer');
+  const navAudioGameBtnF = document.querySelector('#nav-audio-game-footer');
+  const navStatisticsBtnF = document.querySelector('#nav-statistics-footer');
+
   const pageList = [startPage, dictionaryPage, sprintGamePage, audioGamePage, statisticsPage];
   
   function switchActiveTab(currentTabsNum: number) {
@@ -90,6 +96,38 @@ const nav = () => {
   navStatisticsBtnA.addEventListener('click', () => {
     closeAdaptiveMenu();
     hideUnnecessaryBlocks(4);
+  })
+
+  navMainPageBtnF.addEventListener('click', () => {
+    switchActiveTab(0);
+    hideUnnecessaryBlocks(0);
+  })
+
+  navDictionaryBtnF.addEventListener('click', () => {
+    switchActiveTab(1);
+    hideUnnecessaryBlocks(1);
+  })
+
+  navSprintGameBtnF.addEventListener('click', () => {
+    switchActiveTab(2);
+    hideUnnecessaryBlocks(2);
+  })
+
+  navAudioGameBtnF.addEventListener('click', () => {
+    switchActiveTab(3);
+    hideUnnecessaryBlocks(3);
+  })
+
+  navStatisticsBtnF.addEventListener('click', () => {
+    switchActiveTab(4);
+    hideUnnecessaryBlocks(4);
+  })
+
+  /*для перехода в аудиоигру из учебника*/
+  document.querySelector('#dictionary-button-audio').addEventListener('click', () =>{
+    closeAdaptiveMenu();
+    switchActiveTab(3);
+    hideUnnecessaryBlocks(3);
   })
 
 }
