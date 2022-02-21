@@ -32,7 +32,7 @@ function sprintGame(){
 
 
   const time: HTMLParagraphElement = document.querySelector('.sprint-game-timer');
-  const resultsPage: Element = document.querySelector('.sprint-results');
+  const resultsPage: Element = document.querySelector('.sprint-results-section');
   const timer = function(){
     let curTime:number = +time.innerHTML;
     let timerId = setInterval(() => {
@@ -190,6 +190,22 @@ function sprintGame(){
     }
     showWord(Math.floor(Math.random() * sprintWords.length));
   })
+
+  const restartBtn: HTMLButtonElement = document.querySelector('#restart-sprint');
+
+  function restartSprint(){
+    console.log(sprintWords)
+    console.log(sprintResults)
+    sprintScore = 0;
+    page = 1;
+    const nodeCollection: any = resultsContainer.childNodes;
+    for (let node of nodeCollection){
+      node.remove();
+    }
+    //resultsPage.classList.toggle('visually-hidden');
+    //gamePlayPage.classList.toggle('visually-hidden');
+  }
+  restartBtn.addEventListener('click', restartSprint);
 }
 
 export { sprintGame }

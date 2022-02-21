@@ -48,7 +48,7 @@
       <section class="user-handler"></section>
     </header>
     <main>
-      <div class="start-page" id="start-page">
+      <div class="start-page  visually-hidden" id="start-page">
         <section class="app-description">
           <h1 class="big-font app-description__header wide-lines">
             RS Lang поможет изучить английский
@@ -160,7 +160,7 @@
           <ul class="dictionary__pages open"></ul>
         </div>
       </div>
-      <div class="sprint-game visually-hidden" id="sprint-game-page">
+      <div class="sprint-game" id="sprint-game-page">
         <section class="sprint-game-start">
           <h2>Спринт</h2>
           <h3>Тренировка на скорость. Попробуй угадать как можно больше слов. Выбери уровень английского</h3>
@@ -188,9 +188,15 @@
             <button type="button" id="falseBtn">Неверно</button>
           </div>
         </section>
-        <section class="sprint-results visually-hidden">
-          <h2 class="results-heading">Результаты</h2>
-          <div class="sprint-results__container"></div>
+        <section class="sprint-results-section visually-hidden">
+          <div class="sprint-results-block">
+            <h2 class="results-heading">Результаты</h2>
+            <div class="sprint-results__container"></div>
+          </div>
+          <div class="sprint-again">
+            <h3>Сыграть ещё раз</h3>
+            <button type="button" id="restart-sprint"></button>
+          </div>
         </section>
       </div>
       <div class="audio-game visually-hidden" id="audio-game-page">
