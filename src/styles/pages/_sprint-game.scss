@@ -127,7 +127,7 @@
   }
 }
 .sprint-results__container{
-  height: 100%;
+  height: 82%;
   border: 2px solid #4d2a16;
   background-color: #976f4f;
   border-radius: 20px;
@@ -136,7 +136,7 @@
 
 .sprint-word {
   display: grid;
-  grid-template-columns: repeat(5, 30px);
+  grid-template-columns: 1fr 1fr 1fr 3fr auto;
   justify-content: space-between;
   align-items: center;
   padding: 10px;

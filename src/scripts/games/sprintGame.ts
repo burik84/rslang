@@ -11,10 +11,10 @@ function sprintGame(){
   const sprintWords: Array<IWordAPI> = [];
   const sprintResults: any = [];
   let sprintScore: number = 0;
-  const sprintAnswer: Array<boolean> = [];
+  let page: number = 1;
 
-  async function getWordsGroup(group:number = 1){
-    const words = await fetch(`${urlAPI}/words?group=${group}`)
+  async function getWordsGroup(group:number, page: number){
+    const words = await fetch(`${urlAPI}/words?group=${group}&page=${page - 1}`)
       .then((res:any) => res.json())
       .then((data:any) => {
         sprintWords.push(...data);
@@ -49,14 +49,23 @@ function sprintGame(){
     const sprintWordPlace: HTMLSpanElement = document.querySelector('.word-question');
     const answerPlace: HTMLSpanElement = document.querySelector('.sprint-translation');
     sprintWordPlace.innerHTML = sprintWords[idx].word;
-    const randomAnswer: number = Math.floor(Math.random() * 5);
+    const randomAnswer: number = Math.floor(Math.random() * 3);
     let isTrue: boolean = true;
-    if(idx+randomAnswer > sprintWords.length){
-      answerPlace.innerHTML = sprintWords[randomAnswer].wordTranslate;
-      if(sprintWords[randomAnswer].wordTranslate !== sprintWords[idx].wordTranslate) isTrue = false;
+    if(idx+randomAnswer >= sprintWords.length){
+      answerPlace.innerHTML = sprintWords[idx - randomAnswer].wordTranslate;
+      if(sprintWords[randomAnswer].wordTranslate !== sprintWords[idx].wordTranslate) {
+        isTrue = false;
+      } else {
+        isTrue = true;
+      }
+    } else {
+      answerPlace.innerHTML = sprintWords[idx + randomAnswer].wordTranslate;
+      if(sprintWords[idx + randomAnswer].wordTranslate !== sprintWords[idx].wordTranslate){
+        isTrue = false;
+      } else {
+        isTrue = true;
+      }
     }
-    answerPlace.innerHTML = sprintWords[idx + randomAnswer].wordTranslate;
-    if(sprintWords[idx + randomAnswer].wordTranslate !== sprintWords[idx].wordTranslate) isTrue = false;
     sprintResults.push([sprintWords[idx], isTrue]);
   }
 
@@ -65,8 +74,8 @@ function sprintGame(){
   const scoreBlock: HTMLSpanElement = document.querySelector('.score');
 
   function updateScore(){
-    const lastFourAnswers: Array<boolean> = sprintAnswer.slice(-4);
-    if(lastFourAnswers.every((answer) => answer === true)){
+    const lastFourAnswers: Array<boolean> = sprintResults.map((el:Array<any>) => [el[1], el[2]]).slice(-4);
+    if(lastFourAnswers.length === 4 && lastFourAnswers.every((arr: any) => arr[0] === arr[1])){
       sprintScore +=20;
     } else{
       sprintScore += 10;
@@ -78,11 +87,11 @@ function sprintGame(){
     resultsPage.classList.toggle('visually-hidden');
     gamePlayPage.classList.toggle('visually-hidden');
     sprintResults.forEach((arr: any) => {
-      createRow(arr[0], arr[1]);
+      createRow(arr[0], arr[1], arr[2]);
     })
   }
   const resultsContainer: HTMLDivElement = document.querySelector('.sprint-results__container');
-  const createRow = function(obj: IWordAPI, isTrue: boolean){
+  const createRow = function(obj: IWordAPI, isTrue: boolean,answer: boolean){
     const wordRow: HTMLDivElement = document.createElement('div');
     wordRow.classList.add('sprint-word');
     const volumeIcon: HTMLDivElement = document.createElement('div');
@@ -98,7 +107,7 @@ function sprintGame(){
     translation.innerHTML = obj.wordTranslate;
     const resultIco: HTMLDivElement = document.createElement('div');
     resultIco.classList.add('sprint-icon');
-    if(isTrue === true){
+    if(isTrue === answer){
       resultIco.classList.add('checkmark');
     } else {
       resultIco.classList.add('wrong');
@@ -113,27 +122,46 @@ function sprintGame(){
 
   lvla1.addEventListener('click', (event) => {
     const n:number = 0;
-    getWordsGroup(n);
+    for(let i = 0; i < 30; i++){
+      getWordsGroup(n, page);
+      page++;
+    }
+    console.log(sprintWords);
   });
   lvla2.addEventListener('click', (event) => {
     const n: number = 1;
-    getWordsGroup(n);
+    for(let i = 0; i < 30; i++){
+      getWordsGroup(n, page);
+      page++;
+    }
   });
   lvlb1.addEventListener('click', (event) => {
     const n: number = 2;
-    getWordsGroup(n);
+    for(let i = 0; i < 30; i++){
+      getWordsGroup(n, page);
+      page++;
+    }
   });
   lvlb2.addEventListener('click', (event) => {
     const n: number = 3;
-    getWordsGroup(n);
+    for(let i = 0; i < 30; i++){
+      getWordsGroup(n, page);
+      page++;
+    }
   });
   lvlc1.addEventListener('click', (event) => {
     const n: number = 4;
-    getWordsGroup(n);
+    for(let i = 0; i < 30; i++){
+      getWordsGroup(n, page);
+      page++;
+    }
   });
   lvlc2.addEventListener('click', (event) => {
     const n: number = 5;
-    getWordsGroup(n);
+    for(let i = 0; i < 30; i++){
+      getWordsGroup(n, page);
+      page++;
+    }
   });
 
   lvlBtn.addEventListener('click', function(){
@@ -145,18 +173,21 @@ function sprintGame(){
 
   trueBtn.addEventListener('click', () => {
     if(sprintResults[sprintResults.length-1][1] === true){
-      sprintAnswer.push(true);
+      sprintResults[sprintResults.length - 1].push(true)
       updateScore()
+    } else {
+      sprintResults[sprintResults.length - 1].push(false)
     }
-    sprintAnswer.push(false);
     showWord(Math.floor(Math.random() * sprintWords.length));
   });
+
   falseBtn.addEventListener('click', () => {
     if(sprintResults[sprintResults.length-1][1] === false){
-      sprintAnswer.push(true);
+      sprintResults[sprintResults.length - 1].push(false)
       updateScore();
+    } else {
+      sprintResults[sprintResults.length - 1].push(true)
     }
-    sprintAnswer.push(false);
     showWord(Math.floor(Math.random() * sprintWords.length));
   })
 }
