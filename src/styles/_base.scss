@@ -104,12 +104,10 @@ body {
   padding: 42px 30px 38px 40px;
 }
 .app-advantagies__p {
-  // text-align: justify;
-  color: var(--bg-light-color);
+  justify-self: center;
+  color: #ffffff;
 }
-.app-advantagies__h3,
-.app-advantagies__p {
-  // color: #ffffff;
+.app-advantagies__h3 {
   color: var(--bg-dark-color);
   justify-self: center;
 }
