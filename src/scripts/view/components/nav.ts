@@ -27,12 +27,12 @@ const nav = () => {
   const navStatisticsBtnF = document.querySelector('#nav-statistics-footer');
 
   const pageList = [startPage, dictionaryPage, sprintGamePage, audioGamePage, statisticsPage];
-  
+
   function switchActiveTab(currentTabsNum: number) {
     navList.forEach(value => value.classList.remove('nav-item-active'));
     navList[currentTabsNum].classList.add('nav-item-active');
   }
-  
+
   function hideUnnecessaryBlocks(currentTabsNum: number) {
     pageList.forEach(value => value.classList.add('visually-hidden'));
     pageList[currentTabsNum].classList.remove('visually-hidden');
@@ -128,6 +128,14 @@ const nav = () => {
     closeAdaptiveMenu();
     switchActiveTab(3);
     hideUnnecessaryBlocks(3);
+  })
+  //*для перехода в игру спринт
+  document.querySelector('#dictionary-button-sprint').addEventListener('click', () =>{
+    closeAdaptiveMenu();
+    switchActiveTab(2);
+    hideUnnecessaryBlocks(2);
+    document.querySelector('.choose-level').classList.toggle('visually-hidden');
+    document.querySelector('#lvl-btn').classList.toggle('visually-hidden')
   })
 
 }
