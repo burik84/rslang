@@ -134,7 +134,9 @@ function sprintGame(){
     sprintWords = sprintWords.filter(el => typeof el === 'boolean')
     await  getWordsGroup(group, page)
     .then((data: any) => {
-      lvlBtn.classList.toggle('visually-hidden');
+      if(lvlBtn.classList.contains('visually-hidden')){
+        lvlBtn.classList.toggle('visually-hidden');
+      }
       //console.log('group', group, 'page ', page);
     })
   }
@@ -213,7 +215,9 @@ function sprintGame(){
     document.querySelector('.choose-level').classList.remove('visually-hidden')
     resultsPage.classList.toggle('visually-hidden');
     gameStartPage.classList.toggle('visually-hidden')
-    lvlBtn.classList.toggle('visually-hidden');
+    if(!lvlBtn.classList.contains('visually-hidden')){
+      lvlBtn.classList.toggle('visually-hidden');
+    }
   }
 
   restartBtn.addEventListener('click', restartSprint);

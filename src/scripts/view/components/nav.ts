@@ -134,8 +134,14 @@ const nav = () => {
     closeAdaptiveMenu();
     switchActiveTab(2);
     hideUnnecessaryBlocks(2);
-    document.querySelector('.choose-level').classList.toggle('visually-hidden');
-    document.querySelector('#lvl-btn').classList.toggle('visually-hidden')
+    const lvlBtns: HTMLDivElement = document.querySelector('.choose-level');
+    const startBtn: HTMLButtonElement = document.querySelector('#lvl-btn');
+    if(!lvlBtns.classList.contains('visually-hidden')){
+      lvlBtns.classList.toggle('visually-hidden');
+    }
+    if(startBtn.classList.contains('visually-hidden')){
+      startBtn.classList.toggle('visually-hidden');
+    }
   })
 
 }
