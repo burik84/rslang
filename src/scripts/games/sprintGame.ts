@@ -10,7 +10,6 @@ function sprintGame(){
   const lvlc2: HTMLUListElement = document.querySelector('#lvlc2');
 
   const dictStorage:IDictinaryData = JSON.parse(localStorage.getItem('rsteam17-dictionary'));
-   console.log(dictStorage)
 
   let sprintWords: Array<IWordAPI> = [];
   let sprintResults: any = [];
@@ -41,7 +40,7 @@ function sprintGame(){
   const time: HTMLParagraphElement = document.querySelector('.sprint-game-timer');
   const resultsPage: Element = document.querySelector('.sprint-results-section');
   const timer = function(){
-    time.innerHTML = '15';
+    time.innerHTML = '60';
     let curTime:number = +time.innerHTML;
     let timerId = setInterval(() => {
       if(curTime === 1){
@@ -62,8 +61,10 @@ function sprintGame(){
     if(idx+randomAnswer >= sprintWords.length){
       answerPlace.innerHTML = sprintWords[idx - randomAnswer].wordTranslate;
       if(sprintWords[randomAnswer].wordTranslate !== sprintWords[idx].wordTranslate) {
+        console.log(`функция showWord, перевод неверный, записываем false в sprintResults`, sprintResults);
         isTrue = false;
       } else {
+        console.log(`функция showWord, перевод верный, записываем true в sprintResults`, sprintResults);
         isTrue = true;
       }
     } else {
@@ -85,7 +86,7 @@ function sprintGame(){
     const lastFourAnswers: Array<boolean> = sprintResults.map((el:Array<any>) => [el[1], el[2]]).slice(-4);
     if(lastFourAnswers.length === 4 && lastFourAnswers.every((arr: any) => arr[0] === arr[1])){
       sprintScore +=20;
-    } else{
+    } else if(sprintResults[sprintResults.length - 1][1] === sprintResults[sprintResults.length - 1][2]){
       sprintScore += 10;
     }
     scoreBlock.innerHTML = `${sprintScore}`;
@@ -186,22 +187,14 @@ function sprintGame(){
   });
 
   trueBtn.addEventListener('click', () => {
-    if(sprintResults[sprintResults.length-1][1] === true){
-      sprintResults[sprintResults.length - 1].push(true)
-      updateScore()
-    } else {
-      sprintResults[sprintResults.length - 1].push(false)
-    }
+    sprintResults[sprintResults.length - 1].push(true);
+    updateScore();
     showWord(Math.floor(Math.random() * sprintWords.length));
   });
 
   falseBtn.addEventListener('click', () => {
-    if(sprintResults[sprintResults.length-1][1] === false){
-      sprintResults[sprintResults.length - 1].push(false)
-      updateScore();
-    } else {
-      sprintResults[sprintResults.length - 1].push(true)
-    }
+    sprintResults[sprintResults.length - 1].push(false);
+    updateScore();
     showWord(Math.floor(Math.random() * sprintWords.length));
   })
 
