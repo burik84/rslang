@@ -1,3 +1,5 @@
+@import './_constants.scss';
+
 * {
   margin: 0;
   padding: 0;
@@ -67,6 +69,15 @@ body {
   grid-column-gap: 27px;
   justify-content: center;
   align-content: center;
+  &.open{
+  background-color: $color-button-bcg;
+    .about-video__text{
+      display: none;
+    }
+    .video{
+      display: block;
+    }
+  }
 }
 .about-video__text {
   color: var(--bg-light-color);
@@ -148,6 +159,15 @@ body {
     padding: 160px 0 0 15px;
   }
 }
+
+.alex{
+  width: 109px;
+  height: 150px;
+  background: top/contain no-repeat url("../assets/img/big-heroes-hero.jpg");
+  h3{
+    padding: 160px 0 0 15px;
+  }
+}
 .git-link {
   width: 60px;
   height: 60px;
@@ -157,6 +177,10 @@ body {
   padding-top: 47px;
   text-align: center;
   color: var(--bg-light-color);
+}
+
+.video{
+  display: none;
 }
 
 @media screen and (max-width: 960px) {

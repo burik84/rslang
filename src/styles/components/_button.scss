@@ -15,7 +15,8 @@ button {
 .button-link,
 .menu-user-name,
 .dictionary__button,
-.button__icon {
+.button__icon,
+.button__video {
   background-color: inherit;
   border: none;
   border-radius: 0;
@@ -202,5 +203,14 @@ header.login {
     &.check {
       cursor: auto;
     }
+  }
+}
+
+.button__video{
+  color:$color-button-bcg;
+  font-size: 24px;
+  line-height: 50px;
+  &:hover{
+    cursor: pointer;
   }
 }
