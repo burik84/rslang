@@ -2,6 +2,8 @@ import { urlAPI } from '../shared/api';
 import { IWordAPI, IAudio, IStatisticsAG } from '../shared/interface';
 
 const audioGame = () => {
+  const audioGamePage = document.querySelector('#audio-game-page');
+
   const audioChoiceLevelModal = document.querySelector('#audio-choice-level-modal');
   const audioChoiceLevelItems = document.querySelectorAll('.audio-choice-level-item');
   const audioStartGameBtn = document.querySelector('#audio-start-game-button');
@@ -246,6 +248,10 @@ const audioGame = () => {
   });
 
   nextQuestionButton.addEventListener('click', () => {
+    setNextQuestion()
+  });
+  
+  function setNextQuestion() {
     if (currentQuestionNumber < totalNumberOfQuestions + 1) {
       clearButtonsColor();
       clearSelectedButtonBorder();
@@ -256,6 +262,32 @@ const audioGame = () => {
       setAGResultWordsCont(rightWordsArr, wrongWordsArr);
       setAGResultStatistics(totalCorrectAnswers, totalNumberOfQuestions);
       disabledNextButton();
+    }
+  }
+
+  /*дублирование кнопок с клавиатуры*/
+
+  document.addEventListener('keydown', (e) => {
+    if (!audioGamePage.classList.contains('visually-hidden')){
+      // e.preventDefault();
+      if (e.code == 'Space') {
+          playback();
+      }
+      if (e.code == 'Digit1' && (!nextQuestionButton.classList.contains('audio-button-enable'))) {
+        answerButtonHandler(0);
+      }
+      if (e.code == 'Digit2' && (!nextQuestionButton.classList.contains('audio-button-enable'))) {
+        answerButtonHandler(1);
+      }
+      if (e.code == 'Digit3' && (!nextQuestionButton.classList.contains('audio-button-enable'))) {
+        answerButtonHandler(2);
+      }
+      if (e.code == 'Digit4' && (!nextQuestionButton.classList.contains('audio-button-enable'))) {
+        answerButtonHandler(3);
+      }
+      if ((e.code == 'Enter') && (nextQuestionButton.classList.contains('audio-button-enable'))) {
+        setNextQuestion();
+      }
     }
   });
 

@@ -11,7 +11,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 10px;
   padding-bottom: 80px;
   width: 900px;
@@ -38,6 +38,17 @@
 // .audio-counter-container {
 //   font-size: 20px;
 // }
+
+.audio-description-control-text {
+  margin: 0 auto;
+  text-align: center;
+  width: 550px;
+  font-size: 21px;
+  color: #348498;
+  border: 2px solid rgba(65, 182, 230, 1);
+  padding: 15px;
+  border-radius: 10px;
+}
 
 .audio-repeat-voice-button-cont {
   display: flex;
@@ -342,6 +353,10 @@
 
   .audio-game-container {
     width: 400px;
+  }
+
+  .audio-description-control-text {
+    display: none;
   }
 
   .audio-answer-options-container {
