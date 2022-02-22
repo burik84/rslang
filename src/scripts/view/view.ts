@@ -60,10 +60,19 @@ const addErrorLogin = (type?: string) => {
   message.insertAdjacentHTML('afterend', errorMessage(type));
   removeElement('#user-error-msg-holder');
 };
+
+const showVideo=()=>{
+  // const containerVideo: HTMLDivElement = document.querySelector('about-video');
+  const buttonVideo=document.querySelector('.button__video')
+  buttonVideo.addEventListener('click',()=>{
+    isToggleElement('.about-video')
+  })
+}
 const clickButtons = () => {
   showAdaptiveMenu();
   renderFormUser();
   changeGroupWords();
+  showVideo();
 };
 const view = {
   init: () => {
