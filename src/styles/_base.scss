@@ -138,6 +138,15 @@ body {
   grid-template-columns: repeat(3, auto);
   justify-content: space-between;
   align-items: center;
+  grid-gap: 200px;
+}
+.dasha{
+  width: 109px;
+  height: 150px;
+  background: top/contain no-repeat url("../assets/img/toriko.jpg");
+  h3{
+    padding: 160px 0 0 15px;
+  }
 }
 .git-link {
   width: 60px;
@@ -145,7 +154,7 @@ body {
   background: no-repeat center url("../assets/icons/bi_github.svg");
 }
 .about-developers__p {
-  padding-top: 27px;
+  padding-top: 47px;
   text-align: center;
   color: var(--bg-light-color);
 }
