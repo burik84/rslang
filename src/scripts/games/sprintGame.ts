@@ -1,5 +1,6 @@
 import { urlAPI } from '../shared/api';
-import { IWordAPI } from '../shared/interface'
+import { IWordAPI, IDictinaryData } from '../shared/interface';
+
 function sprintGame(){
   const lvla1: HTMLUListElement = document.querySelector('#lvla1');
   const lvla2: HTMLUListElement = document.querySelector('#lvla2');
@@ -8,13 +9,18 @@ function sprintGame(){
   const lvlc1: HTMLUListElement = document.querySelector('#lvlc1');
   const lvlc2: HTMLUListElement = document.querySelector('#lvlc2');
 
+  const dictStorage:IDictinaryData = JSON.parse(localStorage.getItem('rsteam17-dictionary'));
+   console.log(dictStorage)
+
   let sprintWords: Array<IWordAPI> = [];
   let sprintResults: any = [];
   let sprintScore: number = 0;
-  let page: number = 1;
+  let setPage:number = dictStorage.page || 1;
 
   async function getWordsGroup(group:number, page: number){
-    const words = await fetch(`${urlAPI}/words?group=${group}&page=${page - 1}`)
+    const pageNum: number = page + 5;
+    for (page; page < pageNum; page++){
+      const words = await fetch(`${urlAPI}/words?group=${group}&page=${page - 1}`)
       .then((res:any) => res.json())
       .then((data:any) => {
         sprintWords.push(...data);
@@ -22,6 +28,7 @@ function sprintGame(){
       .catch((error) => {
         console.log('Something went wrong', error.message);
       })
+    }
   }
 
 
@@ -34,6 +41,7 @@ function sprintGame(){
   const time: HTMLParagraphElement = document.querySelector('.sprint-game-timer');
   const resultsPage: Element = document.querySelector('.sprint-results-section');
   const timer = function(){
+    time.innerHTML = '15';
     let curTime:number = +time.innerHTML;
     let timerId = setInterval(() => {
       if(curTime === 1){
@@ -120,55 +128,61 @@ function sprintGame(){
     resultsContainer.append(wordRow);
   }
 
+
+  async function startGameOnLvlBtn(group: number, page: number){
+    sprintWords = sprintWords.filter(el => typeof el === 'boolean')
+    await  getWordsGroup(group, page)
+    .then((data: any) => {
+      lvlBtn.classList.toggle('visually-hidden');
+      //console.log('group', group, 'page ', page);
+    })
+  }
+
   lvla1.addEventListener('click', (event) => {
     const n:number = 0;
-    for(let i = 0; i < 30; i++){
-      getWordsGroup(n, page);
-      page++;
-    }
-    console.log(sprintWords);
+    startGameOnLvlBtn(n, setPage);
   });
+
   lvla2.addEventListener('click', (event) => {
     const n: number = 1;
-    for(let i = 0; i < 30; i++){
-      getWordsGroup(n, page);
-      page++;
-    }
+    startGameOnLvlBtn(n, setPage);
   });
+
   lvlb1.addEventListener('click', (event) => {
     const n: number = 2;
-    for(let i = 0; i < 30; i++){
-      getWordsGroup(n, page);
-      page++;
-    }
+    startGameOnLvlBtn(n, setPage);
   });
+
   lvlb2.addEventListener('click', (event) => {
     const n: number = 3;
-    for(let i = 0; i < 30; i++){
-      getWordsGroup(n, page);
-      page++;
-    }
+    startGameOnLvlBtn(n, setPage);
   });
+
   lvlc1.addEventListener('click', (event) => {
     const n: number = 4;
-    for(let i = 0; i < 30; i++){
-      getWordsGroup(n, page);
-      page++;
-    }
+    startGameOnLvlBtn(n, setPage);
   });
   lvlc2.addEventListener('click', (event) => {
     const n: number = 5;
-    for(let i = 0; i < 30; i++){
-      getWordsGroup(n, page);
-      page++;
-    }
+    startGameOnLvlBtn(n, setPage);
   });
 
-  lvlBtn.addEventListener('click', function(){
-    gamePlayPage.classList.toggle('visually-hidden');
-    gameStartPage.classList.toggle('visually-hidden');
-    timer();
-    showWord(0);
+  lvlBtn.addEventListener('click',async function(){
+    //sprintWords = sprintWords.filter((el) => typeof el === 'boolean');
+    if(sprintWords.length === 0){
+      await getWordsGroup(+dictStorage.group, setPage)
+      .then((res: any) => {
+        timer();
+        showWord(0);
+        gamePlayPage.classList.toggle('visually-hidden');
+        gameStartPage.classList.toggle('visually-hidden');
+      })
+    } else {
+      gamePlayPage.classList.toggle('visually-hidden');
+      gameStartPage.classList.toggle('visually-hidden');
+      timer();
+      showWord(0);
+    }
   });
 
   trueBtn.addEventListener('click', () => {
@@ -194,21 +208,21 @@ function sprintGame(){
   const restartBtn: HTMLButtonElement = document.querySelector('#restart-sprint');
 
   function restartSprint(){
-    console.log(sprintWords)
-    sprintWords = sprintWords.splice(0,sprintWords.length - 1);
-    console.log(sprintWords)
-    console.log(sprintResults)
-    sprintResults = sprintResults.splice(0,sprintResults.length - 1);
-    console.log(sprintResults)
+    sprintWords = sprintWords.filter((el) => typeof el === 'boolean');
+    sprintResults = sprintResults.filter((el: any) => typeof el === 'boolean');
     sprintScore = 0;
-    page = 1;
-    const nodeCollection: any = resultsContainer.childNodes;
-    for (let node of nodeCollection){
-      console.log(node)
+    setPage = 1;
+    time.innerHTML = '60';
+    scoreBlock.innerHTML = `${sprintScore}`;
+    while(resultsContainer.firstChild){
+      resultsContainer.removeChild(resultsContainer.firstChild);
     }
-    //resultsPage.classList.toggle('visually-hidden');
-    //gamePlayPage.classList.toggle('visually-hidden');
+    document.querySelector('.choose-level').classList.remove('visually-hidden')
+    resultsPage.classList.toggle('visually-hidden');
+    gameStartPage.classList.toggle('visually-hidden')
+    lvlBtn.classList.toggle('visually-hidden');
   }
+
   restartBtn.addEventListener('click', restartSprint);
 }
 
