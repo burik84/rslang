@@ -191,13 +191,15 @@ const audioGame = () => {
 
   audioStartGameBtn.addEventListener('click', () => {
     audioChoiceLevelModal.classList.add('visually-hidden');
-    if (localStorage.getItem('rsteam17-dictionary')) {
-      const pageAndLevel = JSON.parse(localStorage.getItem('rsteam17-dictionary'));
-      getWordsForAG(pageAndLevel.page - 1, userSelectedLevel);
-    } else {
-      const randomPage = Math.floor(Math.random() * 30);
+    // if (localStorage.getItem('rsteam17-dictionary')) {
+    //   const pageAndLevel = JSON.parse(localStorage.getItem('rsteam17-dictionary'));
+    //   getWordsForAG(pageAndLevel.page - 1, userSelectedLevel);
+    // } else {
+    //   const randomPage = Math.floor(Math.random() * 30);
+    //   getWordsForAG(randomPage, userSelectedLevel);
+    // }
+    const randomPage = Math.floor(Math.random() * 27 + 3);
       getWordsForAG(randomPage, userSelectedLevel);
-    }
   });
 
   function enableNextButton() {
