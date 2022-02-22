@@ -22,15 +22,16 @@
       font-weight: 300;
       color: var(--bg-dark-color);
     }
-    #lvl-btn {
-      height: 45px;
-      margin: 0 46% 0;
-      border-radius: 50px;
-      background-color: #3c5b74;
-      border: 1px solid #b0c3c9;
-      color: #ececdd;
-    }
   }
+}
+.lvl-button {
+  display: block;
+  height: 45px;
+  margin: 0 auto;
+  border-radius: 50px;
+  background-color: #3c5b74;
+  border: 1px solid #b0c3c9;
+  color: #ececdd;
 }
 .choose-level{
   width: 35%;
@@ -92,7 +93,9 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: auto auto auto;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  grid-gap: 90px;
   padding: 50px 0 90px;
 }
 .answer-btns {
@@ -139,7 +142,15 @@
 }
 .sprint-again{
   display: grid;
-  grid-template-rows: 50px 1fr;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  grid-gap: 20px;
+  h3{
+    align-self: flex-end;
+  }
+  button{
+    align-self: flex-start;
+  }
 }
 .sprint-word {
   display: grid;
@@ -169,4 +180,61 @@
   width: 60px;
   height: 60px;
   background: center/ cover no-repeat url('../assets/icons/restartSprint.svg');
+}
+
+@media only screen and (max-width: 1400px) {
+  .sprint-question{
+    width: 65%;
+    grid-gap: 60px;
+  }
+  .sprint-results-section{
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-gap: 40px;
+  }
+  .sprint-word{
+    grid-template-columns: 50px 1fr 1fr 1fr auto;
+    font-size: 16px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .sprint-game {
+    section {
+      h3 {
+        font-size: 20px;
+      }
+      h2{
+        font-size: 24px;
+      }
+    }
+  }
+  .choose-level {
+    grid-template-rows: auto auto;
+    grid-template-columns: auto auto auto;
+    padding-bottom: 50px;
+  }
+  .score-blocks{
+    grid-gap: 30px;
+  }
+  .sprint-question{
+    width: 85%;
+    grid-gap: 30px;
+  }
+  .answer-btns{
+    button {
+      height: 35px;
+      width: 100px;
+    }
+  }
+  .sprint-word{
+    grid-template-columns: 90px;
+    font-size: 16px;
+    grid-template-rows: auto;
+    grid-gap: 3px;
+    justify-content: center;
+  }
+  #restart-sprint{
+    width: 40px;
+    height: 40px;
+  }
 }
