@@ -90,36 +90,26 @@ const model = {
   },
 
   getUserWords: async () => {
-    const userId = controllers.user.userId;
+    const userId = controllers.user.userId ? controllers.user.userId : '';
 
-    const data = await servicesWordsApi
-      .getUserWords(controllers.user.token, userId)
-      .then((words: TUserWord[]) => {
-        controllers.userWords = words;
-        return words
-      });
+    const data = userId
+      ? await servicesWordsApi
+          .getUserWords(controllers.user.token, userId)
+          .then((words: TUserWord[]) => {
+            controllers.userWords = words;
+            return words;
+          })
+      : [];
     return data;
   },
   getUserHardWords: async () => {
-    // const userId = controllers.user.userId;
-
-    const data=await model.getUserWords().then((words:TUserWord[])=>{
+    const data = await model.getUserWords().then((words: TUserWord[]) => {
       const hardWords = words.filter((word) => word.difficulty === 'hard');
       const request = hardWords.map((word) => {
         return servicesWordsApi.getWord(word.wordId);
       });
       return Promise.all(request);
-    })
-    // const data = await servicesWordsApi
-    //   .getUserWords(controllers.user.token, userId)
-    //   .then((words: TUserWord[]) => {
-    //     controllers.userWords = words;
-    //     const hardWords = words.filter((word) => word.difficulty === 'hard');
-    //     const request = hardWords.map((word) => {
-    //       return servicesWordsApi.getWord(word.wordId);
-    //     });
-    //     return Promise.all(request);
-    //   });
+    });
     return data;
   },
   getUserWord: async (wordId: string) => {

@@ -82,6 +82,20 @@ const controllers: IControllers = {
 
     model.savePageLibrary();
 
+    if (controllers.isUserSignIn) {
+      controllers.getDataUserWords()
+    }else{
+    const getWords = model.getWords()
+    .then((data) => {
+      controllers.words = data;
+
+      view.renderWordsDictionary();
+    })
+    .catch();
+    }
+  },
+  getDataUserWords: () => {
+
     const getWords = model.getUserWords().then((data) => {
       model
         .getWords()
