@@ -165,8 +165,6 @@ class Word {
   }
 
   renderIcon() {
-    console.log(this.body.word, this.isDifficult, this.isLearning);
-
     const defaultColor = '#C4C4C4';
     const colorIconDifficult: string = this.isDifficult ? 'red' : defaultColor;
     const colorIconLearning: string = this.isLearning ? 'green' : defaultColor;
@@ -185,18 +183,17 @@ class Word {
     this.buttonWordLearned.element.insertAdjacentHTML('afterbegin', svgLearning(colorIconLearning));
   }
   handleClick() {
-    console.log('click button');
-
     this.buttonWordDifficult.element.addEventListener('click', () => {
       if ((!this.isDifficult && !this.isLearning) || controllers.wordsGroup === '6') {
         this.isDifficult = !this.isDifficult;
       }
 
       if (controllers.wordsGroup === '6') {
-        if (!this.isDifficult && this.buttonWordDifficult.element.classList.contains('check')) {
+        if (this.isDifficult && this.buttonWordDifficult.element.classList.contains('check')) {
           this.buttonWordDifficult.element.classList.remove('check');
-          this.data.difficulty = '0';
-          model.updateUserWord(this.body.id, this.data);
+
+          // this.data.difficulty = '0';
+          // model.updateUserWord(this.body.id, this.data);
         }
       }
 
@@ -218,8 +215,10 @@ class Word {
               this.buttonWordDifficult.element.classList.remove('check');
           });
         }
-      } else {
+
+      } else if (!this.isDifficult && !this.buttonWordDifficult.element.classList.contains('check')) {
         this.data.difficulty = '';
+        this.data.optional.testFieldStatus=true
         model.deleteUserWord(this.body.id).finally(() => {
           if (
             !this.isDifficult &&
@@ -236,10 +235,13 @@ class Word {
         !this.buttonWordDifficult.element.classList.contains('check')
       ) {
         this.buttonWordDifficult.element.classList.add('check');
+
       }
+
       this.renderIcon();
     });
     this.buttonWordLearned.element.addEventListener('click', () => {
+
       if (!this.buttonWordLearned.element.classList.contains('check'))
         this.buttonWordLearned.element.classList.add('check');
 
@@ -270,6 +272,7 @@ class Word {
         }
       } else {
         this.data.difficulty = '';
+        this.data.optional.testFieldStatus=true
         model
           .deleteUserWord(this.body.id)
           .then((data) => data)
@@ -286,6 +289,14 @@ class Word {
     });
   }
   init() {
+    this.data = {
+      difficulty: '',
+      optional: {
+        testFieldString: '0',
+        testFieldStatus: true,
+      },
+    };
+
     if (controllers.userWords.length > 0) {
       controllers.userWords.forEach((user: TUserWord) => {
         if (user.wordId === this.body.id) {
@@ -321,44 +332,16 @@ class Word {
                   // model.createUserWord(this.body.id,)
                 }
               }
-
-              this.handleClick();
               this.renderIcon();
             })
             .catch((err) => {
-              this.data = {
-                difficulty: '',
-                optional: {
-                  testFieldString: '0',
-                  testFieldStatus: true,
-                },
-              };
-
-              this.handleClick();
               this.renderIcon();
             });
-        } else {
-          this.data = {
-            difficulty: '',
-            optional: {
-              testFieldString: '0',
-              testFieldStatus: true,
-            },
-          };
         }
       });
-    } else {
-      this.data = {
-        difficulty: '',
-        optional: {
-          testFieldString: '0',
-          testFieldStatus: true,
-        },
-      };
-
-      this.handleClick();
-      this.renderIcon();
     }
+    this.handleClick();
+    this.renderIcon();
   }
 }
 

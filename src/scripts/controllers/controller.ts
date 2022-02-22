@@ -83,8 +83,6 @@ const controllers: IControllers = {
     model.savePageLibrary();
 
     const getWords = model.getUserWords().then((data) => {
-      console.log(data);
-
       model
         .getWords()
         .then((data) => {
