@@ -194,9 +194,7 @@ function sprintGame(){
         console.log('выбрана группа ', i, 'страница ', setPage)
         startGameOnLvlBtn(i, setPage);
       });
-      /*chooseLevelBtns[i].addEventListener('keydown', (e: KeyboardEvent) => {
-        if(e.code === 'Enter') console.log(`${e.code}`)
-      });*/
+      chooseLevelBtns[i].addEventListener('keydown', (e: KeyboardEvent) => console.log(e));;
     }
   }
 
