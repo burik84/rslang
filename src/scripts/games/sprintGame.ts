@@ -7,13 +7,15 @@ function sprintGame(){
   let sprintWords: Array<IWordAPI> = [];
   let sprintResults: any = [];
   let sprintScore: number = 0;
-  let setPage:number = dictStorage.page || 1;
+  let setPage:number = 1;
   let aContext = new AudioContext();
   let audio: IAudio;
+  let showWordInitlVal = 0;
+  let chooseLvlGroup: number;
+  let startFromVocabulary = false;
+  let timerId: any;
 
   async function getWordsGroup(group:number, page: number){
-    const pageNum: number = page + 5;
-    for (page; page < pageNum; page++){
       const words = await fetch(`${urlAPI}/words?group=${group}&page=${page - 1}`)
       .then((res:any) => res.json())
       .then((data:any) => {
@@ -22,7 +24,6 @@ function sprintGame(){
       .catch((error) => {
         console.log('Something went wrong', error.message);
       })
-    }
   }
 
 
@@ -36,9 +37,9 @@ function sprintGame(){
   const resultsPage: Element = document.querySelector('.sprint-results-section');
 
   const timer = function(){
-    time.innerHTML = '10';
+    time.innerHTML = '60';
     let curTime:number = +time.innerHTML;
-    let timerId = setInterval(() => {
+    timerId = setInterval(() => {
       if(curTime === 1){
         showResults();
         clearInterval(timerId);
@@ -49,34 +50,50 @@ function sprintGame(){
   }
 
   const showWord = (idx: number) => {
+    console.log('showWordInitlVal', showWordInitlVal)
+    if(idx >= sprintWords.length){
+      if(startFromVocabulary){
+        setPage--;
+        if(setPage < 1){
+          clearInterval(timerId);
+          showResults();
+        } else {
+          getWordsGroup(chooseLvlGroup, setPage);
+        }
+      } else {
+        setPage++;
+        getWordsGroup(chooseLvlGroup, setPage);
+      }
+    }
     const sprintWordPlace: HTMLSpanElement = document.querySelector('.word-question');
     const answerPlace: HTMLSpanElement = document.querySelector('.sprint-translation');
     sprintWordPlace.innerHTML = sprintWords[idx].word;
-    const randomAnswer: number = Math.floor(Math.random() * 3);
+    const randomAnswer: number = Math.floor(Math.random() * 2);
     let isTrue: boolean = true;
     if(idx+randomAnswer >= sprintWords.length){
       answerPlace.innerHTML = sprintWords[idx - randomAnswer].wordTranslate;
-      if(sprintWords[randomAnswer].wordTranslate !== sprintWords[idx].wordTranslate) {
-        console.log(`функция showWord, перевод неверный, записываем false в sprintResults`, sprintResults);
-        isTrue = false;
+        if(sprintWords[randomAnswer].wordTranslate !== sprintWords[idx].wordTranslate) {
+          isTrue = false;
+        } else {
+          isTrue = true;
+        }
       } else {
-        console.log(`функция showWord, перевод верный, записываем true в sprintResults`, sprintResults);
-        isTrue = true;
-      }
-    } else {
-      answerPlace.innerHTML = sprintWords[idx + randomAnswer].wordTranslate;
-      if(sprintWords[idx + randomAnswer].wordTranslate !== sprintWords[idx].wordTranslate){
-        isTrue = false;
-      } else {
-        isTrue = true;
-      }
+        answerPlace.innerHTML = sprintWords[idx + randomAnswer].wordTranslate;
+        if(sprintWords[idx + randomAnswer].wordTranslate !== sprintWords[idx].wordTranslate){
+          isTrue = false;
+        } else {
+          isTrue = true;
+        }
     }
     sprintResults.push([sprintWords[idx], isTrue]);
+    showWordInitlVal++;
   }
 
   const trueBtn: HTMLButtonElement = document.querySelector('#trueBtn');
   const falseBtn: HTMLButtonElement = document.querySelector('#falseBtn');
   const scoreBlock: HTMLSpanElement = document.querySelector('.score');
+
+  resultsPage.addEventListener('keypress', (e:KeyboardEvent) => console.log(true))
 
   function updateScore(){
     const lastFourAnswers: Array<boolean> = sprintResults.map((el:Array<any>) => [el[1], el[2]]).slice(-4);
@@ -117,9 +134,11 @@ function sprintGame(){
         getAudioAndPlay(src);
         });
       }
+    restartBtn.addEventListener('click', restartSprint);
   }
 
   const resultsContainer: HTMLDivElement = document.querySelector('.sprint-results__container');
+
   const createRow = function(obj: IWordAPI, isTrue: boolean,answer: boolean){
     const wordRow: HTMLDivElement = document.createElement('div');
     wordRow.classList.add('sprint-word');
@@ -149,6 +168,13 @@ function sprintGame(){
     resultsContainer.append(wordRow);
   }
 
+  /*function playWordOnkeyDown(elements: HTMLAllCollection){
+    for(let i: number = 0; i < elements.length; i++){
+      elements[i].addEventListener("keydown", (e: KeyboardEventInit) => {
+        if(e.code = 'ArrowDown') console.log(`${e.code}`)
+      })
+    }
+  }*/
 
   async function startGameOnLvlBtn(group: number, page: number){
     sprintWords = sprintWords.filter(el => typeof el === 'boolean')
@@ -164,21 +190,25 @@ function sprintGame(){
     const chooseLevelBtns: HTMLCollection = document.querySelector('.choose-level').children;
     for(let i: number = 0; i < chooseLevelBtns.length; i++){
       chooseLevelBtns[i].addEventListener('click', () => {
+        chooseLvlGroup = i;
+        console.log('выбрана группа ', i, 'страница ', setPage)
         startGameOnLvlBtn(i, setPage);
       });
-     /* chooseLevelBtns[i].addEventListener('keydown', (e: Event) => {
-        if(e.code === '')
-      });
-    }*/
+      /*chooseLevelBtns[i].addEventListener('keydown', (e: KeyboardEvent) => {
+        if(e.code === 'Enter') console.log(`${e.code}`)
+      });*/
+    }
   }
 
   lvlBtn.addEventListener('click',async function(){
-    //sprintWords = sprintWords.filter((el) => typeof el === 'boolean');
-    if(sprintWords.length === 0){
+    if(sprintWords.length === 0 || startFromVocabulary){
+      setPage = dictStorage.page;
+      startFromVocabulary = true;
+      console.log('игра запущена из словаря, страница ', setPage, 'группа ', dictStorage.group)
       await getWordsGroup(+dictStorage.group, setPage)
       .then((res: any) => {
         timer();
-        showWord(0);
+        showWord(showWordInitlVal);
         gamePlayPage.classList.toggle('visually-hidden');
         gameStartPage.classList.toggle('visually-hidden');
       })
@@ -186,30 +216,32 @@ function sprintGame(){
       gamePlayPage.classList.toggle('visually-hidden');
       gameStartPage.classList.toggle('visually-hidden');
       timer();
-      showWord(0);
+      showWord(showWordInitlVal);
+      console.log('игра запущена со стартовой страницы, страница ',setPage, 'группа ', chooseLvlGroup )
     }
   });
 
   trueBtn.addEventListener('click', () => {
     sprintResults[sprintResults.length - 1].push(true);
     updateScore();
-    showWord(Math.floor(Math.random() * sprintWords.length));
+    showWord(showWordInitlVal);
   });
 
   falseBtn.addEventListener('click', () => {
     sprintResults[sprintResults.length - 1].push(false);
     updateScore();
-    showWord(Math.floor(Math.random() * sprintWords.length));
+    showWord(showWordInitlVal);
   })
 
   const restartBtn: HTMLButtonElement = document.querySelector('#restart-sprint');
 
   function restartSprint(){
-    sprintWords = sprintWords.filter((el) => typeof el === 'boolean');
-    sprintResults = sprintResults.filter((el: any) => typeof el === 'boolean');
+    sprintWords = [];
+    sprintResults = [];
     sprintScore = 0;
     setPage = 1;
     time.innerHTML = '10';
+    showWordInitlVal = 0;
     scoreBlock.innerHTML = `${sprintScore}`;
     while(resultsContainer.firstChild){
       resultsContainer.removeChild(resultsContainer.firstChild);
@@ -222,7 +254,7 @@ function sprintGame(){
     }
   }
 
-  restartBtn.addEventListener('click', restartSprint);
+  listenLvlBtns()
 }
 
 export { sprintGame }
