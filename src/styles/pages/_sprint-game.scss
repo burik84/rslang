@@ -164,6 +164,7 @@
 }
 .volume-icon{
   background: no-repeat url("../assets/icons/volume.svg");
+  cursor: pointer;
 }
 .sprint-icon{
   width: 30px;
@@ -180,6 +181,7 @@
   width: 60px;
   height: 60px;
   background: center/ cover no-repeat url('../assets/icons/restartSprint.svg');
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 1400px) {
