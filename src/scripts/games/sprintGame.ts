@@ -3,6 +3,7 @@ import { IWordAPI, IDictinaryData, IAudio } from '../shared/interface';
 
 function sprintGame(){
   const dictStorage:IDictinaryData = JSON.parse(localStorage.getItem('rsteam17-dictionary'));
+  const chooseLevelBtns: HTMLCollection = document.querySelector('.choose-level').children;
 
   let sprintWords: Array<IWordAPI> = [];
   let sprintResults: any = [];
@@ -168,13 +169,6 @@ function sprintGame(){
     resultsContainer.append(wordRow);
   }
 
-  /*function playWordOnkeyDown(elements: HTMLAllCollection){
-    for(let i: number = 0; i < elements.length; i++){
-      elements[i].addEventListener("keydown", (e: KeyboardEventInit) => {
-        if(e.code = 'ArrowDown') console.log(`${e.code}`)
-      })
-    }
-  }*/
 
   async function startGameOnLvlBtn(group: number, page: number){
     sprintWords = sprintWords.filter(el => typeof el === 'boolean')
@@ -187,18 +181,18 @@ function sprintGame(){
   }
 
   function listenLvlBtns(){
-    const chooseLevelBtns: HTMLCollection = document.querySelector('.choose-level').children;
     for(let i: number = 0; i < chooseLevelBtns.length; i++){
       chooseLevelBtns[i].addEventListener('click', () => {
         chooseLvlGroup = i;
         console.log('выбрана группа ', i, 'страница ', setPage)
         startGameOnLvlBtn(i, setPage);
       });
-      chooseLevelBtns[i].addEventListener('keydown', (e: KeyboardEvent) => console.log(e));;
     }
   }
 
-  lvlBtn.addEventListener('click',async function(){
+  lvlBtn.addEventListener('click', startPageBtnFn);
+
+  async function startPageBtnFn(){
     if(sprintWords.length === 0 || startFromVocabulary){
       setPage = dictStorage.page;
       startFromVocabulary = true;
@@ -217,7 +211,7 @@ function sprintGame(){
       showWord(showWordInitlVal);
       console.log('игра запущена со стартовой страницы, страница ',setPage, 'группа ', chooseLvlGroup )
     }
-  });
+  }
 
   trueBtn.addEventListener('click', () => {
     sprintResults[sprintResults.length - 1].push(true);
@@ -252,7 +246,54 @@ function sprintGame(){
     }
   }
 
-  listenLvlBtns()
+  document.addEventListener('keydown', (e) => {
+    if(!gameStartPage.classList.contains('visually-hidden')){
+      if(e.code === '1'){
+        chooseLvlGroup = 0;
+        console.log('выбрана группа ', 0, 'страница ', setPage)
+        startGameOnLvlBtn(0, setPage);
+      } else if(e.code === '2'){
+        chooseLvlGroup = 1;
+        console.log('выбрана группа ', 1, 'страница ', setPage)
+        startGameOnLvlBtn(1, setPage);
+      } else if(e.code === '3'){
+        chooseLvlGroup = 2;
+        console.log('выбрана группа ', 2, 'страница ', setPage)
+        startGameOnLvlBtn(2, setPage);
+      } else if(e.code === '4'){
+        chooseLvlGroup = 3;
+        console.log('выбрана группа ', 3, 'страница ', setPage)
+        startGameOnLvlBtn(3, setPage);
+      } else if(e.code === '5'){
+        chooseLvlGroup = 4;
+        console.log('выбрана группа ', 4, 'страница ', setPage)
+        startGameOnLvlBtn(4, setPage);
+      } else if(e.code === '6'){
+          chooseLvlGroup = 5;
+          console.log('выбрана группа ', 5, 'страница ', setPage)
+          startGameOnLvlBtn(5, setPage);
+      } else if(e.code === 'Enter'){
+        startPageBtnFn();
+      }
+    }
+    if(!gamePlayPage.classList.contains('visually-hidden')){
+      if(e.code === 'ArrowLeft'){
+        sprintResults[sprintResults.length - 1].push(true);
+        updateScore();
+        showWord(showWordInitlVal);
+      } else if(e.code === 'ArrowRight'){
+        sprintResults[sprintResults.length - 1].push(false);
+        updateScore();
+        showWord(showWordInitlVal);
+      }
+    }
+    if(!resultsPage.classList.contains('visually-hidden')){
+      if(e.code === 'Enter'){
+        restartSprint();
+      }
+    }
+  })
+  listenLvlBtns();
 }
 
 export { sprintGame }
