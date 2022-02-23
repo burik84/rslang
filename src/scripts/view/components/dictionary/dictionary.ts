@@ -7,12 +7,13 @@ import { Word } from './Word';
 const renderTextBook = (isUserSignIn: boolean, group: string) => {
   const lists: HTMLUListElement = document.querySelector('.word__cards');
   lists.setAttribute('data-group', group);
+
   if (controllers.words.length > 0) {
     controllers.words.forEach((word: IWordAPI) => {
       const statistics: number[] = [0, 0];
       const li = new Word(word, isUserSignIn, statistics);
-      li.init();
       lists.append(li.show().element);
+      li.init();
     });
   } else {
     const p = document.createElement('p');

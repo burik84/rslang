@@ -73,6 +73,7 @@ interface IControllers {
   userSign: (data: string[]) => void;
   updateUser: () => void;
   getDataWords: () => void;
+  getDataUserWords: () => void;
   getDataWordsDifficult: () => void;
 }
 
