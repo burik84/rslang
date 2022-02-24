@@ -1,4 +1,4 @@
-import { IControllers } from '../shared/interface';
+import { IControllers, IWordAPI } from '../shared/interface';
 import { view } from '../view/view';
 import { model } from '../model/model';
 
@@ -9,11 +9,13 @@ const signIn = (result: string[]) => {
       password: result[1],
     })
     .then((data) => {
-      if (!data) view.renderUserMessage();
-      controllers.isUserLogin = data ? true : false;
-      if (controllers.isUserLogin) {
+      if (!data) {
+        view.renderUserMessageError();
+        controllers.isUserSignIn = false;
+      } else {
         controllers.updateUser();
         view.closeModalUserSign();
+        controllers.isUserSignIn = true;
       }
     });
 };
@@ -25,9 +27,11 @@ const signUp = (result: string[]) => {
       password: result[2],
     })
     .then((data) => {
-      if (!data) view.renderUserMessage('signin');
-      controllers.isUserSignin = data ? true : false;
-      if (controllers.isUserSignin) {
+      if (!data) {
+        view.renderUserMessageError('signin');
+        controllers.isUserSignUp = false;
+      } else {
+        controllers.isUserSignUp = true;
         const user = result.slice(1);
         signIn(user);
       }
@@ -35,30 +39,84 @@ const signUp = (result: string[]) => {
 };
 const controllers: IControllers = {
   signin: true,
-  isUserLogin: false,
-  isUserSignin: false,
+  isUserSignIn: false,
+  isUserSignUp: false,
   isSpinner: false,
   user: {},
+  words: [],
+  userWords: [],
   refreshToken: '',
+  wordsGroup: '0',
+  wordsPage: 1,
   init: () => {
-    console.log('Init view');
+    model.getPageLibrary();
     view.init();
-    model.start();
     controllers.updateUser();
+    if (controllers.wordsGroup === '6') {
+      controllers.getDataWordsDifficult();
+    } else {
+      controllers.getDataWords();
+    }
   },
-  userSign: (data:string[]) => {
+  userSign: (data: string[]) => {
     if (data.length === 2) signIn(data);
     if (data.length === 3) signUp(data);
   },
   updateUser: () => {
     model.isSignIn();
+
     if (controllers.user) {
-      controllers.isUserLogin = true;
-      view.renderUserLogin(controllers.isUserLogin, controllers.user.name);
+      controllers.isUserSignIn = true;
+      view.renderUserLogin(controllers.user.name);
     } else {
-      controllers.isUserLogin = false;
-      view.renderUserLogin(controllers.isUserLogin);
+      controllers.isUserSignIn = false;
+      if (controllers.wordsGroup === '6') {
+        controllers.wordsGroup = '0';
+        controllers.wordsPage = 1;
+      }
+      view.renderUserLogin();
     }
+  },
+  getDataWords: () => {
+    view.showSpinnerWords();
+
+    model.savePageLibrary();
+
+    if (controllers.isUserSignIn) {
+      controllers.getDataUserWords()
+    }else{
+    const getWords = model.getWords()
+    .then((data) => {
+      controllers.words = data;
+
+      view.renderWordsDictionary();
+    })
+    .catch();
+    }
+  },
+  getDataUserWords: () => {
+
+    const getWords = model.getUserWords().then((data) => {
+      model
+        .getWords()
+        .then((data) => {
+          controllers.words = data;
+
+          view.renderWordsDictionary();
+        })
+        .catch();
+    });
+  },
+  getDataWordsDifficult: () => {
+    view.showSpinnerWords();
+    model.savePageLibrary();
+    const getWords = model
+      .getUserHardWords()
+      .then((data) => {
+        controllers.words = data;
+        view.renderWordsDictionary();
+      })
+      .catch();
   },
 };
 

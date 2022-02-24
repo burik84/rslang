@@ -1,20 +1,114 @@
+@import '../constants';
+
 .dictionary {
   display: flex;
-  height: calc(100vh - 230px);
-  min-height: 300px;
+  // height: calc(100vh - 230px);
+  min-height: calc(100vh - 230px);
   padding-top: 24px;
-  // justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: coral;
+  // background-color: coral;
   color: white;
   font-size: 30px;
 }
 .dictionary__lists {
   display: flex;
+  padding: 4px 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
   align-items: center;
   border-radius: 4px;
-  padding: 4px 8px;
+  row-gap: 14px;
   list-style-type: none;
+  li {
+    &:last-of-type {
+      display: none;
+    }
+  }
+  &.open {
+    li {
+      &:last-of-type {
+        display: block;
+      }
+    }
+  }
+}
+.dictionary__words {
+  margin: 0 80px 48px;
+}
+.dictionary__links{
+  margin-bottom: 24px;
+  ul{
+    min-width: 240px;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    column-gap: 16px;
+  }
+  .nav-item{
+    color: $color-word-secondary;
+    &:hover{
+      color:$color-word-primary;
+    }
+  }
+}
+.dictionary__pages {
+  display: none;
+  align-items: center;
+  border-radius: 4px;
+  padding: 8px 16px;
+  border-top: 1px solid #aeaeae;
+  border-bottom: 1px solid #ffffff;
+  &.open {
+    display: flex;
+  }
 }
 
+.dictionary__game-buttons {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  // background-color: crimson;
+}
+
+.dictionary__game-buttons__sprint,
+.dictionary__game-buttons__audio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #1f9da5;
+  font-size: 17px;
+  color: #1f9da5;
+  background-color: #e5e5e5;
+}
+
+.dictionary__game-buttons__sprint:hover,
+.dictionary__game-buttons__audio:hover {
+  border: 1px solid #1f9da5;
+  color: #e5e5e5;
+  background-color: #1f9da5;
+}
+
+.dictionary__game-buttons__sprint:active,
+.dictionary__game-buttons__audio:active {
+  opacity: 0.8;
+}
+
+.dictionary__game-buttons__sprint {
+  background-image: url("/src/assets/icons/Sprint.svg");
+  background-size: 50px 50px;
+  background-repeat: no-repeat;
+  background-position: 110% 50%;
+}
+
+.dictionary__game-buttons__audio {
+  justify-content: flex-start;
+  padding-left: 10px;
+  background-image: url("/src/assets/icons/AudioGame.svg");
+  background-size: 50px 50px;
+  background-repeat: no-repeat;
+  background-position: 110% 50%;
+}

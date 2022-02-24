@@ -1,10 +1,8 @@
 .audio-game {
   position: relative;
-  // height: calc(100vh - 474px);
-  min-height: 350px;
-  height: calc(100vh - 400px);
+  min-height: 450px;
+  height: calc(100vh - 300px);
   background-color: aliceblue;
-  // background-color: #d5dee0;
 }
 
 /*styles for game start*/
@@ -13,7 +11,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 10px;
   padding-bottom: 80px;
   width: 900px;
@@ -40,6 +38,17 @@
 // .audio-counter-container {
 //   font-size: 20px;
 // }
+
+.audio-description-control-text {
+  margin: 0 auto;
+  text-align: center;
+  width: 550px;
+  font-size: 21px;
+  color: #348498;
+  border: 2px solid rgba(65, 182, 230, 1);
+  padding: 15px;
+  border-radius: 10px;
+}
 
 .audio-repeat-voice-button-cont {
   display: flex;
@@ -286,24 +295,24 @@
   cursor: pointer;
 }
 
-.audio-choice-level-item:nth-child(3) {
-  border: 10px solid #20a4b4;
+.audio-choice-level-item:nth-child(1) {
+  border: 10px solid #b1cfd3;
 }
 
 .audio-choice-level-item:nth-child(2) {
   border: 10px solid #98d4e4;
 }
 
-.audio-choice-level-item:nth-child(5) {
-  border: 10px solid #047c94;
+.audio-choice-level-item:nth-child(3) {
+  border: 10px solid #20a4b4;
 }
 
 .audio-choice-level-item:nth-child(4) {
   border: 10px solid #509ba6;
 }
 
-.audio-choice-level-item:nth-child(1) {
-  border: 10px solid #b1cfd3;
+.audio-choice-level-item:nth-child(5) {
+  border: 10px solid #047c94;
 }
 
 .audio-choice-level-item:nth-child(6) {
@@ -344,6 +353,10 @@
 
   .audio-game-container {
     width: 400px;
+  }
+
+  .audio-description-control-text {
+    display: none;
   }
 
   .audio-answer-options-container {

@@ -1,12 +1,14 @@
 import { urlAPI } from '../shared/api';
-import { IWordAPI } from '../shared/interface';
-import { IAudio } from '../shared/interface';
+import { IWordAPI, IAudio, IStatisticsAG } from '../shared/interface';
 
 const audioGame = () => {
+  const audioGamePage = document.querySelector('#audio-game-page');
+
   const audioChoiceLevelModal = document.querySelector('#audio-choice-level-modal');
   const audioChoiceLevelItems = document.querySelectorAll('.audio-choice-level-item');
   const audioStartGameBtn = document.querySelector('#audio-start-game-button');
   const audioRestartGgameBtn = document.querySelector('#audio-restart-game-button');
+  const startAGFromDictionaryBtn = document.querySelector('#dictionary-button-audio');
 
   const repeatVoiceButton = document.querySelector('#audio-repeat-voice-button');
   const answerButton1 = document.querySelector('#audio-answer-button-1');
@@ -27,7 +29,6 @@ const audioGame = () => {
   const audioResultModal = document.querySelector('#audio-game-result-container');
 
   let userSelectedLevel: number;
-  // let userSelectedPage = 0;
   const userSelectedPage = 0;
   const wordsForAGarr: Array<IWordAPI> = [];
   let currentQuestionNumber = 1;
@@ -37,6 +38,18 @@ const audioGame = () => {
   const rightWordsArr: Array<IWordAPI> = [];
   const wrongWordsArr: Array<IWordAPI> = [];
   let bufferWordBeforePush: IWordAPI;
+
+  let currentWinStreak = 0;
+  const winStreakArr: Array<number> = [];
+
+  let statisticsAGNewWordsArr: Array<string>;
+  const statisticsAGNewWordsSet = new Set();
+  let statisticsAG: IStatisticsAG = {
+    newWords: 0,
+    winRate: 0,
+    longestWinStreak: 0,
+    numberOfGames: 0 
+  }
 
   /*функции для получения аудио с сервера и последующего воспроизведения по клику*/
 
@@ -122,8 +135,12 @@ const audioGame = () => {
     if (userSelect == correctAnswerNumber) {
       totalCorrectAnswers += 1;
       rightWordsArr.push(bufferWordBeforePush);
+      currentWinStreak += 1;
+      statisticsAGNewWordsSet.add(bufferWordBeforePush.word);
     } else {
       wrongWordsArr.push(bufferWordBeforePush);
+      winStreakArr.push(currentWinStreak);
+      currentWinStreak = 0;
     }
 
     currentQuestionNumber += 1;
@@ -157,6 +174,13 @@ const audioGame = () => {
 
   /*обработчики для кнопок*/
 
+  startAGFromDictionaryBtn.addEventListener('click', () =>{
+    clearAllBeforeRestart();
+    document.querySelector('#audio-choice-level-modal').classList.add('visually-hidden');
+    const pageAndLevel = JSON.parse(localStorage.getItem('rsteam17-dictionary'));
+    getWordsForAG(pageAndLevel.page - 1, pageAndLevel.group);
+  })
+
   audioChoiceLevelItems.forEach(value => value.addEventListener('click', ()=> {
     audioChoiceLevelItems.forEach(item => item.classList.remove('audio-choice-level-item-active'));
     value.classList.add('audio-choice-level-item-active');
@@ -167,7 +191,15 @@ const audioGame = () => {
 
   audioStartGameBtn.addEventListener('click', () => {
     audioChoiceLevelModal.classList.add('visually-hidden');
-    getWordsForAG(userSelectedPage, userSelectedLevel);
+    // if (localStorage.getItem('rsteam17-dictionary')) {
+    //   const pageAndLevel = JSON.parse(localStorage.getItem('rsteam17-dictionary'));
+    //   getWordsForAG(pageAndLevel.page - 1, userSelectedLevel);
+    // } else {
+    //   const randomPage = Math.floor(Math.random() * 30);
+    //   getWordsForAG(randomPage, userSelectedLevel);
+    // }
+    const randomPage = Math.floor(Math.random() * 27 + 3);
+      getWordsForAG(randomPage, userSelectedLevel);
   });
 
   function enableNextButton() {
@@ -218,15 +250,46 @@ const audioGame = () => {
   });
 
   nextQuestionButton.addEventListener('click', () => {
+    setNextQuestion()
+  });
+  
+  function setNextQuestion() {
     if (currentQuestionNumber < totalNumberOfQuestions + 1) {
       clearButtonsColor();
       clearSelectedButtonBorder();
       setQuestionAG(currentQuestionNumber);
     } else {
+      winStreakArr.push(currentWinStreak);
       audioResultModal.classList.remove('visually-hidden');
       setAGResultWordsCont(rightWordsArr, wrongWordsArr);
       setAGResultStatistics(totalCorrectAnswers, totalNumberOfQuestions);
       disabledNextButton();
+    }
+  }
+
+  /*дублирование кнопок с клавиатуры*/
+
+  document.addEventListener('keydown', (e) => {
+    if (!audioGamePage.classList.contains('visually-hidden')){
+      // e.preventDefault();
+      if (e.code == 'Space') {
+          playback();
+      }
+      if (e.code == 'Digit1' && (!nextQuestionButton.classList.contains('audio-button-enable'))) {
+        answerButtonHandler(0);
+      }
+      if (e.code == 'Digit2' && (!nextQuestionButton.classList.contains('audio-button-enable'))) {
+        answerButtonHandler(1);
+      }
+      if (e.code == 'Digit3' && (!nextQuestionButton.classList.contains('audio-button-enable'))) {
+        answerButtonHandler(2);
+      }
+      if (e.code == 'Digit4' && (!nextQuestionButton.classList.contains('audio-button-enable'))) {
+        answerButtonHandler(3);
+      }
+      if ((e.code == 'Enter') && (nextQuestionButton.classList.contains('audio-button-enable'))) {
+        setNextQuestion();
+      }
     }
   });
 
@@ -238,7 +301,8 @@ const audioGame = () => {
     const pers = Math.round(totalCorrectAnswers / totalNumberOfQuestions * 100);
     audioResultPercentagesCounter.innerHTML = `${String(pers)}%`;
     const donutValue = `${pers} ${100 - pers}`;
-    audioResultDonutSegment.setAttribute('stroke-dasharray', donutValue)
+    audioResultDonutSegment.setAttribute('stroke-dasharray', donutValue);
+    setStatisticsAG();
   }
 
   /*заполняет блоки правильно и неправильно отвеченных слов*/
@@ -275,30 +339,73 @@ const audioGame = () => {
     })
   }
 
-/*для перезапуска игры*/
+  /*для перезапуска игры*/
 
-audioRestartGgameBtn.addEventListener('click', () => {
-  clearAllBeforeRestart();
-})
+  audioRestartGgameBtn.addEventListener('click', () => {
+    clearAllBeforeRestart();
+  })
 
-function clearAllBeforeRestart() {
-  wordsForAGarr.length = 0;
-  currentQuestionNumber = 1;
-  totalCorrectAnswers = 0;
-  rightWordsArr.length = 0;
-  wrongWordsArr.length = 0;
+  function clearAllBeforeRestart() {
+    wordsForAGarr.length = 0;
+    currentQuestionNumber = 1;
+    totalCorrectAnswers = 0;
+    rightWordsArr.length = 0;
+    wrongWordsArr.length = 0;
+    currentWinStreak = 0;
+    winStreakArr.length = 0;
 
-  audioResultRightWordsCont.innerHTML = '';
-  audioResultWrongWordsCont.innerHTML = '';
-  audioResultModal.classList.add('visually-hidden');
+    audioResultRightWordsCont.innerHTML = '';
+    audioResultWrongWordsCont.innerHTML = '';
+    audioResultModal.classList.add('visually-hidden');
 
-  clearButtonsColor();
-  clearSelectedButtonBorder();
+    clearButtonsColor();
+    clearSelectedButtonBorder();
 
-  audioChoiceLevelModal.classList.remove('visually-hidden');
-  audioChoiceLevelItems.forEach(item => item.classList.remove('audio-choice-level-item-active'));
-  audioStartGameBtn.setAttribute('disabled', 'disabled');
-}
+    audioChoiceLevelModal.classList.remove('visually-hidden');
+    audioChoiceLevelItems.forEach(item => item.classList.remove('audio-choice-level-item-active'));
+    audioStartGameBtn.setAttribute('disabled', 'disabled');
+  }
+
+  /*для статистики*/
+
+  function setStatisticsAG() {
+    if (localStorage.getItem('statisticsAG')) {
+      statisticsAG = JSON.parse(localStorage.getItem('statisticsAG'));
+    } else {
+      statisticsAG = {
+        newWords: 0,
+        winRate: 0,
+        longestWinStreak: 0,
+        numberOfGames: 0 
+      }
+    }
+
+    if (localStorage.getItem('statisticsAGWords')) {
+      statisticsAGNewWordsArr = JSON.parse(localStorage.getItem('statisticsAGWords'));
+    } else {
+      statisticsAGNewWordsArr = [];
+    }
+
+    statisticsAGNewWordsSet.forEach(value => {
+      if (!statisticsAGNewWordsArr.includes(String(value))) {
+        statisticsAGNewWordsArr.push(String(value));
+        statisticsAG.newWords += 1;
+      }
+    })
+
+    const pers = Math.round(totalCorrectAnswers / totalNumberOfQuestions * 100);
+    statisticsAG.winRate = Math.round((statisticsAG.winRate * statisticsAG.numberOfGames + pers) / (statisticsAG.numberOfGames + 1));
+
+    if (Math.max(...winStreakArr) > statisticsAG.longestWinStreak) {
+      statisticsAG.longestWinStreak = Math.max(...winStreakArr);
+    }
+
+    statisticsAG.numberOfGames += 1;
+
+    localStorage.setItem('statisticsAG', JSON.stringify(statisticsAG));
+    localStorage.setItem('statisticsAGWords', JSON.stringify(statisticsAGNewWordsArr));
+
+  }
 
 
 };

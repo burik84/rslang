@@ -14,6 +14,7 @@ interface IWordAPI {
   textMeaningTranslate: string;
   wordTranslate: string;
 }
+
 type TUser = {
   email: string;
   password: string;
@@ -22,6 +23,7 @@ type TUser = {
 type TUserCreate = TUser & {
   name: string;
 };
+
 interface IUserAuth {
   message?: string;
   token: string;
@@ -29,22 +31,50 @@ interface IUserAuth {
   userId: string;
   name: string;
 }
+
 interface IUserCreated {
   id: string;
   name: string;
   email: string;
 }
 
+type TUserWordGet = {
+  userId: string;
+  wordId: string;
+};
+type TWordBody = {
+  difficulty: string;
+  optional: {
+    testFieldString: string;
+    testFieldStatus: boolean;
+  };
+};
+
+type TUserWord = {
+  wordId: string;
+  difficulty: string;
+  optional: {
+    testFieldString: string;
+    testFieldStatus: boolean;
+  };
+};
 interface IControllers {
   signin: boolean;
-  isUserLogin: boolean;
-  isUserSignin: boolean;
+  isUserSignIn: boolean;
+  isUserSignUp: boolean;
   isSpinner: boolean;
   user: IUserAuth | any;
+  words: IWordAPI[];
+  userWords: TUserWord[];
   refreshToken: string;
+  wordsGroup: string;
+  wordsPage: number;
   init: () => void;
-  userSign: (data:string[]) => void;
+  userSign: (data: string[]) => void;
   updateUser: () => void;
+  getDataWords: () => void;
+  getDataUserWords: () => void;
+  getDataWordsDifficult: () => void;
 }
 
 type TDataPagination = {
@@ -52,6 +82,7 @@ type TDataPagination = {
   page: number;
   step: number;
 };
+
 interface IPagination {
   code: string;
   size: number;
@@ -71,6 +102,7 @@ interface IPagination {
   buttons: (element: HTMLElement) => void;
   create: (element: HTMLElement) => void;
   init: (element: HTMLElement, data: TDataPagination) => void;
+  // render: (data: TDataPagination) => void;
 }
 
 interface IAudio {
@@ -83,4 +115,30 @@ interface IAudio {
   copyToChannel(source: Float32Array, channelNumber: number, bufferOffset?: number): void;
 }
 
-export { IWordAPI, TUser, TUserCreate, IUserAuth, IUserCreated, IControllers, IPagination, IAudio };
+interface IDictinaryData {
+  group: string;
+  page: number;
+}
+
+interface IStatisticsAG {
+  newWords: number;
+  winRate: number;
+  longestWinStreak: number;
+  numberOfGames: number;
+}
+
+export {
+  IWordAPI,
+  TUser,
+  TUserCreate,
+  IUserAuth,
+  IUserCreated,
+  TUserWordGet,
+  TUserWord,
+  TWordBody,
+  IControllers,
+  IPagination,
+  IAudio,
+  IDictinaryData,
+  IStatisticsAG,
+};

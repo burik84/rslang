@@ -1,3 +1,5 @@
+@import "./_constants.scss";
+
 * {
   margin: 0;
   padding: 0;
@@ -13,9 +15,9 @@ body {
 }
 
 :root {
-  --bg-dark-color: #41445c;
-  --bg-light-color: #e5e5e5;
-  --div-bg-color: #1f9da5;
+  --bg-dark-color: #94ae3f;
+  --bg-light-color: #ebebeb;
+  --div-bg-color: #243754;
 }
 
 .body {
@@ -39,6 +41,9 @@ body {
 }
 .white-text {
   color: #ffffff;
+}
+.dark-blue-text {
+  color: var(--bg-dark-color);
 }
 .app-description {
   background-color: var(--bg-light-color);
@@ -64,6 +69,15 @@ body {
   grid-column-gap: 27px;
   justify-content: center;
   align-content: center;
+  &.open {
+    background-color: $color-button-bcg;
+    .about-video__text {
+      display: none;
+    }
+    .video {
+      display: block;
+    }
+  }
 }
 .about-video__text {
   color: var(--bg-light-color);
@@ -97,15 +111,15 @@ body {
   background-color: var(--div-bg-color);
   display: grid;
   grid-template-rows: 24px auto;
-  grid-row-gap: 60px;
-  padding: 42px 21px 38px;
+  grid-row-gap: 40px;
+  padding: 42px 30px 38px 40px;
 }
 .app-advantagies__p {
-  text-align: justify;
-  color: var(--bg-light-color);
+  justify-self: center;
+  color: #ffffff;
 }
-.app-advantagies__h3,
-.app-advantagies__p {
+.app-advantagies__h3 {
+  color: var(--bg-dark-color);
   justify-self: center;
 }
 .dev-section {
@@ -125,24 +139,97 @@ body {
   padding: 0 273px;
 }
 .about-developers {
+  min-height: 205px;
+  position: relative;
   background-color: var(--div-bg-color);
   width: 100%;
   border-radius: 10px;
-  padding: 45px 25px 27px;
+  border-radius: 30px;
+  padding: 45px 170px 27px 170px;
 }
+
 .name-logo {
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(2, auto);
   justify-content: space-between;
   align-items: center;
+  grid-gap: 200px;
 }
+
+.alex {
+  background: url("../assets/img/big-heroes-hero.jpg");
+}
+
+.dasha {
+  background: url("../assets/img/toriko.jpg");
+}
+
+.oleg {
+  background: url("../assets/img/pok.jpg");
+}
+
+.developers-avatar-wrapper {
+  position: absolute;
+  left: -25px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 1px 1px 5px #41445c;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
 .git-link {
-  width: 60px;
-  height: 60px;
-  background: no-repeat center url("../assets/icons/bi_github.svg");
+  position: absolute;
+  right: -25px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 150px;
+  height: 150px;
+  background: url("../assets/icons/bi_github.svg");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 1px 1px 1px #41445c;
+  border-radius: 50%;
 }
+
+.git-link:hover {
+  background-color: #41445c;
+}
+
 .about-developers__p {
-  padding-top: 27px;
-  text-align: center;
+  padding-top: 30px;
+  text-align: left;
   color: var(--bg-light-color);
+}
+
+.video {
+  display: none;
+}
+
+@media screen and (max-width: 960px) {
+  .line-break {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .developers-avatar-wrapper {
+    left: 20px;
+    top: 40%;
+    width: 120px;
+    height: 120px;
+  }
+
+  .git-link {
+    right: 20px;
+    top: 40%;
+    // transform: translateY(0);
+    width: 120px;
+    height: 120px;
+  }
 }
