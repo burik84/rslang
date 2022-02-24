@@ -1,0 +1,21 @@
+@import "./base";
+
+@import "./layouts/header";
+@import "./layouts/main";
+@import "./layouts/footer";
+
+@import "./components/button";
+@import "./components/navigation";
+@import "./components/form";
+@import "./components/pagination";
+@import "./components/word";
+@import "./components/spinner";
+
+@import "./pages/audio-game";
+@import "./pages/start-page-adaptive";
+
+@import "./pages/dictionary";
+@import "./pages/sprint-game";
+@import "./pages/statistics";
+
+@import "./pages/main";
